@@ -2,10 +2,13 @@ const path = require('path');
 
 module.exports = {
     context: __dirname,
-    entry: './frontend/all_trecks.jsx',
+    entry: './frontend/alltreks.jsx',
     output: {
         path: path.resolve(__dirname, 'app', 'assets', 'javascripts'),
         filename: 'bundle.js'
+    },
+    resolve: {
+        extensions: ['.js', '.jsx', '*']
     },
     module: {
         rules: [
@@ -14,15 +17,14 @@ module.exports = {
                 exclude: /(node_modules)/,
                 use: {
                     loader: 'babel-loader',
-                    option: {
+                    options: {
                         presets: ['@babel/env', '@babel/react']
                     }
                 },
             }
         ]
     },
-    devtool: 'inline-source-map',
-    resolve: {
-        extensions: [".js", ".jsx", "*"]
-    }
+    devtool: 'source-map'
 };
+
+
