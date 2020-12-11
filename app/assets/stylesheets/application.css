@@ -13,3 +13,133 @@
  *= require_tree .
  *= require_self
  */
+
+
+ /* User Auth and Splash Page */
+
+body{
+    margin: 0px;
+}
+
+
+.AllTreks{
+    
+    text-decoration: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #808080;
+}
+.splashHeader{
+    text-align: center;
+}
+
+.splashMessage{
+    position: absolute;
+    top: 27%;
+    right: 22%;
+    width: 55%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white;
+    font-size: 39px;
+    text-shadow: 2px 2px #020000;
+    text-align: center;
+}
+.splashH3{
+    color: rgb(4, 31, 4);
+    text-align: center;
+    font-size: 50px;
+
+}
+
+.splashPtag{
+    text-align: center;
+    font-size: 20px;
+    width: 430px;
+    margin: auto;
+}
+
+
+
+
+.image {
+
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 700px;
+}
+
+
+
+.signup{
+       position: relative;
+    color: white;
+    background-color: #219ad8;
+    padding: 10px;
+    border-radius: 8px;
+    border: 3px #219ad8 solid;
+    text-decoration: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+.login{
+    color: #219ad8;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+    position: relative;
+    border: 3px #219ad8 solid;
+    text-decoration: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.welcomeMsg{
+    text-emphasis: none;
+}
+.navBar{
+    position: absolute;
+    top: 3%;
+    right: 1%;
+}
+
+.authForm {
+    position: absolute;
+    top: 17%;
+    right: 22%;
+    width: 55%;
+    height: 46%;
+    
+    text-align: center;
+}
+.authForm input{
+    border-radius: 5px;
+    padding: 1%;
+    padding-inline-end: 11%;
+}
+
+.authForm button{
+     border-radius: 5px;
+    padding: 1%;
+    
+    color: white;
+    text-decoration: bold;
+    background-color: #428a13;
+}
+.authForm h1{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, serif;
+    font-weight: 550;
+}
+
+.formInput{
+
+    padding-bottom: 15px;
+}
+
+
+.authBackground {
+
+    
+   
+    width: 100%;
+    height: 25%;
+}
+
+/* hikes css */

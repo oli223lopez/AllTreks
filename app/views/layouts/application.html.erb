@@ -8,9 +8,25 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+
+
+
+  <script type="text/javascript"> 
+
+    ; window.treksLogoURL = "<%= image_url('IMG_2945-png.png')%>";
+    window.treksLogoURL = "<%= image_url('IMG_2945-png2.png')%>";
+
+    window.authBackGroundURL = "<%= image_url('plex_zion.jpg')%>";
+
+
+  </script> 
+
+
+  
   </head>
 
   <body>
+    
     <%= yield %>
   </body>
 </html>
