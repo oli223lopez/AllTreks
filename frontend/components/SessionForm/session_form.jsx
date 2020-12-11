@@ -18,8 +18,7 @@ class SessionForm extends React.Component {
         password: ""
       }
     }
-
-
+    this.demoLogin = this.demoLogin.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -45,39 +44,63 @@ class SessionForm extends React.Component {
     );
   }
 
+  
+  demoLogin(e) {
+    e.preventDefault();
+    const user = { email: "teddyroosevelt@test.com", password: "password" };
+    this.props.processForm(user)
+  }
+
 
   signUp(){
       return(
-          <form onSubmit={this.handleSubmit}>
+        <div>
+        <img src={window.authBackGroundURL} className="authBackground" width="600" height="600"/>
+
+        <form onSubmit={this.handleSubmit} className="authForm">
                 <h1>{this.props.formType} and lets start your adventure!</h1>
+            <div>{this.renderErrors()}</div>
                 <label> 
-                    Username: <input type="text" value={this.state.username} onChange={this.update('username')}/>
+                   <input type="text" value={this.state.username} onChange={this.update('username')} placeholder="Username"/>
+                    <div className="formInput"></div>
                 </label>
                 <label> 
-                    Email: <input type="text" value={this.state.email} onChange={this.update('email')}/>
+                  <input type="text" value={this.state.email} onChange={this.update('email')} placeholder="Email"/>
+            <div className="formInput"></div>
                 </label>
                 <label> 
-                    Password: <input type="password" onChange={this.update('password')}/>
+                    <input type="password" onChange={this.update('password')} placeholder="Password"/>
+            <div className="formInput"></div>
                 </label>
                 <button type="submit">{this.props.formType}</button>
 
           </form>
+        </div>
       )
   }
 
   logIn(){
         return(
-          <form onSubmit={this.handleSubmit}>
-                <h1>{this.props.formType} and lets start your adventure!</h1>
+          <div>
+          <img src={window.authBackGroundURL} className="authBackground" />
+
+          <form onSubmit={this.handleSubmit} className="authForm">
+
+                <h1>{this.props.formType} and lets continue your adventure!</h1>
+              <div>{this.renderErrors()}</div>
                 <label> 
-                    Email: <input type="text" value={this.state.email} onChange={this.update('email')}/>
+                    <input type="text" value={this.state.email} onChange={this.update('email')} placeholder="Email" />
+              <div className="formInput"></div>
                 </label>
                 <label> 
-                    Password: <input type="password" onChange={ this.update('password')}/>
+                    <input type="password" onChange={ this.update('password')} placeholder="Password"/>
+              <div className="formInput"></div>
                 </label>
                 <button type="submit">{this.props.formType}</button>
+              <button onClick={this.demoLogin}>Demo Login</button>
 
           </form>
+          </div>
       )
   }
 
