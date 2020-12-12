@@ -1,5 +1,6 @@
 node_modules
 
+
 # Ignore bundler config.
 /.bundle
 # Ignore all logfiles and tempfiles.
@@ -15,6 +16,10 @@ node_modules
 /public/assets
 .byebug_history
 # Ignore master key for decrypting credentials and more.
+
 /config/master.key
 node_modules/
 bundle.js
+
+
+
