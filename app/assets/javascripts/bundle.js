@@ -91,9 +91,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RECEIVE_CURRENT_USER": () => /* binding */ RECEIVE_CURRENT_USER,
 /* harmony export */   "LOGOUT_CURRENT_USER": () => /* binding */ LOGOUT_CURRENT_USER,
 /* harmony export */   "RECEIVE_SESSION_ERRORS": () => /* binding */ RECEIVE_SESSION_ERRORS,
+/* harmony export */   "REMOVE_ERRORS": () => /* binding */ REMOVE_ERRORS,
 /* harmony export */   "receiveCurrentUser": () => /* binding */ receiveCurrentUser,
 /* harmony export */   "logoutCurrentUser": () => /* binding */ logoutCurrentUser,
 /* harmony export */   "receiveErrors": () => /* binding */ receiveErrors,
+/* harmony export */   "removeErrors": () => /* binding */ removeErrors,
 /* harmony export */   "login": () => /* binding */ login,
 /* harmony export */   "logout": () => /* binding */ logout,
 /* harmony export */   "signup": () => /* binding */ signup
@@ -102,7 +104,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
-var RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS'; //action creators
+var RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
+var REMOVE_ERRORS = 'REMOVE_ERRORS'; //action creators
 
 var receiveCurrentUser = function receiveCurrentUser(currentUser) {
   return {
@@ -116,16 +119,25 @@ var logoutCurrentUser = function logoutCurrentUser() {
   };
 };
 var receiveErrors = function receiveErrors(errors) {
+  // console.log(`these are the errors: ${JSON.stringify(errors)}`)
   return {
     type: RECEIVE_SESSION_ERRORS,
     errors: errors
+  };
+};
+var removeErrors = function removeErrors() {
+  return {
+    type: REMOVE_ERRORS
   };
 }; //thunk action creators
 
 var login = function login(user) {
   return function (dispatch) {
+    // console.log(SessionApiUtil.login(user))
     return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__.login(user).then(function (user) {
       return dispatch(receiveCurrentUser(user));
+    }, function (err) {
+      return dispatch(receiveErrors(err));
     });
   };
 };
@@ -138,8 +150,11 @@ var logout = function logout() {
 };
 var signup = function signup(user) {
   return function (dispatch) {
+    // console.log(SessionApiUtil.signup(user))
     return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__.signup(user).then(function (user) {
       return dispatch(receiveCurrentUser(user));
+    }, function (err) {
+      return dispatch(receiveErrors(err));
     });
   };
 };
@@ -219,14 +234,15 @@ __webpack_require__.r(__webpack_exports__);
 
 var Greeting = function Greeting(props) {
   var isLoggedIn = function isLoggedIn() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-      className: "navBar"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
       className: "welcomeMsg"
-    }, " Welcome back ", props.currentUser.username, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-      onClick: props.logout,
-      className: "logout"
-    }, "Logout "));
+    }, " Welcome back ", props.currentUser.username, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "navBar"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+      to: "/",
+      className: "login",
+      onClick: props.logout
+    }, " Log Out")));
   };
 
   var notLoggedIn = function notLoggedIn() {
@@ -235,9 +251,7 @@ var Greeting = function Greeting(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
       to: "/signup",
       className: "signup"
-    }, " Sign Up"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-      className: "seperator"
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    }, " Sign Up"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
       to: "/login",
       className: "login"
     }, " Log In "));
@@ -324,6 +338,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     processForm: function processForm(user) {
       return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__.login)(user));
+    },
+    removeErrors: function removeErrors() {
+      return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__.removeErrors)());
     }
   };
 };
@@ -344,6 +361,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -367,6 +385,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -401,6 +420,11 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(SessionForm, [{
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      return this.props.removeErrors();
+    }
+  }, {
     key: "update",
     value: function update(field) {
       var _this2 = this;
@@ -421,6 +445,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
     value: function renderErrors() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, this.props.errors.map(function (error, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          className: "authErrors",
           key: "error-".concat(i)
         }, error);
       }));
@@ -446,7 +471,9 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         onSubmit: this.handleSubmit,
         className: "authForm"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, this.props.formType, " and lets start your adventure!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.renderErrors()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, this.props.formType, " and lets start your adventure!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "authErrorsDiv"
+      }, this.renderErrors()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         value: this.state.username,
         onChange: this.update('username'),
@@ -468,7 +495,12 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
         className: "formInput"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit"
-      }, this.props.formType)));
+      }, this.props.formType), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        className: "formMessage"
+      }, "Already have an account? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        to: "/login",
+        className: "oppLink"
+      }, " Log In"))));
     }
   }, {
     key: "logIn",
@@ -479,7 +511,9 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         onSubmit: this.handleSubmit,
         className: "authForm"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, this.props.formType, " and lets continue your adventure!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.renderErrors()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, this.props.formType, " and lets continue your adventure!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "authErrorsDiv"
+      }, this.renderErrors()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         value: this.state.email,
         onChange: this.update('email'),
@@ -496,7 +530,12 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
         type: "submit"
       }, this.props.formType), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: this.demoLogin
-      }, "Demo Login")));
+      }, "Demo Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        className: "formMessage"
+      }, "Don't have an account? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        to: "/signup",
+        className: "oppLink"
+      }, " Sign Up"))));
     }
   }, {
     key: "render",
@@ -539,6 +578,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state) {
+  console.log("maps state to props ".concat(JSON.stringify(state.errors)));
   return {
     errors: state.errors.session,
     formType: 'Sign up',
@@ -552,6 +592,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     processForm: function processForm(user) {
       return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__.signup)(user));
+    },
+    removeErrors: function removeErrors() {
+      return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__.removeErrors)());
     }
   };
 };
@@ -660,7 +703,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // import trekLogo from '../../../../../assets/images/IMG_2945-png.png';
+
 
 var App = function App() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
@@ -812,8 +855,12 @@ var sessionErrorsReducer = function sessionErrorsReducer() {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_USER:
       return [];
 
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_ERRORS:
+      return [];
+
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_SESSION_ERRORS:
-      return action.errors;
+      // console.log(action.errors.responseJSON)
+      return action.errors.responseJSON;
 
     default:
       return state;

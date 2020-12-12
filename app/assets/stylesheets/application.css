@@ -27,6 +27,7 @@ body{
     text-decoration: none;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: #808080;
+    position: relative;
 }
 .splashHeader{
     text-align: center;
@@ -60,11 +61,8 @@ body{
 
 
 
-.image {
-
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 700px;
+.image{
+    width: 100%
 }
 
 
@@ -78,7 +76,7 @@ body{
     border: 3px #219ad8 solid;
     text-decoration: none;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
+    margin: 0 10px;
 }
 
 .login{
@@ -91,37 +89,70 @@ body{
     text-decoration: none;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+.logout{
+    color: #219ad8;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+    position: relative;
+    border: 3px #219ad8 solid;
+    text-decoration: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 .welcomeMsg{
     text-emphasis: none;
+    font-family:  'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display: flex;
+    position: absolute;
+    top: 9px;
+    display: flex;
+    right: 106px;
+    font-size: 19px;
+
+    
 }
 .navBar{
     position: absolute;
     top: 3%;
     right: 1%;
+    display: flex;
 }
 
 .authForm {
+    flex-direction: column;
     position: absolute;
-    top: 17%;
-    right: 22%;
-    width: 55%;
-    height: 46%;
-    
+    top: 135px;
+    left: 30%;
+    right: 30%;
     text-align: center;
+    display: flex;
+    background: #5b70c18c;
 }
 .authForm input{
-    border-radius: 5px;
-    padding: 1%;
+   border-radius: 5px;
+    padding: 15px;
     padding-inline-end: 11%;
+    margin: 0px 27px;
+    width: -webkit-fill-available;
+    border-color: #f0f8ff00;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+
 }
 
 .authForm button{
-     border-radius: 5px;
-    padding: 1%;
-    
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
     color: white;
     text-decoration: bold;
     background-color: #428a13;
+    margin: 10px 27px;
+    border-color: #428a1300;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
 }
 .authForm h1{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, serif;
@@ -133,13 +164,29 @@ body{
     padding-bottom: 15px;
 }
 
+.formMessage{
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
 
-.authBackground {
+.oppLink{
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
 
-    
-   
+
+
+.authBackground {   
     width: 100%;
-    height: 25%;
+    height: 50%;
+}
+
+.authErrors{
+    color: #670000;
+    list-style-type: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+    
 }
 
 /* hikes css */
