@@ -1,10 +1,12 @@
 import React from 'react'
 import GreetingContainer from '../Greetings/greeting_container'
+import {Link} from 'react-router-dom'
 
 
 class Splash extends React.Component{
     constructor(props){
         super(props)
+
     }
 
 
@@ -28,6 +30,8 @@ class Splash extends React.Component{
                     build the largest collection of hand-curated trail guides, so you can explore the 
                     outdoors with confidence. Anytime. Anywhere.
                 </p>
+                <div className="splashBottom"></div>
+                <Link to="/nationalPark/1">Glacier National Park</Link>
             </div>
         )
     }

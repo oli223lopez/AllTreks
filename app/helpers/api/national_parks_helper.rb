@@ -1,0 +1,2 @@
+module Api::NationalParksHelper
+end
