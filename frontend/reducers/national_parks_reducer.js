@@ -8,7 +8,7 @@ const nationalParkReducer = (state ={}, action) => {
     switch(action.type){
         
         case RECEIVE_NATIONAL_PARK:
-            return Object.assign({}, state, {[action.nationalPark.id]: action.nationalPark})
+            return Object.assign({}, state, {[action.nationalPark.name]: action.nationalPark})
             // return action.nationalPark ///!
         default: return state
     }

@@ -6,7 +6,7 @@ class Api::HikesController < ApplicationController
     end
 
     def show 
-        @hike = Hike.find_vy(id: params[:id])
+        @hike = Hike.find_by(name: params[:id])
         render :show
     end
 end

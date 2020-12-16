@@ -8,13 +8,13 @@ import { receiveTreks } from '../../actions/hike_actions'
 const mapStateToProps = (state, ownProps ) => { 
     // debugger
     // receiveNationalPark(ownProps.match.params.nationalParkId)
-   return({ nationalParkId: ownProps.match.params.nationalParkId,
-    nationalPark: state.entities.nationalPark[ownProps.match.params.nationalParkId]})
+   return({ nationalParkName: ownProps.match.params.nationalParkName,
+    nationalPark: state.entities.nationalPark[ownProps.match.params.nationalParkName]})
     
 };
 
 const mapDispatchToProps = dispatch => ({
-    receiveNationalPark: nationalParkId => dispatch(receiveNationalPark(nationalParkId)),
+    receiveNationalPark: nationalParkName=> dispatch(receiveNationalPark(nationalParkName)),
     receiveTreks: nationalPark => dispatch(receiveTreks(nationalPark))
 })
 

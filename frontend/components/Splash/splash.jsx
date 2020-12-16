@@ -1,21 +1,33 @@
 import React from 'react'
-import GreetingContainer from '../Greetings/greeting_container'
 import {Link} from 'react-router-dom'
-
+import Autocomplete from '../Autocomplete/autocomplete'
 
 class Splash extends React.Component{
     constructor(props){
         super(props)
 
     }
-
+    
 
 
     render(){
+        const searchList = [
+            'Glacier National Park', 
+            'Grinnell Glacier',
+            'Highline to The Loop',
+            'Avalanche Lake via Trail of the Cedars',
+            'Hidden Lake Overlook',
+            'Gunsight Pass',
+            'Ptarmigan Tunnel Route',
+            'Many Glacier Loop',
+            'Grinnell Lake',
+            'Bullhead Lake'
+        ]
         return(
             <div>
-                <GreetingContainer />
-
+                <div className="splashSearch">
+                    <Autocomplete searchList = {searchList}/>
+                </div>
 
                 <img src={window.treksLogoURL} className="image" width='650' height='650' />
 
@@ -31,7 +43,7 @@ class Splash extends React.Component{
                     outdoors with confidence. Anytime. Anywhere.
                 </p>
                 <div className="splashBottom"></div>
-                <Link to="/nationalPark/1">Glacier National Park</Link>
+                <Link to="/national_park/Glacier_National_Park">Glacier National Park</Link>
             </div>
         )
     }

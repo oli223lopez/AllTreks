@@ -196,4 +196,24 @@ body{
     
 }
 
-/* hikes css */
+/* Hike index*/
+
+
+.hikes{
+    display: flex;
+    justify-content: center;
+    border: red;
+    padding: 0px 111px;
+}
+
+.hikeImg{
+    height: 200px;
+    margin: 37px 0px;
+    position: relative;
+    left: -285px;
+    border-radius: 15px;
+}
+
+
+
+ /* Autocomplete */

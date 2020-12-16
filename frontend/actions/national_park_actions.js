@@ -17,9 +17,9 @@ export const fetchNationalPark = nationalPark => ({
 
 
 // thunk action creator
-export const receiveNationalPark = nationalParkId => dispatch => (
+export const receiveNationalPark = nationalParkName => dispatch => (
 
-    NationalParkAPI.showNationalPark(nationalParkId).then(nationalPark => dispatch(fetchNationalPark(nationalPark)))
+    NationalParkAPI.showNationalPark(nationalParkName).then(nationalPark => dispatch(fetchNationalPark(nationalPark)))
 )
 
 

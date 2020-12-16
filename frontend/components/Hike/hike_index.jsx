@@ -5,16 +5,19 @@ class HikeIndex extends React.Component {
     constructor(props){
         super(props)
         // console.log(this.props.nationalPark)
-        
+    console.log(this.props)
+    this.receiveTrek = this.props.receiveTrek.bind(this)
+    this.showHikeThunk = this.props.showHikeThunk.bind(this)
     }
     
     componentDidMount(){
         this.props.receiveTreks(this.props.nationalPark)
     }
+
     isEmpty(obj) {
         return Object.keys(obj).length === 0;
     }
-    dificulty(hikeDifficulty){
+    difficulty(hikeDifficulty){
         if (hikeDifficulty === 'green'){
             return 'Easy'
         }else if(hikeDifficulty === 'greenBlue'){
@@ -38,17 +41,23 @@ class HikeIndex extends React.Component {
         }
         return (
             <div>
-                {this.props.hikes.trails.map((hike) =>{
+                {this.props.hikes.trails.map((hike, id) =>{
                     return(
-                    <Link to='/'>
-                        <h3>{hike.name}</h3>
-                        <p>{this.props.nationalPark.name}</p>
-                        <img src={hike.imgMedium} width='300' height='300'/>
-                        <div>
-                            <p>{this.dificulty(hike.difficulty)} Length: {hike.length}</p>
-                            <p>{hike.summary}</p>
+                    <div key={id} className="hikes">
+                            <h3 className="hikeLink"><Link to={`/hike/${hike.name.split(" ").join("_")}`}>
+                                {hike.name}
+                                </Link>
+                            </h3>
+                        <p className="nationalParkName">{this.props.nationalPark.name}</p>
+                        <img className='hikeImg' src={hike.imgMedium} width='300' height='300'/>
+                        <div className="hikeAttributes">
+                            <p className="difficulty">{this.difficulty(hike.difficulty)}</p>
+                           <p className="length">
+                               Length: {hike.length}
+                            </p> 
                         </div>
-                    </Link>
+                            <p className="summary">{hike.summary}</p>
+                    </div>
                     )
                 })}
             </div>

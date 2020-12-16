@@ -5,21 +5,23 @@ import HikeIndexContainer from '../Hike/hike_index_container'
 class NationalParkShow extends React.Component {
     constructor(props){
         super(props)
+        // console.log(this.props.nationalParkName)
         this.state = {
             nationalPark: {}
         }
     }
 
     componentDidMount(){
-       this.props.receiveNationalPark(this.props.nationalParkId);
+        
+        this.props.receiveNationalPark(this.props.nationalParkName);
     }
 
 
     render(){
-        // console.log(this.props.nationalPark)
+        console.log(this.props.nationalPark)
 
-      if(!this.props.nationalPark){
-          return <div> not working</div>
+      if(this.props.nationalPark === undefined){
+          return <div> </div>
       }
       return(
           <div>

@@ -1,9 +1,9 @@
 
 
 
-export const showNationalPark = nationalParkId => (
+export const showNationalPark = nationalParkName => (
     $.ajax({
-        url: `/api/national_parks/${nationalParkId}`,
+        url: `/api/national_parks/${nationalParkName}`,
         method: 'GET'
     })
 )

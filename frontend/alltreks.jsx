@@ -5,6 +5,7 @@ import * as Actions from './actions/session_actions';
 import configureStore from './store/store'
 import Root from './components/root'
 import * as HikeAPI from './util/hike_api_util'
+import * as NationalParkAPI from './util/national_park_api_util'
 
 document.addEventListener("DOMContentLoaded", () => {
     const root = document.getElementById('root');
@@ -16,6 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // window.getState = store.getState 
     // window.dispatch = store.dispatch
   window.fetchNationalPark = HikeAPI.fetchNationalPark({ lat: 48.7596, lon: 113.7870})
+  window.fetchTrek = HikeAPI.fetchTrek(7018721)
+  window.showHikeTrail = HikeAPI.showHikeTrail('Highline_to_The_Loop')
+  window.showNationalPark = NationalParkAPI.showNationalPark('Glacier_National_Park')
+
   113.7870
     //test
 

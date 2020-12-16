@@ -12,9 +12,9 @@
 class Hike < ApplicationRecord
     validates :name, :hike_API_id, presence: true
 
-    belongs_to :National_park,
+    belongs_to :national_park,
         foreign_key: :national_park_id,
-        class_name: :National_park
+        class_name: :NationalPark
 
 
 
