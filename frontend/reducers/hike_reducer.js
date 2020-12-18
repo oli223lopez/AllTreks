@@ -12,7 +12,7 @@ const hikeReducer = (state = {}, action) => {
             return Object.assign({}, state, {[action.hike.id]: action.hike})
 
         case SHOW_HIKE:
-            return Object.assign({}, state, { [action.hike.id]: action.hike})
+            return Object.assign({}, state, { [`${action.hike.name}1`]: action.hike})
         case RECEIVE_HIKE_FROM_API:
             return Object.assign({}, state, {[action.hike.trails[0].name]: action.hike.trails[0]} )
 

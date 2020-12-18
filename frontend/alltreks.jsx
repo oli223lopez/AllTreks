@@ -6,6 +6,7 @@ import configureStore from './store/store'
 import Root from './components/root'
 import * as HikeAPI from './util/hike_api_util'
 import * as NationalParkAPI from './util/national_park_api_util'
+import * as ReviewAPI from './util/review_api_util'
 
 document.addEventListener("DOMContentLoaded", () => {
     const root = document.getElementById('root');
@@ -20,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.fetchTrek = HikeAPI.fetchTrek(7018721)
   window.showHikeTrail = HikeAPI.showHikeTrail('Highline_to_The_Loop')
   window.showNationalPark = NationalParkAPI.showNationalPark('Glacier_National_Park')
+  // window.updateReview = ReviewAPI.updateReview({id: 4, description: 'Not a bad hike I tell ya', hikes_id: 1, user_id: 1})
 
   113.7870
     //test

@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 
 
 const mapStateToProps = state => {
-    console.log(`maps state to props ${JSON.stringify(state.errors)}`)
+    // console.log(`maps state to props ${JSON.stringify(state.errors)}`)
     return {errors: state.errors.session,
     formType: 'Sign up',
     navLink: <Link to="/login">Login</Link>}

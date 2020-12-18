@@ -196,7 +196,55 @@ body{
     
 }
 
-/* Hike index*/
+
+
+
+/* Autocomplete */
+
+.splashSearch{
+    position: absolute;
+        left: 498px;
+    top: 356px;
+
+}
+.splashSearchInput{
+    border-radius: 8px;
+    padding: 10px 87px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 18px;
+    border-color: transparent;
+}
+
+.splashSearchButton{
+    
+       border-radius: 8px;
+    padding: 10px 41px;
+    color: white;
+    background: #305844;
+    border-color: transparent;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 18px;
+}
+
+.hide{
+    background: white;
+    margin: 0px;
+    border-radius: 8px;
+}
+
+.searchItem{
+    list-style-type: none;
+     font-size: 18px;
+}
+.searchItemLink{
+    text-decoration: none;
+    color: black;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+/* National Park styling */
+
+
 
 
 .hikes{
@@ -206,14 +254,189 @@ body{
     padding: 0px 111px;
 }
 
+.hikeLink{
+    position: absolute;
+    display: flex;
+    text-decoration: none;
+    left: 431px;
+    color: black;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 .hikeImg{
-    height: 200px;
-    margin: 37px 0px;
+    position: absolute;
+       border-radius: 8px;
+    height: 192px;
+    margin-right: 24px;
+    min-width: 288px;
+    width: 288px;
+        left: 124px;
+}
+
+.hikeAttributes{
+    position: absolute;
+    left: 430px;
+    bottom: 72px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+.summary{
+    position: absolute;
+    bottom: 36px;
+    left: 430px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+
+.otherTest{
+    justify-content: center;
+    display: flex;
+    /* position: absolute; */
+}
+
+.otherSearchBar{
+    border-radius: 8px;
+
+}
+.otherSearchItem{
+    text-decoration: none;
+    color: black;
+    list-style-type: none;
+}
+
+.nationalDiv{
     position: relative;
-    left: -285px;
-    border-radius: 15px;
 }
 
 
 
- /* Autocomplete */
+.nationalParkName{
+    position: absolute;
+    left: 430px;
+    bottom: 132px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+.hikes{
+    display: flex;
+    height: 224px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,.08), 0 0 4px 0 rgba(0,0,0,.08);
+    background-color: #fff;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    padding: 16px;
+}
+
+.difficulty{
+    background-color: #768ebe;
+    border-radius: 8px;
+    padding: 1px 7px;
+    margin: 0px 1px;
+    color: white;
+}
+
+
+
+/* hike styling  */
+.otherTest{
+    position: absolute;
+     
+}
+
+.hikeShowImg{
+    height: 600px
+}
+
+.hikeShow{
+        position: absolute;
+        left: 23%;
+        width: 500px;
+}
+
+.hikeShowName{
+    color: white;
+    position: absolute;
+    top: 465px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+}
+
+.hikeDifficulty{
+    background: #6d8ac7;
+    position: absolute;
+    top: 500px;
+    border-radius: 8px;
+    color: white;
+    padding: 3px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+}
+
+
+.hikeSummaryStuff{
+    display: flex;
+    flex-direction: column;
+}
+
+.SummaryDeclaration{
+    display: block;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+
+}
+
+.hikeSummary{
+    display: flex;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+
+}
+
+.hikeShowAttributes{
+    display: flex;
+    flex-direction: row;
+}
+
+.length{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+    /* padding: 0px 14px; */
+    padding-right: 14px;;
+}
+
+.elevation{
+     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+}
+
+.hikeShowDescription{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+}
+
+.hikeShowDescriptionDeclaration{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+.rating{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
+}
+
+.reviewRating{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 18px;
+}
+
+.reviewDescription{
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+}

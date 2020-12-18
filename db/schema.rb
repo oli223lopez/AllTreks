@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_13_205734) do
+ActiveRecord::Schema.define(version: 2020_12_18_075115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2020_12_13_205734) do
     t.integer "hike_API_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "description"
   end
 
   create_table "national_parks", force: :cascade do |t|
@@ -29,6 +30,13 @@ ActiveRecord::Schema.define(version: 2020_12_13_205734) do
     t.float "lon", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "description", null: false
+    t.integer "rating", null: false
+    t.integer "hikes_id"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -5,7 +5,7 @@ class HikeIndex extends React.Component {
     constructor(props){
         super(props)
         // console.log(this.props.nationalPark)
-    console.log(this.props)
+    // console.log(this.props)
     this.receiveTrek = this.props.receiveTrek.bind(this)
     this.showHikeThunk = this.props.showHikeThunk.bind(this)
     }
@@ -34,18 +34,21 @@ class HikeIndex extends React.Component {
     }
     
     render(){
-        console.log(this.props.hikes)
-        
+
+        // console.log(this.props.hikes)
+        let count = 0
         if (this.isEmpty(this.props.hikes)) {
-            return <div> not working</div>
+            return <div></div>
         }
+        console.log(this.props.hikes)
         return (
             <div>
                 {this.props.hikes.trails.map((hike, id) =>{
+                    count++
                     return(
                     <div key={id} className="hikes">
-                            <h3 className="hikeLink"><Link to={`/hike/${hike.name.split(" ").join("_")}`}>
-                                {hike.name}
+                            <h3><Link to={`/hike/${hike.name.split(" ").join("_")}`} className="hikeLink">
+                                #{count}-{hike.name}
                                 </Link>
                             </h3>
                         <p className="nationalParkName">{this.props.nationalPark.name}</p>

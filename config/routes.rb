@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
     resources :hikes, only: [:show, :index]
     resources :national_parks, only: [:show]
+    resources :reviews, only: [:show, :create, :update, :destroy]
   end
   
   root 'static_pages#root'

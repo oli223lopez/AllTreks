@@ -5,7 +5,7 @@ import { showHikeThunk, receiveTreks, receiveTrek,  } from '../../actions/hike_a
 
 const mapStateToProps = (state, ownProps) => {
  
-        console.log("container")
+        // console.log("container")
         return ({
         hikes: state.entities.hikes,
         })

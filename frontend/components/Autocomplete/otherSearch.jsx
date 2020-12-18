@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 
 
-class Autocomplete extends React.Component {
+class OtherSearch extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             inputVal: ''
@@ -14,11 +14,11 @@ class Autocomplete extends React.Component {
         this.update = this.update.bind(this)
     }
 
-    update(e){
-       this.setState({inputVal: e.currentTarget.value})
+    update(e) {
+        this.setState({ inputVal: e.currentTarget.value })
     }
 
-    matches(){
+    matches() {
         const matches = []
         if (this.state.inputVal === "") {
             return []
@@ -31,41 +31,41 @@ class Autocomplete extends React.Component {
             }
         })
 
-        if(matches.length === 0){
+        if (matches.length === 0) {
             matches.push('No matches')
         }
         return matches
     }
 
-    selectName(event){
+    selectName(event) {
         const name = event.currentTarget.innerText
-        this.setState({inputVal: name})
+        this.setState({ inputVal: name })
     }
 
 
-    render(){
+    render() {
         const results = this.matches().map((result, i) => {
-            if(result.includes('National')){
-                return(
-                        <li key={i} onClick={this.selectName} className="searchItem">
-                            <Link to={`/national_park/${result.split(" ").join("_")}`}
-                            className="searchItemLink">{result}</Link>
-                        </li>
-                    )
-            }else{
-                return(
-                    <li key={i} onClick={this.selectName} className="searchItem">
+            if (result.includes('National')) {
+                return (
+                    <li key={i} onClick={this.selectName}>
+                        <Link to={`/national_park/${result.split(" ").join("_")}`}
+                        className="otherSearchItem">{result}</Link>
+                    </li>
+                )
+            } else {
+                return (
+                    <li key={i} onClick={this.selectName}>
                         <Link to={`/hike/${result.split(" ").join("_")}`}
-                            className="searchItemLink">{result}</Link>
+                        className="otherSearchItem">{result}</Link>
                     </li>
                 )
             }
         })
-        return(
+        return (
             <div>
-                <input type="text" onChange={this.update} className="splashSearchInput"/>
-                <button type="submit" className="splashSearchButton">Search</button>
-                
+                <input type="text" onChange={this.update} className="otherSearchBar"/>
+                <button type="submit">Search</button>
+
                 <ul className="hide">
                     {results}
                 </ul>
@@ -76,4 +76,4 @@ class Autocomplete extends React.Component {
 
 }
 
-export default Autocomplete
+export default OtherSearch

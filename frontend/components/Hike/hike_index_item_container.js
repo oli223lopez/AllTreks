@@ -1,20 +1,27 @@
 import {connect} from 'react-redux'
 import HikeIndexItem from './hike_index_item'
-import { receiveTrek, receiveHikeAPI} from '../../actions/hike_actions'
+import { receiveTrek, receiveHikeAPI, showHikeThunk} from '../../actions/hike_actions'
 
 
 const mapStateToProps = (state, ownProps) => {
-    let hike = {}
+    let hikeAPI = {}
     if (state.entities.hikes[ownProps.match.params.hikeName.split("_").join(" ")] != undefined){
-        hike = state.entities.hikes[ownProps.match.params.hikeName.split("_").join(" ")]
+        hikeAPI = state.entities.hikes[ownProps.match.params.hikeName.split("_").join(" ")]
     }
-    return ({hike: hike,
+    let hikeDB = {}
+    // console.log(`${ownProps.match.params.hikeName}1`)
+    if (state.entities.hikes[`${ownProps.match.params.hikeName}1`] != undefined){
+        hikeDB = state.entities.hikes[`${ ownProps.match.params.hikeName }1`]
+    }
+    return ({hikeAPI: hikeAPI,
+        hikeDB: hikeDB,
     hikeName: ownProps.match.params.hikeName}) 
 };
 
 const mapDispatchToProps = dispatch => ({
     receiveTrek: trekAPIId => dispatch(receiveTrek(trekAPIId)),
-    receiveHikeAPI: hikeName => dispatch(receiveHikeAPI(hikeName))
+    receiveHikeAPI: hikeName => dispatch(receiveHikeAPI(hikeName)),
+    showHikeThunk: hikeName => dispatch(showHikeThunk(hikeName))
 
 })
 

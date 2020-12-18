@@ -17,6 +17,10 @@ class Hike < ApplicationRecord
         class_name: :NationalPark
 
 
+    has_many :reviews,
+        foreign_key: :hikes_id,
+        class_name: :Review
+
 
 end
 
