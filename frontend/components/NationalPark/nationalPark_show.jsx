@@ -41,6 +41,7 @@ class NationalParkShow extends React.Component {
               <div className="otherTest">
                   <OtherSearch searchList={searchList} />
               </div>
+              
               <div className="nationalDiv"> 
                 <h1 className="nationalParkHeader">Best Hikes in {this.props.nationalPark.name.split("_").join(" ")}</h1>
                 

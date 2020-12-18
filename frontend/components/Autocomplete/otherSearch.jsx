@@ -66,7 +66,7 @@ class OtherSearch extends React.Component {
                 <input type="text" onChange={this.update} className="otherSearchBar"/>
                 <button type="submit">Search</button>
 
-                <ul className="hide">
+                <ul className="otherHide">
                     {results}
                 </ul>
             </div>

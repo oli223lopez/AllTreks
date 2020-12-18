@@ -231,6 +231,9 @@ body{
     margin: 0px;
     border-radius: 8px;
 }
+.otherHide{
+    background: white;
+}
 
 .searchItem{
     list-style-type: none;
@@ -303,10 +306,12 @@ body{
     text-decoration: none;
     color: black;
     list-style-type: none;
+
 }
 
 .nationalDiv{
     position: relative;
+    top: 20px;
 }
 
 
