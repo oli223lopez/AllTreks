@@ -1,24 +1,10 @@
-# README
+# AllTreks
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+--------------------------------------
 
-Things you may want to cover:
+https://alltreks.herokuapp.com
 
-* Ruby version
 
-* System dependencies
+AllTreks is a clone of AllTrails.com, where users can find detailed information about hikes they are interested in, as well as add reviews and photos of hikes they have completed. A hike page can give information such as difficulty, length, route type, waypoints, weather conditions, driving directions, and even a map of the hike.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The AllTreks backend is built using the Ruby on Rails framework, and PostgreSQL database. The frontend of the site it built using React and CSS, with Redux managing the front-end state. 
