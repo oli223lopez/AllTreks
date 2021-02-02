@@ -61,6 +61,7 @@ class SessionForm extends React.Component {
   signUp(){
       return(
         <div>
+
         <img src={window.authBackGroundURL} className="authBackground" width="600" height="600"/>
 
         <form onSubmit={this.handleSubmit} className="authForm">

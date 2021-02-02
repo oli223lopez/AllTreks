@@ -79,88 +79,47 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 
 /***/ }),
 
-/***/ "./frontend/actions/hike_actions.js":
-/*!******************************************!*
-  !*** ./frontend/actions/hike_actions.js ***!
-  \******************************************/
+/***/ "./frontend/actions/hike_action.js":
+/*!*****************************************!*
+  !*** ./frontend/actions/hike_action.js ***!
+  \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RECEIVE_HIKE": () => /* binding */ RECEIVE_HIKE,
-/* harmony export */   "RECEIVE_ALL_TREKS": () => /* binding */ RECEIVE_ALL_TREKS,
-/* harmony export */   "SHOW_HIKE": () => /* binding */ SHOW_HIKE,
-/* harmony export */   "RECEIVE_HIKE_FROM_API": () => /* binding */ RECEIVE_HIKE_FROM_API,
-/* harmony export */   "fetchTrek": () => /* binding */ fetchTrek,
-/* harmony export */   "fetchAllTreks": () => /* binding */ fetchAllTreks,
-/* harmony export */   "showHike": () => /* binding */ showHike,
-/* harmony export */   "receiveHikeFromAPI": () => /* binding */ receiveHikeFromAPI,
-/* harmony export */   "receiveTrek": () => /* binding */ receiveTrek,
-/* harmony export */   "receiveTreks": () => /* binding */ receiveTreks,
-/* harmony export */   "showHikeThunk": () => /* binding */ showHikeThunk,
-/* harmony export */   "receiveHikeAPI": () => /* binding */ receiveHikeAPI
+/* harmony export */   "REMOVE_HIKE": () => /* binding */ REMOVE_HIKE,
+/* harmony export */   "receiveHike": () => /* binding */ receiveHike,
+/* harmony export */   "clearHike": () => /* binding */ clearHike,
+/* harmony export */   "fetchHike": () => /* binding */ fetchHike,
+/* harmony export */   "removeHike": () => /* binding */ removeHike
 /* harmony export */ });
 /* harmony import */ var _util_hike_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/hike_api_util */ "./frontend/util/hike_api_util.js");
 
 var RECEIVE_HIKE = 'RECEIVE_HIKE';
-var RECEIVE_ALL_TREKS = 'RECIEVE_ALL_TREKS';
-var SHOW_HIKE = "SHOW_HIKE";
-var RECEIVE_HIKE_FROM_API = "RECEIVE_HIKE_FROM_API"; // actions creator
-
-var fetchTrek = function fetchTrek(hike) {
+var REMOVE_HIKE = 'REMOVE_HIKE';
+var receiveHike = function receiveHike(hike) {
   return {
     type: RECEIVE_HIKE,
     hike: hike
   };
 };
-var fetchAllTreks = function fetchAllTreks(treks) {
+var clearHike = function clearHike() {
   return {
-    type: RECEIVE_ALL_TREKS,
-    treks: treks
+    type: REMOVE_HIKE
   };
 };
-var showHike = function showHike(hike) {
-  return {
-    type: SHOW_HIKE,
-    hike: hike
-  };
-};
-var receiveHikeFromAPI = function receiveHikeFromAPI(hike) {
-  return {
-    type: RECEIVE_HIKE_FROM_API,
-    hike: hike
-  };
-}; //thunk action creators
-
-var receiveTrek = function receiveTrek(trekAPIId) {
+var fetchHike = function fetchHike(hike_id) {
   return function (dispatch) {
-    return _util_hike_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchTrek(trekAPIId).then(function (trek) {
-      return dispatch(fetchTrek(trek));
-    });
+    return _util_hike_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchHike(hike_id).then(function (hike) {
+      return dispatch(receiveHike(hike));
+    }); // .catch(err => console.log(err))
   };
 };
-var receiveTreks = function receiveTreks(nationalPark) {
+var removeHike = function removeHike() {
   return function (dispatch) {
-    return _util_hike_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchNationalPark(nationalPark).then(function (treks) {
-      return dispatch(fetchAllTreks(treks));
-    });
-  };
-};
-var showHikeThunk = function showHikeThunk(hikeName) {
-  return function (dispatch) {
-    return _util_hike_api_util__WEBPACK_IMPORTED_MODULE_0__.showHikeTrail(hikeName).then(function (hike) {
-      return dispatch(showHike(hike));
-    });
-  };
-};
-var receiveHikeAPI = function receiveHikeAPI(hikeName) {
-  return function (dispatch) {
-    return _util_hike_api_util__WEBPACK_IMPORTED_MODULE_0__.showHikeTrail(hikeName).then(function (hike) {
-      return _util_hike_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchTrek(hike.hike_API_id);
-    }).then(function (hike) {
-      return dispatch(receiveHikeFromAPI(hike));
-    });
+    return dispatch(clearHike());
   };
 };
 
@@ -175,114 +134,41 @@ var receiveHikeAPI = function receiveHikeAPI(hikeName) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "RECEIVE_NATIONAL_PARK": () => /* binding */ RECEIVE_NATIONAL_PARK,
-/* harmony export */   "fetchNationalPark": () => /* binding */ fetchNationalPark,
-/* harmony export */   "receiveNationalPark": () => /* binding */ receiveNationalPark
+/* harmony export */   "RECEIVE_NP": () => /* binding */ RECEIVE_NP,
+/* harmony export */   "RECEIVE_ALL_NP": () => /* binding */ RECEIVE_ALL_NP,
+/* harmony export */   "receiveNP": () => /* binding */ receiveNP,
+/* harmony export */   "receiveAllNP": () => /* binding */ receiveAllNP,
+/* harmony export */   "fetchNP": () => /* binding */ fetchNP,
+/* harmony export */   "fetchAllNP": () => /* binding */ fetchAllNP
 /* harmony export */ });
 /* harmony import */ var _util_national_park_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/national_park_api_util */ "./frontend/util/national_park_api_util.js");
 
-var RECEIVE_NATIONAL_PARK = 'RECEIVE_NATIONAL_PARK'; // action creator
-
-var fetchNationalPark = function fetchNationalPark(nationalPark) {
+var RECEIVE_NP = 'RECEIVE_NP';
+var RECEIVE_ALL_NP = 'RECEIVE_ALL_NP';
+var receiveNP = function receiveNP(national_park) {
   return {
-    type: RECEIVE_NATIONAL_PARK,
-    nationalPark: nationalPark
-  };
-}; // thunk action creator
-
-var receiveNationalPark = function receiveNationalPark(nationalParkName) {
-  return function (dispatch) {
-    return _util_national_park_api_util__WEBPACK_IMPORTED_MODULE_0__.showNationalPark(nationalParkName).then(function (nationalPark) {
-      return dispatch(fetchNationalPark(nationalPark));
-    });
+    type: RECEIVE_NP,
+    national_park: national_park
   };
 };
-
-/***/ }),
-
-/***/ "./frontend/actions/review_actions.js":
-/*!********************************************!*
-  !*** ./frontend/actions/review_actions.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "RECEIVE_REVIEW": () => /* binding */ RECEIVE_REVIEW,
-/* harmony export */   "REMOVE_REVIEW": () => /* binding */ REMOVE_REVIEW,
-/* harmony export */   "RECEIVE_ERRORS": () => /* binding */ RECEIVE_ERRORS,
-/* harmony export */   "REMOVE_ERRORS": () => /* binding */ REMOVE_ERRORS,
-/* harmony export */   "fetchReview": () => /* binding */ fetchReview,
-/* harmony export */   "removeReview": () => /* binding */ removeReview,
-/* harmony export */   "removeError": () => /* binding */ removeError,
-/* harmony export */   "receiveErrors": () => /* binding */ receiveErrors,
-/* harmony export */   "receiveReview": () => /* binding */ receiveReview,
-/* harmony export */   "createReview": () => /* binding */ createReview,
-/* harmony export */   "updateReview": () => /* binding */ updateReview,
-/* harmony export */   "deleteReview": () => /* binding */ deleteReview
-/* harmony export */ });
-/* harmony import */ var _util_review_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/review_api_util */ "./frontend/util/review_api_util.js");
-
-var RECEIVE_REVIEW = 'RECEIVE_REVIEW';
-var REMOVE_REVIEW = 'REMOVE_REVIEW';
-var RECEIVE_ERRORS = 'RECEIVE__ERRORS';
-var REMOVE_ERRORS = 'REMOVE_ERRORS'; //action creators
-
-var fetchReview = function fetchReview(review) {
+var receiveAllNP = function receiveAllNP(national_parks) {
   return {
-    type: RECEIVE_REVIEW,
-    review: review
+    type: RECEIVE_ALL_NP,
+    national_parks: national_parks
   };
 };
-var removeReview = function removeReview(reviewId) {
-  return {
-    type: REMOVE_REVIEW,
-    reviewId: reviewId
-  };
-};
-var removeError = function removeError() {
-  return {
-    type: REMOVE_ERRORS
-  };
-};
-var receiveErrors = function receiveErrors(errors) {
-  return {
-    type: RECEIVE_ERRORS,
-    errors: errors
-  };
-}; //thunk action creator 
-
-var receiveReview = function receiveReview(reviewId) {
+var fetchNP = function fetchNP(national_parkID) {
   return function (dispatch) {
-    return _util_review_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchReview(reviewId).then(function (review) {
-      return dispatch(fetchReview(review));
-    });
+    return _util_national_park_api_util__WEBPACK_IMPORTED_MODULE_0__.NationalPark(national_parkID).then(function (national_park) {
+      return dispatch(receiveNP(national_park));
+    }); // .catch(err => console.log(err))
   };
 };
-var createReview = function createReview(review) {
+var fetchAllNP = function fetchAllNP() {
   return function (dispatch) {
-    return _util_review_api_util__WEBPACK_IMPORTED_MODULE_0__.createReview(review).then(function (review) {
-      return dispatch(fetchReview(review));
-    }, function (err) {
-      return dispatch(receiveErrors(err));
-    });
-  };
-};
-var updateReview = function updateReview(review) {
-  return function (dispatch) {
-    return _util_review_api_util__WEBPACK_IMPORTED_MODULE_0__.updateReview(review).then(function (review) {
-      return dispatch(fetchReview(review));
-    }, function (err) {
-      return dispatch(receiveErrors(err));
-    });
-  };
-};
-var deleteReview = function deleteReview(reviewId) {
-  return function (dispatch) {
-    return _util_review_api_util__WEBPACK_IMPORTED_MODULE_0__.deleteReview(reviewId).then(function (reviewId) {
-      return dispatch(removeReview(reviewId));
-    });
+    return _util_national_park_api_util__WEBPACK_IMPORTED_MODULE_0__.allNP().then(function (national_parks) {
+      return dispatch(receiveAllNP(national_parks));
+    }); // .catch(err => console.log(err))
   };
 };
 
@@ -387,8 +273,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_hike_api_util__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./util/hike_api_util */ "./frontend/util/hike_api_util.js");
 /* harmony import */ var _util_national_park_api_util__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./util/national_park_api_util */ "./frontend/util/national_park_api_util.js");
 /* harmony import */ var _util_review_api_util__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./util/review_api_util */ "./frontend/util/review_api_util.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -400,22 +284,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 document.addEventListener("DOMContentLoaded", function () {
   var root = document.getElementById('root');
-  var store; //test
-  // window.login = Actions.login
-  // window.signup = Actions.signup
-  // window.logout = Actions.logout
-  // window.getState = store.getState 
-  // window.dispatch = store.dispatch
-
-  window.fetchNationalPark = _util_hike_api_util__WEBPACK_IMPORTED_MODULE_6__.fetchNationalPark({
-    lat: 48.7596,
-    lon: 113.7870
-  });
-  window.fetchTrek = _util_hike_api_util__WEBPACK_IMPORTED_MODULE_6__.fetchTrek(7018721);
-  window.showHikeTrail = _util_hike_api_util__WEBPACK_IMPORTED_MODULE_6__.showHikeTrail('Highline_to_The_Loop');
-  window.showNationalPark = _util_national_park_api_util__WEBPACK_IMPORTED_MODULE_7__.showNationalPark('Glacier_National_Park'); // window.updateReview = ReviewAPI.updateReview({id: 4, description: 'Not a bad hike I tell ya', hikes_id: 1, user_id: 1})
-
-  113.7870; //test
+  var store;
 
   if (window.currentUser) {
     var preloadedState = {
@@ -423,7 +292,7 @@ document.addEventListener("DOMContentLoaded", function () {
         id: window.currentUser.id
       },
       entities: {
-        users: _defineProperty({}, window.currentUser.id, window.currentUser)
+        users: window.currentUser
       }
     };
     store = (0,_store_store__WEBPACK_IMPORTED_MODULE_4__.default)(preloadedState);
@@ -440,9 +309,96 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /***/ }),
 
-/***/ "./frontend/components/Autocomplete/autocomplete.jsx":
+/***/ "./frontend/components/Hike/hike_show.js":
+/*!***********************************************!*
+  !*** ./frontend/components/Hike/hike_show.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+var HikeShow = function HikeShow(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+      _useState2 = _slicedToArray(_useState, 2),
+      hike = _useState2[0],
+      setHike = _useState2[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    props.fetchHike(props.hikeID).then(function (res) {
+      return setHike(res.hike);
+    });
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, Object.values(hike).length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, hike.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Length: ", hike.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Route Type: ", hike.route_type), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Elevation Gain: ", hike.elevation_gain), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Summary: ", hike.summary), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Description: ", hike.description)) : null);
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HikeShow);
+
+/***/ }),
+
+/***/ "./frontend/components/Hike/hike_show_container.js":
+/*!*********************************************************!*
+  !*** ./frontend/components/Hike/hike_show_container.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _hike_show__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./hike_show */ "./frontend/components/Hike/hike_show.js");
+/* harmony import */ var _actions_hike_action__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/hike_action */ "./frontend/actions/hike_action.js");
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  // console.log(state.entities.hike)  
+  return {
+    hike: state.entities.hike,
+    hikeID: ownProps.match.params.id
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchHike: function fetchHike(hikeID) {
+      return dispatch((0,_actions_hike_action__WEBPACK_IMPORTED_MODULE_3__.fetchHike)(hikeID));
+    },
+    removeHike: function removeHike() {
+      return dispatch((0,_actions_hike_action__WEBPACK_IMPORTED_MODULE_3__.removeHike)());
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(_hike_show__WEBPACK_IMPORTED_MODULE_2__.default));
+
+/***/ }),
+
+/***/ "./frontend/components/NationalPark/national_park.js":
 /*!***********************************************************!*
-  !*** ./frontend/components/Autocomplete/autocomplete.jsx ***!
+  !*** ./frontend/components/NationalPark/national_park.js ***!
   \***********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -453,140 +409,94 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
 
-var Autocomplete = /*#__PURE__*/function (_React$Component) {
-  _inherits(Autocomplete, _React$Component);
+var NationalPark = function NationalPark(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+      _useState2 = _slicedToArray(_useState, 2),
+      nationalPark = _useState2[0],
+      setNationalPark = _useState2[1];
 
-  var _super = _createSuper(Autocomplete);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (Object.values(nationalPark).length === 0) {
+      props.fetchNP(props.nationalParkID);
 
-  function Autocomplete(props) {
-    var _this;
-
-    _classCallCheck(this, Autocomplete);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      inputVal: ''
-    };
-    _this.selectName = _this.selectName.bind(_assertThisInitialized(_this));
-    _this.update = _this.update.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(Autocomplete, [{
-    key: "update",
-    value: function update(e) {
-      this.setState({
-        inputVal: e.currentTarget.value
-      });
-    }
-  }, {
-    key: "matches",
-    value: function matches() {
-      var _this2 = this;
-
-      var matches = [];
-
-      if (this.state.inputVal === "") {
-        return [];
+      if (props.nationalPark.hikes) {
+        setNationalPark(props.nationalPark);
       }
-
-      this.props.searchList.forEach(function (name) {
-        var lowerCaseName = name.toLowerCase();
-
-        if (lowerCaseName.includes(_this2.state.inputVal.toLowerCase())) {
-          matches.push(name);
-        }
-      });
-
-      if (matches.length === 0) {
-        matches.push('No matches');
-      }
-
-      return matches;
     }
-  }, {
-    key: "selectName",
-    value: function selectName(event) {
-      var name = event.currentTarget.innerText;
-      this.setState({
-        inputVal: name
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this3 = this;
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, console.log(nationalPark), Object.values(nationalPark).length ? nationalPark.hikes.map(function (hike, i) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      key: i
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+      to: "/hike/".concat(hike.id)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, hike.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, hike.difficulty), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, hike.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, hike.elevation_gain), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, hike.summary)));
+  }) : null);
+};
 
-      var results = this.matches().map(function (result, i) {
-        if (result.includes('National')) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-            key: i,
-            onClick: _this3.selectName,
-            className: "searchItem"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-            to: "/national_park/".concat(result.split(" ").join("_")),
-            className: "searchItemLink"
-          }, result));
-        } else {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-            key: i,
-            onClick: _this3.selectName,
-            className: "searchItem"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-            to: "/hike/".concat(result.split(" ").join("_")),
-            className: "searchItemLink"
-          }, result));
-        }
-      });
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "text",
-        onChange: this.update,
-        className: "splashSearchInput"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        type: "submit",
-        className: "splashSearchButton"
-      }, "Search"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-        className: "hide"
-      }, results));
-    }
-  }]);
-
-  return Autocomplete;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Autocomplete);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NationalPark);
 
 /***/ }),
 
-/***/ "./frontend/components/Autocomplete/otherSearch.jsx":
-/*!**********************************************************!*
-  !*** ./frontend/components/Autocomplete/otherSearch.jsx ***!
-  \**********************************************************/
+/***/ "./frontend/components/NationalPark/national_park_container.js":
+/*!*********************************************************************!*
+  !*** ./frontend/components/NationalPark/national_park_container.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _national_park__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./national_park */ "./frontend/components/NationalPark/national_park.js");
+/* harmony import */ var _actions_national_park_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/national_park_actions */ "./frontend/actions/national_park_actions.js");
+
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  // console.log(state.entities.nationalPark)
+  // console.log(ownProps.match.params.id)
+  return {
+    nationalPark: state.entities.nationalPark,
+    nationalParkID: ownProps.match.params.id
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps() {
+  return function (dispatch) {
+    return {
+      fetchNP: function fetchNP(nationalParkID) {
+        return dispatch((0,_actions_national_park_actions__WEBPACK_IMPORTED_MODULE_2__.fetchNP)(nationalParkID));
+      }
+    };
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_national_park__WEBPACK_IMPORTED_MODULE_1__.default));
+
+/***/ }),
+
+/***/ "./frontend/components/NavBar/navbar.js":
+/*!**********************************************!*
+  !*** ./frontend/components/NavBar/navbar.js ***!
+  \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -596,150 +506,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
 
-var OtherSearch = /*#__PURE__*/function (_React$Component) {
-  _inherits(OtherSearch, _React$Component);
+var NavBar = function NavBar(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.currentUser),
+      _useState2 = _slicedToArray(_useState, 2),
+      user = _useState2[0],
+      setUser = _useState2[1];
 
-  var _super = _createSuper(OtherSearch);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    // console.log('useEffect')
+    setUser(props.currentUser);
+  }, [props.currentUser]);
 
-  function OtherSearch(props) {
-    var _this;
-
-    _classCallCheck(this, OtherSearch);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      inputVal: ''
-    };
-    _this.selectName = _this.selectName.bind(_assertThisInitialized(_this));
-    _this.update = _this.update.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(OtherSearch, [{
-    key: "update",
-    value: function update(e) {
-      this.setState({
-        inputVal: e.currentTarget.value
-      });
-    }
-  }, {
-    key: "matches",
-    value: function matches() {
-      var _this2 = this;
-
-      var matches = [];
-
-      if (this.state.inputVal === "") {
-        return [];
-      }
-
-      this.props.searchList.forEach(function (name) {
-        var lowerCaseName = name.toLowerCase();
-
-        if (lowerCaseName.includes(_this2.state.inputVal.toLowerCase())) {
-          matches.push(name);
-        }
-      });
-
-      if (matches.length === 0) {
-        matches.push('No matches');
-      }
-
-      return matches;
-    }
-  }, {
-    key: "selectName",
-    value: function selectName(event) {
-      var name = event.currentTarget.innerText;
-      this.setState({
-        inputVal: name
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this3 = this;
-
-      var results = this.matches().map(function (result, i) {
-        if (result.includes('National')) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-            key: i,
-            onClick: _this3.selectName
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-            to: "/national_park/".concat(result.split(" ").join("_")),
-            className: "otherSearchItem"
-          }, result));
-        } else {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-            key: i,
-            onClick: _this3.selectName
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-            to: "/hike/".concat(result.split(" ").join("_")),
-            className: "otherSearchItem"
-          }, result));
-        }
-      });
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "text",
-        onChange: this.update,
-        className: "otherSearchBar"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        type: "submit"
-      }, "Search"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-        className: "otherHide"
-      }, results));
-    }
-  }]);
-
-  return OtherSearch;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (OtherSearch);
-
-/***/ }),
-
-/***/ "./frontend/components/Greetings/greeting.jsx":
-/*!****************************************************!*
-  !*** ./frontend/components/Greetings/greeting.jsx ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
-
-
-var Greeting = function Greeting(props) {
   var isLoggedIn = function isLoggedIn() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
       className: "welcomeMsg"
@@ -764,17 +556,22 @@ var Greeting = function Greeting(props) {
     }, " Log In "));
   };
 
-  return props.currentUser ? isLoggedIn() : notLoggedIn();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    className: "splashHeader"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    to: "/",
+    className: "AllTreks"
+  }, "AllTreks")), Object.values(props.currentUser).length ? isLoggedIn() : notLoggedIn());
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Greeting);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NavBar);
 
 /***/ }),
 
-/***/ "./frontend/components/Greetings/greeting_container.js":
-/*!*************************************************************!*
-  !*** ./frontend/components/Greetings/greeting_container.js ***!
-  \*************************************************************/
+/***/ "./frontend/components/NavBar/navbar_container.js":
+/*!********************************************************!*
+  !*** ./frontend/components/NavBar/navbar_container.js ***!
+  \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -784,7 +581,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _greeting__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./greeting */ "./frontend/components/Greetings/greeting.jsx");
+/* harmony import */ var _navbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./navbar */ "./frontend/components/NavBar/navbar.js");
 
 
 
@@ -792,8 +589,9 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(_ref) {
   var session = _ref.session,
       users = _ref.entities.users;
+  // console.log('this is the current user', users)
   return {
-    currentUser: users[session.id]
+    currentUser: users
   };
 };
 
@@ -805,606 +603,13 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(_greeting__WEBPACK_IMPORTED_MODULE_2__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(_navbar__WEBPACK_IMPORTED_MODULE_2__.default));
 
 /***/ }),
 
-/***/ "./frontend/components/Hike/hike_index.jsx":
-/*!*************************************************!*
-  !*** ./frontend/components/Hike/hike_index.jsx ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-var HikeIndex = /*#__PURE__*/function (_React$Component) {
-  _inherits(HikeIndex, _React$Component);
-
-  var _super = _createSuper(HikeIndex);
-
-  function HikeIndex(props) {
-    var _this;
-
-    _classCallCheck(this, HikeIndex);
-
-    _this = _super.call(this, props); // console.log(this.props.nationalPark)
-    // console.log(this.props)
-
-    _this.receiveTrek = _this.props.receiveTrek.bind(_assertThisInitialized(_this));
-    _this.showHikeThunk = _this.props.showHikeThunk.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(HikeIndex, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.receiveTreks(this.props.nationalPark);
-    }
-  }, {
-    key: "isEmpty",
-    value: function isEmpty(obj) {
-      return Object.keys(obj).length === 0;
-    }
-  }, {
-    key: "difficulty",
-    value: function difficulty(hikeDifficulty) {
-      if (hikeDifficulty === 'green') {
-        return 'Easy';
-      } else if (hikeDifficulty === 'greenBlue') {
-        return 'Easy/Intermediate';
-      } else if (hikeDifficulty === 'blue') {
-        return 'Intermediate';
-      } else if (hikeDifficulty === 'blueBlack') {
-        return 'Intermidate';
-      } else if (hikeDifficulty === 'black') {
-        return 'Difficult';
-      } else {
-        return 'Dummy Difficult';
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      // console.log(this.props.hikes)
-      var count = 0;
-
-      if (this.isEmpty(this.props.hikes)) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null);
-      }
-
-      console.log(this.props.hikes);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.props.hikes.trails.map(function (hike, id) {
-        count++;
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          key: id,
-          className: "hikes"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-          to: "/hike/".concat(hike.name.split(" ").join("_")),
-          className: "hikeLink"
-        }, "#", count, "-", hike.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-          className: "nationalParkName"
-        }, _this2.props.nationalPark.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-          className: "hikeImg",
-          src: hike.imgMedium,
-          width: "300",
-          height: "300"
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "hikeAttributes"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-          className: "difficulty"
-        }, _this2.difficulty(hike.difficulty)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-          className: "length"
-        }, "Length: ", hike.length)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-          className: "summary"
-        }, hike.summary));
-      }));
-    }
-  }]);
-
-  return HikeIndex;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HikeIndex);
-
-/***/ }),
-
-/***/ "./frontend/components/Hike/hike_index_container.js":
-/*!**********************************************************!*
-  !*** ./frontend/components/Hike/hike_index_container.js ***!
-  \**********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _hike_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./hike_index */ "./frontend/components/Hike/hike_index.jsx");
-/* harmony import */ var _actions_hike_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/hike_actions */ "./frontend/actions/hike_actions.js");
-
-
-
-
-var mapStateToProps = function mapStateToProps(state, ownProps) {
-  // console.log("container")
-  return {
-    hikes: state.entities.hikes
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  // console.log(receiveTreks)
-  return {
-    receiveTreks: function receiveTreks(nationalPark) {
-      return dispatch((0,_actions_hike_actions__WEBPACK_IMPORTED_MODULE_2__.receiveTreks)(nationalPark));
-    },
-    receiveTrek: function receiveTrek(trek) {
-      return dispatch((0,_actions_hike_actions__WEBPACK_IMPORTED_MODULE_2__.receiveTrek)(trek));
-    },
-    showHikeThunk: function showHikeThunk(hikeName) {
-      return dispatch((0,_actions_hike_actions__WEBPACK_IMPORTED_MODULE_2__.showHikeThunk)(hikeName));
-    }
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_hike_index__WEBPACK_IMPORTED_MODULE_1__.default));
-
-/***/ }),
-
-/***/ "./frontend/components/Hike/hike_index_item.jsx":
-/*!******************************************************!*
-  !*** ./frontend/components/Hike/hike_index_item.jsx ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _Autocomplete_otherSearch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Autocomplete/otherSearch */ "./frontend/components/Autocomplete/otherSearch.jsx");
-/* harmony import */ var _Review_create_review_form_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Review/create_review_form_container */ "./frontend/components/Review/create_review_form_container.jsx");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-
-
-var HikeIndex = /*#__PURE__*/function (_React$Component) {
-  _inherits(HikeIndex, _React$Component);
-
-  var _super = _createSuper(HikeIndex);
-
-  function HikeIndex(props) {
-    _classCallCheck(this, HikeIndex);
-
-    return _super.call(this, props);
-  }
-
-  _createClass(HikeIndex, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.receiveHikeAPI(this.props.hikeName);
-      this.props.showHikeThunk(this.props.hikeName);
-    }
-  }, {
-    key: "isEmpty",
-    value: function isEmpty(obj) {
-      return Object.keys(obj).length === 0;
-    }
-  }, {
-    key: "difficulty",
-    value: function difficulty(hikeDifficulty) {
-      if (hikeDifficulty === 'green') {
-        return 'Easy';
-      } else if (hikeDifficulty === 'greenBlue') {
-        return 'Easy/Intermediate';
-      } else if (hikeDifficulty === 'blue') {
-        return 'Intermediate';
-      } else if (hikeDifficulty === 'blueBlack') {
-        return 'Intermidate';
-      } else if (hikeDifficulty === 'black') {
-        return 'Difficult';
-      } else {
-        return 'Dummy Difficult';
-      }
-    }
-  }, {
-    key: "ratingAvg",
-    value: function ratingAvg() {
-      var num = 0;
-      var count = 0; // console.log(this.props.hikeDB.reviews)
-
-      if (this.props.hikeDB.reviews) {
-        Object.values(this.props.hikeDB.reviews).forEach(function (review) {
-          num += review.rating;
-          count++;
-        });
-        return num / count;
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this = this;
-
-      var searchList = ['Glacier National Park', 'Grinnell Glacier', 'Highline to The Loop', 'Avalanche Lake via Trail of the Cedars', 'Hidden Lake Overlook', 'Gunsight Pass', 'Ptarmigan Tunnel Route', 'Many Glacier Loop', 'Grinnell Lake', 'Bullhead Lake'];
-      var hikeAPI = this.props.hikeAPI;
-      var hikeDB = this.props.hikeDB;
-
-      var hikeReviews = function hikeReviews() {
-        if (_this.isEmpty(hikeDB)) {
-          return null;
-        } else {
-          // console.log(hikeDB.reviews)
-          if (!hikeDB.reviews) {
-            return null;
-          } else {
-            // console.log(Object.values(hikeDB.reviews)[0].user)
-            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
-              className: "rating"
-            }, "Total Review Rating: ", _this.ratingAvg()), Object.values(hikeDB.reviews).map(function (review, id) {
-              return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-                key: id,
-                className: "review"
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-                className: "reviewRating"
-              }, "Review Rating: ", review.rating), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-                className: "reviewDescription"
-              }, review.description));
-            }));
-          }
-        }
-      };
-
-      if (!this.isEmpty(hikeAPI)) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "otherTest"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Autocomplete_otherSearch__WEBPACK_IMPORTED_MODULE_1__.default, {
-          searchList: searchList
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "hikeShow"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-          src: hikeAPI.imgMedium,
-          className: "hikeShowImg"
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
-          className: "hikeShowName"
-        }, hikeAPI.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: ""
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-          className: "hikeDifficulty"
-        }, this.difficulty(hikeAPI.difficulty))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "hikeSummaryStuff"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-          className: "SummaryDeclaration"
-        }, "Summary: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-          className: "hikeSummary"
-        }, hikeAPI.summary)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "hikeShowAttributes"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-          className: "length"
-        }, "Length: ", hikeAPI.length, "m"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-          className: "elevation"
-        }, "Elevation gain: ", hikeAPI.ascent)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-          className: "hikeShowDescriptionDeclaration"
-        }, "Description:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-          className: "hikeShowDescription"
-        }, " ", hikeDB.description)), console.log(this.props.hikeDB), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Write a Review"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Review_create_review_form_container__WEBPACK_IMPORTED_MODULE_2__.default, {
-          hike_id: this.props.hikeDB.id,
-          hikeDB: hikeDB
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, hikeReviews())));
-      } else {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null);
-      }
-    }
-  }]);
-
-  return HikeIndex;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HikeIndex);
-
-/***/ }),
-
-/***/ "./frontend/components/Hike/hike_index_item_container.js":
-/*!***************************************************************!*
-  !*** ./frontend/components/Hike/hike_index_item_container.js ***!
-  \***************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _hike_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./hike_index_item */ "./frontend/components/Hike/hike_index_item.jsx");
-/* harmony import */ var _actions_hike_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/hike_actions */ "./frontend/actions/hike_actions.js");
-
-
-
-
-var mapStateToProps = function mapStateToProps(state, ownProps) {
-  var hikeAPI = {};
-
-  if (state.entities.hikes[ownProps.match.params.hikeName.split("_").join(" ")] != undefined) {
-    hikeAPI = state.entities.hikes[ownProps.match.params.hikeName.split("_").join(" ")];
-  }
-
-  var hikeDB = {}; // console.log(`${ownProps.match.params.hikeName}1`)
-
-  if (state.entities.hikes["".concat(ownProps.match.params.hikeName, "1")] != undefined) {
-    hikeDB = state.entities.hikes["".concat(ownProps.match.params.hikeName, "1")];
-  }
-
-  return {
-    hikeAPI: hikeAPI,
-    hikeDB: hikeDB,
-    hikeName: ownProps.match.params.hikeName
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    receiveTrek: function receiveTrek(trekAPIId) {
-      return dispatch((0,_actions_hike_actions__WEBPACK_IMPORTED_MODULE_2__.receiveTrek)(trekAPIId));
-    },
-    receiveHikeAPI: function receiveHikeAPI(hikeName) {
-      return dispatch((0,_actions_hike_actions__WEBPACK_IMPORTED_MODULE_2__.receiveHikeAPI)(hikeName));
-    },
-    showHikeThunk: function showHikeThunk(hikeName) {
-      return dispatch((0,_actions_hike_actions__WEBPACK_IMPORTED_MODULE_2__.showHikeThunk)(hikeName));
-    }
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_hike_index_item__WEBPACK_IMPORTED_MODULE_1__.default));
-
-/***/ }),
-
-/***/ "./frontend/components/NationalPark/nationalPark_show.jsx":
-/*!****************************************************************!*
-  !*** ./frontend/components/NationalPark/nationalPark_show.jsx ***!
-  \****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _Hike_hike_index_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Hike/hike_index_container */ "./frontend/components/Hike/hike_index_container.js");
-/* harmony import */ var _Autocomplete_otherSearch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Autocomplete/otherSearch */ "./frontend/components/Autocomplete/otherSearch.jsx");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-
-var NationalParkShow = /*#__PURE__*/function (_React$Component) {
-  _inherits(NationalParkShow, _React$Component);
-
-  var _super = _createSuper(NationalParkShow);
-
-  function NationalParkShow(props) {
-    var _this;
-
-    _classCallCheck(this, NationalParkShow);
-
-    _this = _super.call(this, props); // console.log(this.props.nationalParkName)
-
-    _this.state = {
-      nationalPark: {}
-    };
-    return _this;
-  }
-
-  _createClass(NationalParkShow, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.receiveNationalPark(this.props.nationalParkName);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var searchList = ['Glacier National Park', 'Grinnell Glacier', 'Highline to The Loop', 'Avalanche Lake via Trail of the Cedars', 'Hidden Lake Overlook', 'Gunsight Pass', 'Ptarmigan Tunnel Route', 'Many Glacier Loop', 'Grinnell Lake', 'Bullhead Lake']; // console.log(this.props.nationalPark)
-
-      if (this.props.nationalPark === undefined) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, " ");
-      }
-
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "otherTest"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Autocomplete_otherSearch__WEBPACK_IMPORTED_MODULE_2__.default, {
-        searchList: searchList
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "nationalDiv"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
-        className: "nationalParkHeader"
-      }, "Best Hikes in ", this.props.nationalPark.name.split("_").join(" ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Hike_hike_index_container__WEBPACK_IMPORTED_MODULE_1__.default, {
-        nationalPark: this.props.nationalPark
-      })));
-    }
-  }]);
-
-  return NationalParkShow;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NationalParkShow);
-
-/***/ }),
-
-/***/ "./frontend/components/NationalPark/nationalPark_show_container.js":
-/*!*************************************************************************!*
-  !*** ./frontend/components/NationalPark/nationalPark_show_container.js ***!
-  \*************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _nationalPark_show__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./nationalPark_show */ "./frontend/components/NationalPark/nationalPark_show.jsx");
-/* harmony import */ var _actions_national_park_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/national_park_actions */ "./frontend/actions/national_park_actions.js");
-/* harmony import */ var _actions_hike_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/hike_actions */ "./frontend/actions/hike_actions.js");
-
-
-
-
-
-var mapStateToProps = function mapStateToProps(state, ownProps) {
-  // debugger
-  // receiveNationalPark(ownProps.match.params.nationalParkId)
-  return {
-    nationalParkName: ownProps.match.params.nationalParkName,
-    nationalPark: state.entities.nationalPark[ownProps.match.params.nationalParkName]
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    receiveNationalPark: function receiveNationalPark(nationalParkName) {
-      return dispatch((0,_actions_national_park_actions__WEBPACK_IMPORTED_MODULE_2__.receiveNationalPark)(nationalParkName));
-    },
-    receiveTreks: function receiveTreks(nationalPark) {
-      return dispatch((0,_actions_hike_actions__WEBPACK_IMPORTED_MODULE_3__.receiveTreks)(nationalPark));
-    }
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_nationalPark_show__WEBPACK_IMPORTED_MODULE_1__.default));
-
-/***/ }),
-
-/***/ "./frontend/components/Review/create_review_form_container.jsx":
-/*!*********************************************************************!*
-  !*** ./frontend/components/Review/create_review_form_container.jsx ***!
-  \*********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_review_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/review_actions */ "./frontend/actions/review_actions.js");
-/* harmony import */ var _actions_hike_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/hike_actions */ "./frontend/actions/hike_actions.js");
-/* harmony import */ var _review_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./review_form */ "./frontend/components/Review/review_form.jsx");
-
-
-
-
-
-var mapStateToProps = function mapStateToProps(state) {
-  var hikeDB = {};
-  return {
-    review: {
-      description: '',
-      rating: "",
-      user_id: state.session.id
-    },
-    errors: state.errors.review,
-    form_type: 'Write Review'
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    processForm: function processForm(review) {
-      return dispatch((0,_actions_review_actions__WEBPACK_IMPORTED_MODULE_1__.createReview)(review));
-    },
-    showHikeThunk: function showHikeThunk(hikeName) {
-      return dispatch((0,_actions_hike_actions__WEBPACK_IMPORTED_MODULE_2__.showHikeThunk)(hikeName));
-    }
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_review_form__WEBPACK_IMPORTED_MODULE_3__.default));
-
-/***/ }),
-
-/***/ "./frontend/components/Review/review_form.jsx":
+/***/ "./frontend/components/SearchBar/searchbar.js":
 /*!****************************************************!*
-  !*** ./frontend/components/Review/review_form.jsx ***!
+  !*** ./frontend/components/SearchBar/searchbar.js ***!
   \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -1414,152 +619,106 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var ReviewForm = /*#__PURE__*/function (_React$Component) {
-  _inherits(ReviewForm, _React$Component);
 
-  var _super = _createSuper(ReviewForm);
+var SearchBar = function SearchBar(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      searchInput = _useState2[0],
+      setSearchInput = _useState2[1];
 
-  function ReviewForm(props) {
-    var _this;
+  var update = function update(e) {
+    setSearchInput(e.currentTarget.value);
+  };
 
-    _classCallCheck(this, ReviewForm);
+  var matches = function matches() {
+    var matches = [];
 
-    _this = _super.call(this, props);
-    _this.state = {
-      description: _this.props.review.description,
-      rating: _this.props.review.rating,
-      user_id: _this.props.review.user_id
-    };
-    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(ReviewForm, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.showHikeThunk(this.props.hikeName);
+    if (searchInput === "") {
+      return [];
     }
-  }, {
-    key: "update",
-    value: function update(field) {
-      var _this2 = this;
 
-      // console.log(this.state)
-      return function (e) {
-        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
-      };
-    }
-  }, {
-    key: "handleSubmit",
-    value: function handleSubmit(e) {
-      e.preventDefault();
-      var review = Object.assign({}, this.state, {
-        hikes_id: this.props.hikeDB.id
-      });
-      this.props.processForm(review);
-    }
-  }, {
-    key: "isEmpty",
-    value: function isEmpty(obj) {
-      return Object.keys(obj).length === 0;
-    }
-  }, {
-    key: "renderErrors",
-    value: function renderErrors() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, this.props.errors.map(function (error, i) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-          className: "reviewError",
-          key: "error-".concat(i)
-        }, error);
-      }));
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      // console.log(this.props.review)
-      if (!this.isEmpty(this.props.hikeDB)) {
-        // console.log(this.props.review.hikes_id)
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "reviewForm"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-          onSubmit: this.handleSubmit
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, this.props.hikeDB.name.split("_").join(" ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "reviewErrorsDiv"
-        }, this.renderErrors()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "1", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-          type: "radio",
-          name: "rating",
-          value: 1,
-          selected: this.props.rating === 1 ? "selected" : "",
-          onChange: this.update('rating')
-        }), "2", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-          type: "radio",
-          name: "rating",
-          value: 2,
-          selected: this.props.rating === 2 ? "selected" : "",
-          onChange: this.update('rating')
-        }), "3", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-          type: "radio",
-          name: "rating",
-          value: 3,
-          selected: this.props.rating === 3 ? "selected" : "",
-          onChange: this.update('rating')
-        }), "4", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-          type: "radio",
-          name: "rating",
-          value: 4,
-          selected: this.props.rating === 4 ? "selected" : "",
-          onChange: this.update('rating')
-        }), "5", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-          type: "radio",
-          name: "rating",
-          value: 5,
-          selected: this.props.rating === 5 ? "selected" : "",
-          onChange: this.update('rating')
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
-          placeholder: "Share you thoughts about the trail so others know what to expect",
-          value: this.props.description,
-          onChange: this.update('description'),
-          className: "descriptionReviewStuff"
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-          type: "submit",
-          className: ""
-        }, "Post")));
-      } else {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null);
+    Object.values(props.searchData).forEach(function (nationalPark) {
+      if (nationalPark.name.toLowerCase().includes(searchInput.toLowerCase())) {
+        matches.push(nationalPark);
       }
+
+      nationalPark.hikes.forEach(function (hike) {
+        if (hike.name.toLowerCase().includes(searchInput.toLowerCase())) {
+          matches.push(hike);
+        }
+      });
+    });
+
+    if (matches.length === 0) {
+      matches.push('No matches');
     }
-  }]);
 
-  return ReviewForm;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+    return matches;
+  }; // const selectName = (event) => {
+  //     const name = event.currentTarget.innerText
+  //     setSearchInput(name)
+  // }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ReviewForm);
+
+  var results = function results() {
+    return matches().map(function (result, i) {
+      if (result.name) {
+        if (result.name.includes('National')) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+            key: i,
+            className: "searchItem"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+            to: "/national_park/".concat(result.id),
+            className: "searchItemLink"
+          }, result.name));
+        } else {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+            key: i,
+            className: "searchItem"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+            to: "/hike/".concat(result.id),
+            className: "searchItemLink"
+          }, result.name));
+        }
+      } else {
+        return matches().map(function (noResult, i) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+            key: i,
+            className: "searchItem"
+          }, noResult);
+        });
+      }
+    });
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    type: "text",
+    onChange: function onChange(e) {
+      return update(e);
+    },
+    value: searchInput,
+    placeholder: "Search"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    type: "submit"
+  }, "Search")), results());
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SearchBar);
 
 /***/ }),
 
@@ -1839,7 +998,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state) {
-  // console.log(`maps state to props ${JSON.stringify(state.errors)}`)
   return {
     errors: state.errors.session,
     formType: 'Sign up',
@@ -1876,8 +1034,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _Autocomplete_autocomplete__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Autocomplete/autocomplete */ "./frontend/components/Autocomplete/autocomplete.jsx");
+/* harmony import */ var _SearchBar_searchbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../SearchBar/searchbar */ "./frontend/components/SearchBar/searchbar.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1916,29 +1073,29 @@ var Splash = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Splash, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchAllNP();
+    }
+  }, {
     key: "render",
     value: function render() {
-      var searchList = ['Glacier National Park', 'Grinnell Glacier', 'Highline to The Loop', 'Avalanche Lake via Trail of the Cedars', 'Hidden Lake Overlook', 'Gunsight Pass', 'Ptarmigan Tunnel Route', 'Many Glacier Loop', 'Grinnell Lake', 'Bullhead Lake'];
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "splashSearch"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Autocomplete_autocomplete__WEBPACK_IMPORTED_MODULE_1__.default, {
-        searchList: searchList
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         src: window.treksLogoURL,
         className: "image",
         width: "650",
         height: "650"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
         className: "splashMessage"
-      }, "Find your next favorite trek"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+      }, "Find your next favorite trek"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_SearchBar_searchbar__WEBPACK_IMPORTED_MODULE_1__.default, {
+        searchData: this.props.allNationalParks
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
         className: "splashH3"
       }, "100,000+ trails. 20 million explorers. Endless memories."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         className: "splashPtag"
       }, "The beauty of nature doesn\u2019t need to be hard to find. Our goal is simple - build the largest collection of hand-curated trail guides, so you can explore the outdoors with confidence. Anytime. Anywhere."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "splashBottom"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-        to: "/national_park/Glacier_National_Park"
-      }, "Glacier National Park"));
+      }));
     }
   }]);
 
@@ -1946,6 +1103,44 @@ var Splash = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Splash);
+
+/***/ }),
+
+/***/ "./frontend/components/Splash/splash_container.js":
+/*!********************************************************!*
+  !*** ./frontend/components/Splash/splash_container.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_national_park_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/national_park_actions */ "./frontend/actions/national_park_actions.js");
+/* harmony import */ var _splash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./splash */ "./frontend/components/Splash/splash.jsx");
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    allNationalParks: state.entities.nationalPark
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchAllNP: function fetchAllNP() {
+      return dispatch((0,_actions_national_park_actions__WEBPACK_IMPORTED_MODULE_2__.fetchAllNP)());
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(_splash__WEBPACK_IMPORTED_MODULE_3__.default));
 
 /***/ }),
 
@@ -1961,54 +1156,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _Greetings_greeting_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Greetings/greeting_container */ "./frontend/components/Greetings/greeting_container.js");
-/* harmony import */ var _SessionForm_signup_form_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SessionForm/signup_form_container */ "./frontend/components/SessionForm/signup_form_container.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.jsx");
+/* harmony import */ var _Splash_splash_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Splash/splash_container */ "./frontend/components/Splash/splash_container.js");
 /* harmony import */ var _SessionForm_login_form_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SessionForm/login_form_container */ "./frontend/components/SessionForm/login_form_container.jsx");
-/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _Splash_splash__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Splash/splash */ "./frontend/components/Splash/splash.jsx");
-/* harmony import */ var _NationalPark_nationalPark_show_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./NationalPark/nationalPark_show_container */ "./frontend/components/NationalPark/nationalPark_show_container.js");
-/* harmony import */ var _Hike_hike_index_item_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Hike/hike_index_item_container */ "./frontend/components/Hike/hike_index_item_container.js");
+/* harmony import */ var _SessionForm_signup_form_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SessionForm/signup_form_container */ "./frontend/components/SessionForm/signup_form_container.jsx");
+/* harmony import */ var _NavBar_navbar_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./NavBar/navbar_container */ "./frontend/components/NavBar/navbar_container.js");
+/* harmony import */ var _NationalPark_national_park_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./NationalPark/national_park_container */ "./frontend/components/NationalPark/national_park_container.js");
+/* harmony import */ var _Hike_hike_show_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Hike/hike_show_container */ "./frontend/components/Hike/hike_show_container.js");
 
 
 
 
 
 
+ // import EditReviewContainer from './Review/edit_review_form_container'
 
 
 
- // import CreateReviewContainer from './Review/create_review_form_container'
-// import EditReviewContainer from './Review/edit_review_form_container'
+
 
 var App = function App() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
-    className: "splashHeader"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
-    to: "/",
-    className: "AllTreks"
-  }, "AllTreks")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Greetings_greeting_container__WEBPACK_IMPORTED_MODULE_1__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NavBar_navbar_container__WEBPACK_IMPORTED_MODULE_5__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
     exact: true,
     path: "/",
-    component: _Splash_splash__WEBPACK_IMPORTED_MODULE_5__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_4__.AuthRoute, {
+    component: _Splash_splash_container__WEBPACK_IMPORTED_MODULE_2__.default
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_1__.AuthRoute, {
     exact: true,
     path: "/login",
     component: _SessionForm_login_form_container__WEBPACK_IMPORTED_MODULE_3__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_4__.AuthRoute, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_1__.AuthRoute, {
     exact: true,
     path: "/signup",
-    component: _SessionForm_signup_form_container__WEBPACK_IMPORTED_MODULE_2__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_4__.ProtectedRoute, {
+    component: _SessionForm_signup_form_container__WEBPACK_IMPORTED_MODULE_4__.default
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
     exact: true,
-    path: "/national_park/:nationalParkName",
-    component: _NationalPark_nationalPark_show_container__WEBPACK_IMPORTED_MODULE_6__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_4__.ProtectedRoute, {
+    path: "/national_park/:id",
+    component: _NationalPark_national_park_container__WEBPACK_IMPORTED_MODULE_6__.default
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
     exact: true,
-    path: "/hike/:hikeName",
-    component: _Hike_hike_index_item_container__WEBPACK_IMPORTED_MODULE_7__.default
-  }));
+    path: "/hike/:id",
+    component: _Hike_hike_show_container__WEBPACK_IMPORTED_MODULE_7__.default
+  })));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
@@ -2057,23 +1246,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _user_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user_reducer */ "./frontend/reducers/user_reducer.js");
 /* harmony import */ var _hike_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./hike_reducer */ "./frontend/reducers/hike_reducer.js");
-/* harmony import */ var _national_parks_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./national_parks_reducer */ "./frontend/reducers/national_parks_reducer.js");
-/* harmony import */ var _review_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./review_reducer */ "./frontend/reducers/review_reducer.js");
+/* harmony import */ var _national_park_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./national_park_reducer */ "./frontend/reducers/national_park_reducer.js");
 
 
 
 
-
-var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
-  users: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
-  hikes: _hike_reducer__WEBPACK_IMPORTED_MODULE_1__.default,
-  nationalPark: _national_parks_reducer__WEBPACK_IMPORTED_MODULE_2__.default,
-  review: _review_reducer__WEBPACK_IMPORTED_MODULE_3__.default
+var EntitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
+  users: _user_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
+  hike: _hike_reducer__WEBPACK_IMPORTED_MODULE_1__.default,
+  nationalPark: _national_park_reducer__WEBPACK_IMPORTED_MODULE_2__.default
 });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (entitiesReducer);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EntitiesReducer);
 
 /***/ }),
 
@@ -2088,17 +1274,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/session_errors_reducer.js");
-/* harmony import */ var _review_error_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./review_error_reducer */ "./frontend/reducers/review_error_reducer.js");
 
 
-
-var errorsReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
-  session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
-  review: _review_error_reducer__WEBPACK_IMPORTED_MODULE_1__.default
+var ErrorsReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
+  session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_0__.default
 });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (errorsReducer);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ErrorsReducer);
 
 /***/ }),
 
@@ -2113,42 +1296,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _actions_hike_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/hike_actions */ "./frontend/actions/hike_actions.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+/* harmony import */ var _actions_hike_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/hike_action */ "./frontend/actions/hike_action.js");
 
 
-
-var hikeReducer = function hikeReducer() {
+var HikeReducer = function HikeReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _actions_hike_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_TREKS:
-      return action.treks;
+    case _actions_hike_action__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_HIKE:
+      return action.hike;
 
-    case _actions_hike_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_HIKE:
-      debugger;
-      return Object.assign({}, state, _defineProperty({}, action.hike.id, action.hike));
-
-    case _actions_hike_actions__WEBPACK_IMPORTED_MODULE_0__.SHOW_HIKE:
-      return Object.assign({}, state, _defineProperty({}, "".concat(action.hike.name, "1"), action.hike));
-
-    case _actions_hike_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_HIKE_FROM_API:
-      return Object.assign({}, state, _defineProperty({}, action.hike.trails[0].name, action.hike.trails[0]));
+    case _actions_hike_action__WEBPACK_IMPORTED_MODULE_0__.REMOVE_HIKE:
+      return {};
 
     default:
       return state;
   }
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (hikeReducer);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HikeReducer);
 
 /***/ }),
 
-/***/ "./frontend/reducers/national_parks_reducer.js":
-/*!*****************************************************!*
-  !*** ./frontend/reducers/national_parks_reducer.js ***!
-  \*****************************************************/
+/***/ "./frontend/reducers/national_park_reducer.js":
+/*!****************************************************!*
+  !*** ./frontend/reducers/national_park_reducer.js ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2157,98 +1331,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _actions_national_park_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/national_park_actions */ "./frontend/actions/national_park_actions.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
-
-var nationalParkReducer = function nationalParkReducer() {
+var NationalParkReducer = function NationalParkReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _actions_national_park_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_NATIONAL_PARK:
-      return Object.assign({}, state, _defineProperty({}, action.nationalPark.name, action.nationalPark));
-    // return action.nationalPark ///!
+    case _actions_national_park_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_NP:
+      return action.national_parks;
+
+    case _actions_national_park_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_NP:
+      return action.national_park;
 
     default:
       return state;
   }
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (nationalParkReducer);
-
-/***/ }),
-
-/***/ "./frontend/reducers/review_error_reducer.js":
-/*!***************************************************!*
-  !*** ./frontend/reducers/review_error_reducer.js ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/review_actions */ "./frontend/actions/review_actions.js");
-
-
-var reviewErrorReducer = function reviewErrorReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    case _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_REVIEW:
-      return [];
-
-    case _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_ERRORS:
-      return [];
-
-    case _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ERRORS:
-      return action.errors.responseJSON;
-
-    default:
-      return state;
-  }
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (reviewErrorReducer);
-
-/***/ }),
-
-/***/ "./frontend/reducers/review_reducer.js":
-/*!*********************************************!*
-  !*** ./frontend/reducers/review_reducer.js ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/review_actions */ "./frontend/actions/review_actions.js");
-
-
-var reviewReducer = function reviewReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    case _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_REVIEW:
-      return action.review;
-
-    case _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_REVIEW:
-      var newState = Object.values({}, state);
-      delete newState[action.reviewId];
-      return newState;
-
-    default:
-      return state;
-  }
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (reviewReducer);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NationalParkReducer);
 
 /***/ }),
 
@@ -2265,16 +1366,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _session_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./session_reducer */ "./frontend/reducers/session_reducer.js");
-/* harmony import */ var _entities_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./entities_reducer */ "./frontend/reducers/entities_reducer.js");
-/* harmony import */ var _errors_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./errors_reducer */ "./frontend/reducers/errors_reducer.js");
+/* harmony import */ var _errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./errors_reducer */ "./frontend/reducers/errors_reducer.js");
+/* harmony import */ var _entities_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./entities_reducer */ "./frontend/reducers/entities_reducer.js");
 
 
 
 
 var rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
+  entities: _entities_reducer__WEBPACK_IMPORTED_MODULE_2__.default,
   session: _session_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
-  entities: _entities_reducer__WEBPACK_IMPORTED_MODULE_1__.default,
-  errors: _errors_reducer__WEBPACK_IMPORTED_MODULE_2__.default
+  errors: _errors_reducer__WEBPACK_IMPORTED_MODULE_1__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (rootReducer);
 
@@ -2294,27 +1395,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
 
 
-var sessionErrorsReducer = function sessionErrorsReducer() {
+var SessionErrorsReducer = function SessionErrorsReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_USER:
-      return [];
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_SESSION_ERRORS:
+      return action.errors.responseJSON;
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_ERRORS:
       return [];
-
-    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_SESSION_ERRORS:
-      // console.log(action.errors.responseJSON)
-      return action.errors.responseJSON;
 
     default:
       return state;
   }
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (sessionErrorsReducer);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SessionErrorsReducer);
 
 /***/ }),
 
@@ -2332,36 +1429,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
 
 
-var _nullUser = Object.freeze({
-  id: null
-});
-
-var sessionReducer = function sessionReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _nullUser;
+var SessionReducer = function SessionReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_USER:
-      return Object.assign({}, {
-        id: action.currentUser.id
-      });
+      return action.currentUser;
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.LOGOUT_CURRENT_USER:
-      return _nullUser;
+      return {};
 
     default:
       return state;
   }
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (sessionReducer);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SessionReducer);
 
 /***/ }),
 
-/***/ "./frontend/reducers/users_reducer.js":
-/*!********************************************!*
-  !*** ./frontend/reducers/users_reducer.js ***!
-  \********************************************/
+/***/ "./frontend/reducers/user_reducer.js":
+/*!*******************************************!*
+  !*** ./frontend/reducers/user_reducer.js ***!
+  \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2370,25 +1461,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
-
-var usersReducer = function usersReducer() {
+var UserReducer = function UserReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state);
 
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_USER:
-      return Object.assign({}, _defineProperty({}, action.currentUser.id, action.currentUser));
+      return action.currentUser;
+
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.LOGOUT_CURRENT_USER:
+      return {};
 
     default:
       return state;
   }
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (usersReducer);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserReducer);
 
 /***/ }),
 
@@ -2431,25 +1522,11 @@ var configureStore = function configureStore() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "fetchTrek": () => /* binding */ fetchTrek,
-/* harmony export */   "fetchNationalPark": () => /* binding */ fetchNationalPark,
-/* harmony export */   "showHikeTrail": () => /* binding */ showHikeTrail
+/* harmony export */   "fetchHike": () => /* binding */ fetchHike
 /* harmony export */ });
-var fetchTrek = function fetchTrek(hike_API_id) {
+var fetchHike = function fetchHike(hike_id) {
   return $.ajax({
-    url: "https://www.hikingproject.com/data/get-trails-by-id?ids=".concat(hike_API_id, "&key=200992181-b5ded87fb6ee5c01ef373e5f6451f3e3"),
-    method: 'GET'
-  });
-};
-var fetchNationalPark = function fetchNationalPark(nationalPark) {
-  return $.ajax({
-    url: "https://www.hikingproject.com/data/get-trails?lat=".concat(nationalPark.lat, "&lon=-").concat(nationalPark.lon, "&maxDistance=10&key=200992181-b5ded87fb6ee5c01ef373e5f6451f3e3"),
-    method: 'GET'
-  });
-};
-var showHikeTrail = function showHikeTrail(hikeName) {
-  return $.ajax({
-    url: "/api/hikes/".concat(hikeName),
+    url: "/api/hikes/".concat(hike_id),
     method: "GET"
   });
 };
@@ -2465,11 +1542,18 @@ var showHikeTrail = function showHikeTrail(hikeName) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "showNationalPark": () => /* binding */ showNationalPark
+/* harmony export */   "NationalPark": () => /* binding */ NationalPark,
+/* harmony export */   "allNP": () => /* binding */ allNP
 /* harmony export */ });
-var showNationalPark = function showNationalPark(nationalParkName) {
+var NationalPark = function NationalPark(id) {
   return $.ajax({
-    url: "/api/national_parks/".concat(nationalParkName),
+    url: "/api/national_parks/".concat(id),
+    method: 'GET'
+  });
+};
+var allNP = function allNP() {
+  return $.ajax({
+    url: "/api/national_parks/",
     method: 'GET'
   });
 };

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :show]
     resource :session, only: [:create, :destroy]
     resources :hikes, only: [:show, :index]
-    resources :national_parks, only: [:show]
+    resources :national_parks, only: [:show, :index]
     resources :reviews, only: [:show, :create, :update, :destroy]
   end
   

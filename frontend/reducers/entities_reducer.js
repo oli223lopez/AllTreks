@@ -1,17 +1,15 @@
-import {combineReducers} from 'redux';
-import usersReducer from './users_reducer';
-import hikeReducer from './hike_reducer'
-import nationalParkReducer from './national_parks_reducer'
-import reviewReducer from './review_reducer'
+import {combineReducers} from 'redux'
+import UserReducer from './user_reducer'
+import HikeReducer from './hike_reducer'
+import NationalParkReducer from './national_park_reducer'
 
 
-const entitiesReducer = combineReducers({
-    users: usersReducer,
-    hikes: hikeReducer,
-    nationalPark: nationalParkReducer,
-    review: reviewReducer
+
+const EntitiesReducer = combineReducers({
+    users: UserReducer,
+    hike: HikeReducer,
+    nationalPark: NationalParkReducer
 
 })
 
-
-export default entitiesReducer
+export default EntitiesReducer

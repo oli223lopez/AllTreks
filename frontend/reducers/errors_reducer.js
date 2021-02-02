@@ -1,11 +1,10 @@
-import {combineReducers} from 'redux';
-import sessionErrorsReducer from './session_errors_reducer';
-import reviewErrorReducer from './review_error_reducer'
+import {combineReducers} from 'redux'
+import SessionErrorsReducer from './session_errors_reducer'
 
 
-const errorsReducer = combineReducers({
-    session: sessionErrorsReducer,
-    review: reviewErrorReducer
+const ErrorsReducer = combineReducers({
+    session: SessionErrorsReducer
 })
 
-export default errorsReducer
+
+export  default ErrorsReducer
