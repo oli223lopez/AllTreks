@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 
 const NationalPark = (props) => {
     const [nationalPark, setNationalPark] = useState({})
-    const [nationalPark]
+    const [photos, setPhotos] = useState([])
  
     useEffect(() => {
         if(Object.values(nationalPark).length === 0) {
