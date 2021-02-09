@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 
 const NationalPark = (props) => {
     const [nationalPark, setNationalPark] = useState({})
+    const [nationalPark]
  
     useEffect(() => {
         if(Object.values(nationalPark).length === 0) {
@@ -27,6 +28,7 @@ const NationalPark = (props) => {
             nationalPark.hikes.map((hike, i) => {
                 return(
                     <div key={i}> 
+
                     <Link to={`/hike/${hike.id}`}>
                         <div> 
                             <h3>

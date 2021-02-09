@@ -17,4 +17,9 @@ class NationalPark < ApplicationRecord
         foreign_key: :national_park_id,
         class_name: :Hike
 
+
+    has_many :photos,
+        through: :hikes,
+        source: :photos
+    
 end

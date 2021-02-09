@@ -27,7 +27,11 @@ class Hike < ApplicationRecord
         foreign_key: :hikes_id,
         class_name: :Review
 
+    has_many :photos,
+        foreign_key: :hike_id,
+        class_name: :Photo
 
+        
 end
 
 

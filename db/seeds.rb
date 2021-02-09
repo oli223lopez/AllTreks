@@ -5,19 +5,25 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+require 'open-uri'
+
 User.destroy_all
 NationalPark.destroy_all
 Hike.destroy_all
 users =[
     User.create(username: 'teddy_roosevelt26', email: 'teddyroosevelt@test.com', password: 'password'),
     User.create(username: 'oli223lopez', email: 'oli@test.com', password: 'password'),
-    User.create(username: 'julian', email: 'julian@test.com', password: 'password')
-
+    User.create(username: 'julian', email: 'julian@test.com', password: 'password'),
+    User.create(username: 'Plex', email: 'alex@perrone.com', password: 'password'),
+    User.create(username: 'Behn', email: 'brendan@dehn.com', password: 'password'),
+    User.create(username: 'Frenchman', email:'jon@french.com', password: 'password')
 ]
 national_parks = [ NationalPark.create(name: 'Glacier National Park', lat: 48.7596, lon: 113.7870)]
 
-glacier_hikes = [
-Hike.create!(name: 'Grinnell Glacier', national_park_id: national_parks[0].id, difficulty: 'Hard' , length: 11.2 , route_type: 'Out & Back', elevation_gain: 2181, coordinates: [{lat: 48.79279, lon: -113.66872}, 
+
+grinnelle_Glacier = Hike.create!(name: 'Grinnell Glacier', national_park_id: national_parks[0].id, difficulty: 'Hard' , length: 11.2 , route_type: 'Out & Back', elevation_gain: 2181, coordinates: [{lat: 48.79279, lon: -113.66872}, 
 {lat: 48.77297558262199, lon: -113.70672747696791 }, 
 {lat: 48.7600035, lon: -113.7300751}], summary:'Grinnell Glacier Trail [CLOSED] is a 11.2 mile heavily trafficked out and back trail located near Babb, Montana that features a lake and is rated as difficult. The trail is primarily used for hiking and is best used from June until October.',
  description: "Access the start of this route from the Grinnell Glacier Trailhead parking area, west of Swiftcurrent Lake.
@@ -32,9 +38,27 @@ As the trail begins to level out, just below the glacier, there is a nice picnic
 
 The Continental Divide runs along the top of the Garden Wall and Going-to-the-Sun Road is just on the other side.
 
-This content was created by Jake Bramante of Hike 734. Visit hike734.com for more expert Glacier content and maps that help you decide which trail to hike."),
+This content was created by Jake Bramante of Hike 734. Visit hike734.com for more expert Glacier content and maps that help you decide which trail to hike.")
 
-Hike.create!(name: 'Highline Trail: Logan Pass to Granite Park Chalet', national_park_id: national_parks[0].id, difficulty: 'Hard', length: 14.9, route_type: "Out & Back", elevation_gain: 2578, coordinates: [{lat: 48.696920, lon: -113.718249}, 
+grinnelle_Glacier_Photos = [
+    Photo.create!(hike_id: grinnelle_Glacier.id, user_id: users[4].id),
+    Photo.create!(hike_id: grinnelle_Glacier.id, user_id: users[4].id),
+    Photo.create!(hike_id: grinnelle_Glacier.id, user_id: users[4].id),
+    Photo.create!(hike_id: grinnelle_Glacier.id, user_id: users[4].id)
+
+]
+gg1 = open('https://alltreks-seeds.s3.amazonaws.com/grinnelle_glacier!.jpg')
+gg2 = open('https://alltreks-seeds.s3.amazonaws.com/grinnelle_glacier2.jpg')
+gg3 = open('https://alltreks-seeds.s3.amazonaws.com/grinnelle_glacier3.JPG')
+gg4 = open('https://alltreks-seeds.s3.amazonaws.com/grinnelle_glacier4.jpg')
+grinnelle_Glacier_Photos[0].picture.attach(io: gg1, filename:'grinnelle_glacier1.jpg')
+grinnelle_Glacier_Photos[1].picture.attach(io: gg2, filename: 'grinnelle_glacier2.jpg')
+grinnelle_Glacier_Photos[2].picture.attach(io: gg3, filename:'grinnelle_glacier3.jpg')
+grinnelle_Glacier_Photos[3].picture.attach(io: gg4, filename:'grinnelle_glacier4.jpg')
+
+
+
+highline_trail = Hike.create!(name: 'Highline Trail: Logan Pass to Granite Park Chalet', national_park_id: national_parks[0].id, difficulty: 'Hard', length: 14.9, route_type: "Out & Back", elevation_gain: 2578, coordinates: [{lat: 48.696920, lon: -113.718249}, 
 {lat: 48.745497, lon: -113.742094}, 
 {lat: 48.770844, lon: -113.772113 }], summary:'Highline Trail: Logan Pass to Granite Park Chalet is a 14.9 mile heavily trafficked out and back trail located near Siyeh Bend, Montana that features a river and is rated as difficult. 
 The trail is primarily used for hiking, camping, and backpacking and is best used from June until October.' , 
@@ -42,9 +66,25 @@ description: "The High-Line trail runs from the Logan Pass Visitors Center to Th
 The first 7.6 miles of the trail in easy with gradual elevation climb. After Granite Park Chalet the trail drops 2,200 feet in 4 miles to the Loop Trail Head. 
 Expect heavy traffic and be early if you plan to park at the visitors center. The trail in very narrow in some places with steep drop offs.
 
-There are three other trails that joint the Highland at Granite Park Chalet allowing of alternative hiking options." ),
+There are three other trails that joint the Highland at Granite Park Chalet allowing of alternative hiking options." )
 
-Hike.create!(name: 'Avalanche Lake via Trail of the Cedars', national_park_id: national_parks[0].id, difficulty: "Moderate", length: 6.7, route_type: "Out & Back", elevation_gain: 757, coordinates: [{lat: 48.68008, lon: -113.81914}, 
+highline_trail_photos = [
+    Photo.create!(hike_id: highline_trail.id, user_id: users[5].id),
+    Photo.create!(hike_id: highline_trail.id, user_id: users[5].id),
+    Photo.create!(hike_id: highline_trail.id, user_id: users[5].id),
+    Photo.create!(hike_id: highline_trail.id, user_id: users[5].id)
+
+]
+ht1 = open('https://alltreks-seeds.s3.amazonaws.com/highline_trail.jpg')
+ht2 = open('https://alltreks-seeds.s3.amazonaws.com/highline_trail1.jpg')
+ht3 = open('https://alltreks-seeds.s3.amazonaws.com/highline_trail2.jpg')
+ht4 = open('https://alltreks-seeds.s3.amazonaws.com/highline_trail3.jpg')
+highline_trail_photos[0].picture.attach(io: ht1, filename:'highline_trail1.jpg')
+highline_trail_photos[1].picture.attach(io: ht2, filename: 'highline_trail2.jpg')
+highline_trail_photos[2].picture.attach(io: ht3, filename:'highline_trail3.jpg')
+highline_trail_photos[3].picture.attach(io: ht4, filename:'highline_trail4.jpg')
+
+avalanche_lake = Hike.create!(name: 'Avalanche Lake via Trail of the Cedars', national_park_id: national_parks[0].id, difficulty: "Moderate", length: 6.7, route_type: "Out & Back", elevation_gain: 757, coordinates: [{lat: 48.68008, lon: -113.81914}, 
 {lat: 48.668690, lon: -113.800368}, 
 {lat: 48.651190, lon: -113.784558}], summary:"Avalanche Lake is the perfect blend of accessibility, enjoyable hiking and scenic payoff. You know from the start that you're in for an experience that's worth the sweat. 
 It's a great one for families with smooth trail, steady inclines and lots of fun stops along the way from hollowed out trees struck by lightning to avalanche clearings blasted through the forest.
@@ -58,9 +98,25 @@ The trail steepens for a short period here as you leave the lower section behind
 As you near the top, the canopy gives way revealing the open sky above and high mountain peaks just ahead. The trail narrows for a section of short singletrack flanked on both sides by thick brush. 
 Soon thereafter, the brush lessens and the trail reaches it's official terminus at Avalanche Lake where the view turns from beautiful to magnificent.
 
-Relax on the rocky beach enjoying the views of the surrounding mountains as they soar thousands of feet above the lake. Additional options include making your way along the shoreline for a secret picnic or fly-fishing spot, or taking the opt"),
+Relax on the rocky beach enjoying the views of the surrounding mountains as they soar thousands of feet above the lake. Additional options include making your way along the shoreline for a secret picnic or fly-fishing spot, or taking the opt")
 
-Hike.create!(name: 'Hidden Lake Overlook', national_park_id: national_parks[0].id, difficulty: "Easy", length: 2.9, route_type: "Out & Back", elevation_gain: 567, coordinates: [{lat: 48.695481, lon: -113.717767}, 
+avalanche_lake_photos = [
+    Photo.create!(hike_id: avalanche_lake.id, user_id: users[1].id),
+    Photo.create!(hike_id: avalanche_lake.id, user_id: users[1].id),
+    Photo.create!(hike_id: avalanche_lake.id, user_id: users[1].id),
+    Photo.create!(hike_id: avalanche_lake.id, user_id: users[1].id)
+
+]
+al1 = open('https://alltreks-seeds.s3.amazonaws.com/avalanche_lake1.png')
+al2 = open('https://alltreks-seeds.s3.amazonaws.com/avalanche_lake2.jpg')
+al3 = open('https://alltreks-seeds.s3.amazonaws.com/avalanche_lake3.jpg')
+al4 = open('https://alltreks-seeds.s3.amazonaws.com/avalanche_lake4.jpg')
+avalanche_lake_photos[0].picture.attach(io: al1, filename:'avalanche_lake1.jpg')
+avalanche_lake_photos[1].picture.attach(io: al2, filename: 'avalanche_lake2.jpg')
+avalanche_lake_photos[2].picture.attach(io: al3, filename:'avalanche_lake3.jpg')
+avalanche_lake_photos[3].picture.attach(io: al4, filename:'avalanche_lake4.jpg')
+
+hidden_lake = Hike.create!(name: 'Hidden Lake Overlook', national_park_id: national_parks[0].id, difficulty: "Easy", length: 2.9, route_type: "Out & Back", elevation_gain: 567, coordinates: [{lat: 48.695481, lon: -113.717767}, 
 {lat: 48.692990, lon: -113.728133 }, 
 {lat: 48.687311, lon: -113.741492 }], summary:"This hike starts from the apex of the Going-to-the-Sun Road at Logan Pass. The entire hike features beautiful panoramic views out over alpine meadows and rugged peaks to a fantastic overlook of Hidden Lake tucked beneath towering peaks. 
 The snow can stick around well into July, but the wildflowers are around through September with the best blooms in August." , 
@@ -68,9 +124,24 @@ description: "To start this hike, head out on the Hidden Lake Trail past the vis
 
 From here, the trail continues on dirt, climbing over Hidden Pass where you can often spot mountain goats. After 1.4 miles, Hidden Lake becomes visible down below at overlook with an interpretive sign. From here, there is also a great view into Sperry Glacier basin.
 
-Most visitors head back from this overlook, but the trail does continue downward for an additional 1.2 miles to the north side of Hidden Lake. This is a steep descent that can be a challenging addition.."),
+Most visitors head back from this overlook, but the trail does continue downward for an additional 1.2 miles to the north side of Hidden Lake. This is a steep descent that can be a challenging addition..")
+hidden_lake_photos = [
+    Photo.create!(hike_id: hidden_lake.id, user_id: users[3].id),
+    Photo.create!(hike_id: hidden_lake.id, user_id: users[3].id),
+    Photo.create!(hike_id: hidden_lake.id, user_id: users[3].id),
+    Photo.create!(hike_id: hidden_lake.id, user_id: users[3].id)
 
-Hike.create!(name: 'Iceberg Lake', national_park_id: national_parks[0].id, difficulty: "Moderate", length: 9.3, route_type: "Out & Back", elevation_gain: 1450, coordinates: [{lat: 48.799922, lon: -113.678465}, 
+]
+hl1 = open('https://alltreks-seeds.s3.amazonaws.com/hidden_lake1.jpg')
+hl2 = open('https://alltreks-seeds.s3.amazonaws.com/hidden_lake2.jpg')
+hl3 = open('https://alltreks-seeds.s3.amazonaws.com/hidden_lake3.jpg')
+hl4 = open('https://alltreks-seeds.s3.amazonaws.com/hidden_lake4.jpg')
+hidden_lake_photos[0].picture.attach(io: hl1, filename:'hidden_lake1.jpg')
+hidden_lake_photos[1].picture.attach(io: hl2, filename: 'hidden_lake2.jpg')
+hidden_lake_photos[2].picture.attach(io: hl3, filename:'hidden_lake3.jpg')
+hidden_lake_photos[3].picture.attach(io: hl4, filename:'hidden_lake4.jpg')
+
+iceberg_lake = Hike.create!(name: 'Iceberg Lake', national_park_id: national_parks[0].id, difficulty: "Moderate", length: 9.3, route_type: "Out & Back", elevation_gain: 1450, coordinates: [{lat: 48.799922, lon: -113.678465}, 
 {lat: 48.827520, lon: -113.721428}, 
 {lat: 48.815588, lon: -113.742178}], 
 summary: "With icebergs drifting on an emerald lake surrounded by cliffs rising more than 2,000 feet above the water, this hike is a visitor favorite for a very good reason.", 
@@ -87,9 +158,24 @@ Continue on over the rise. As you drop towards the towering rock walls, Iceberg 
 
 As summer months begin to get warmer, the icebergs will separate and float freely on the top of the water. During rare years with higher-than-normal temperatures, the icebergs can become completely melted.
 
-From Iceberg Lake, head back the way you came to your vehicle." ),
+From Iceberg Lake, head back the way you came to your vehicle." )
+iceberg_lake_photos = [
+    Photo.create!(hike_id: iceberg_lake.id, user_id: users[1].id),
+    Photo.create!(hike_id: iceberg_lake.id, user_id: users[2].id),
+    Photo.create!(hike_id: iceberg_lake.id, user_id: users[3].id),
+    Photo.create!(hike_id: iceberg_lake.id, user_id: users[4].id)
 
-Hike.create!(name: 'Gunsight Pass Trail', national_park_id: national_parks[0].id, difficulty: "Hard", length: 18.8, route_type: "Out & Back", elevation_gain: 3727, coordinates: [{lat: 48.6775, lon: -113.6521}, 
+]
+il1 = open('https://alltreks-seeds.s3.amazonaws.com/iceberg_lake1.png')
+il2 = open('https://alltreks-seeds.s3.amazonaws.com/iceberg_lake2.png')
+il3 = open('https://alltreks-seeds.s3.amazonaws.com/iceberg_lake3.jpg')
+il4 = open('https://alltreks-seeds.s3.amazonaws.com/iceberg_lake4.png')
+iceberg_lake_photos[0].picture.attach(io: il1, filename:'iceberg_lake1.jpg')
+iceberg_lake_photos[1].picture.attach(io: il2, filename: 'iceberg_lake2.jpg')
+iceberg_lake_photos[2].picture.attach(io: il3, filename:'iceberg_lake3.jpg')
+iceberg_lake_photos[3].picture.attach(io: il4, filename:'iceberg_lake4.jpg')
+
+gunsight_pass = Hike.create!(name: 'Gunsight Pass Trail', national_park_id: national_parks[0].id, difficulty: "Hard", length: 18.8, route_type: "Out & Back", elevation_gain: 3727, coordinates: [{lat: 48.6775, lon: -113.6521}, 
 {lat: 48.611126, lon: -113.736578}, 
 {lat: 48.617756, lon: -113.878574}], 
 summary: "Gunsight Pass Trail is a 18.8 mile moderately trafficked point-to-point trail located near East Glacier Park Village, Montana that features a lake and is only recommended for very experienced adventurers. 
@@ -116,9 +202,25 @@ The trail then bends around the north side of the lake and begins to climb for t
 From Lincoln Pass, head down along the switchbacks for close to a mile until you reach the historic Sperry Chalet. This is another great spot to take a break before.
 
 After Sperry Chalet, the trail heads down for another six miles or so in the trees first paralleling Sprague Creek, then crossing over the ridge to Snyder Creek. 
-It crosses Snyder Creek and then follows it down to Lake McDonald Lodge." ),
+It crosses Snyder Creek and then follows it down to Lake McDonald Lodge." )
 
-Hike.create!(name: 'Ptarmigan Tunnel Route', national_park_id: national_parks[0].id, difficulty: "Hard", length: 10.9, route_type: "Out & Back", elevation_gain: 2283, coordinates: [{lat: 48.799922, lon: -113.678465}, 
+gunsight_pass_photos = [
+    Photo.create!(hike_id: gunsight_pass.id, user_id: users[5].id),
+    Photo.create!(hike_id: gunsight_pass.id, user_id: users[3].id),
+    Photo.create!(hike_id: gunsight_pass.id, user_id: users[1].id),
+    Photo.create!(hike_id: gunsight_pass.id, user_id: users[2].id)
+
+]
+gp1 = open('https://alltreks-seeds.s3.amazonaws.com/gunsight_pass1.jpg')
+gp2 = open('https://alltreks-seeds.s3.amazonaws.com/gunsight_pass2.jpg')
+gp3 = open('https://alltreks-seeds.s3.amazonaws.com/gunsight_pass3.jpg')
+gp4 = open('https://alltreks-seeds.s3.amazonaws.com/gunsight_pass4.jpg')
+gunsight_pass_photos[0].picture.attach(io: gp1, filename:'gunsight_pass1.jpg')
+gunsight_pass_photos[1].picture.attach(io: gp2, filename: 'gunsight_pass2.jpg')
+gunsight_pass_photos[2].picture.attach(io: gp3, filename:'gunsight_pass3.jpg')
+gunsight_pass_photos[3].picture.attach(io: gp4, filename:'gunsight_pass4.jpg')
+
+ptarmigan_tunnel = Hike.create!(name: 'Ptarmigan Tunnel Route', national_park_id: national_parks[0].id, difficulty: "Hard", length: 10.9, route_type: "Out & Back", elevation_gain: 2283, coordinates: [{lat: 48.799922, lon: -113.678465}, 
 {lat: 48.822113, lon: -113.712883}, 
 {lat: 48.849661, lon: -113.707675}], 
 summary: "The 250-foot, constructed tunnel, known as Ptarmigan Tunnel, goes from one stunning view, through the sheer ridge of Ptarmigan Wall, to another stunning view on the other side.", 
@@ -133,9 +235,24 @@ At a little over 1.6 miles from the junction, you'll reach Ptarmigan Lake. You'l
 
 The views looking back down the drainage over the lake are fantastic. The views on the other side of the tunnel are even more breathtaking. 
 The trail on the other side was hewn from the red rocks and offers staggering views onto Elizabeth Lake and the Belly River drainage. 
-It’s time to turn around, enjoy the views looking into Many Glacier, and drop back down to your vehicle." ),
+It’s time to turn around, enjoy the views looking into Many Glacier, and drop back down to your vehicle." )
 
-Hike.create!(name: 'Many Glacier Loop', national_park_id: national_parks[0].id, difficulty: "Hard", length: 61.9, route_type: "Loop", elevation_gain: 11232, coordinates: [{lat: 48.799922, lon: -113.678465}, 
+ptarmigan_tunnel_photo = [
+    Photo.create!(hike_id: ptarmigan_tunnel.id, user_id: users[5].id),
+    Photo.create!(hike_id: ptarmigan_tunnel.id, user_id: users[3].id),
+    Photo.create!(hike_id: ptarmigan_tunnel.id, user_id: users[1].id),
+    Photo.create!(hike_id: ptarmigan_tunnel.id, user_id: users[2].id)
+]
+pt1 = open('https://alltreks-seeds.s3.amazonaws.com/ptarmigan_tunnel1.jpg')
+pt2 = open('https://alltreks-seeds.s3.amazonaws.com/ptarmigan_tunnel2.jpg')
+pt3 = open('https://alltreks-seeds.s3.amazonaws.com/ptarmigan_tunnel3.jpg')
+pt4 = open('https://alltreks-seeds.s3.amazonaws.com/ptarmigan_tunnel4.jpg')
+ptarmigan_tunnel_photo[0].picture.attach(io: pt1, filename:'ptarmigan_tunnel1.jpg')
+ptarmigan_tunnel_photo[1].picture.attach(io: pt2, filename: 'ptarmigan_tunnel2.jpg')
+ptarmigan_tunnel_photo[2].picture.attach(io: pt3, filename:'ptarmigan_tunnel3.jpg')
+ptarmigan_tunnel_photo[3].picture.attach(io: pt4, filename:'ptarmigan_tunnel4.jpg')
+
+many_glacier = Hike.create!(name: 'Many Glacier Loop', national_park_id: national_parks[0].id, difficulty: "Hard", length: 61.9, route_type: "Loop", elevation_gain: 11232, coordinates: [{lat: 48.799922, lon: -113.678465}, 
 {lat: 48.819354, lon: -113.773815},
 {lat: 48.898031, lon: -113.904909}, 
 {lat: 48.911527, lon: -113.723326},
@@ -159,9 +276,23 @@ Continue south to Elizabeth Lake Head Campsite, which is a serene and quiet site
 Follow the CDT alternate trail south through Red Gap Pass, which is easily one of the most scenic views in the entire park. 
 Here you'll see moderate elevation gain and snow hazards even in off-season. Camp overnight at Poia Lake.
 
-Complete the loop by following RT-17 after Poia Lake Trail back to Many Glacier Hotel parking lot." ),
+Complete the loop by following RT-17 after Poia Lake Trail back to Many Glacier Hotel parking lot." )
+many_glacier_photo = [
+    Photo.create!(hike_id: many_glacier.id, user_id: users[3].id),
+    Photo.create!(hike_id: many_glacier.id, user_id: users[4].id),
+    Photo.create!(hike_id: many_glacier.id, user_id: users[5].id),
+    Photo.create!(hike_id: many_glacier.id, user_id: users[1].id)
+]
+mg1 = open('https://alltreks-seeds.s3.amazonaws.com/many_glacier1.jpg')
+mg2 = open('https://alltreks-seeds.s3.amazonaws.com/many_glacier2.jpg')
+mg3 = open('https://alltreks-seeds.s3.amazonaws.com/many_glacier3.jpg')
+mg4 = open('https://alltreks-seeds.s3.amazonaws.com/many_glacier4.jpg')
+many_glacier_photo[0].picture.attach(io: mg1, filename:'many_glacier1.jpg')
+many_glacier_photo[1].picture.attach(io: mg2, filename: 'many_glacier2.jpg')
+many_glacier_photo[2].picture.attach(io: mg3, filename:'many_glacier3.jpg')
+many_glacier_photo[3].picture.attach(io: mg4, filename:'many_glacier4.jpg')
 
-Hike.create!(name: 'Grinnell Lake', national_park_id: national_parks[0].id, difficulty: "Easy", length: 7.1, route_type: "Out & Back", elevation_gain: 351, coordinates: [{lat: 48.795971, lon: -113.657241}, 
+grinnell_lake = Hike.create!(name: 'Grinnell Lake', national_park_id: national_parks[0].id, difficulty: "Easy", length: 7.1, route_type: "Out & Back", elevation_gain: 351, coordinates: [{lat: 48.795971, lon: -113.657241}, 
 {lat: 48.778570, lon: -113.672284}, 
 {lat: 48.764979, lon: -113.700516}], 
 summary:" Grinnell Lake Trail starts at the Many Glacier Hotel and follows the south shorelines of Swiftcurrent Lake and Lake Josephine. 
@@ -179,9 +310,24 @@ Once back on the trail, cross the swinging bridge over Cataract Creek and contin
 The lake sits tucked beneath the base of Mt. Gould, Angel Wing, and Grinnell Mountain with Grinnell Falls cascading from the Grinnell and Salamander Glaciers.
 
 To return, head back the way you came or take the Josephine Walk on the north side of Lake Josephine and follow the Swiftcurrent Lake Trail around the lake in either direction. 
-This route is a fairly level stroll." ),
+This route is a fairly level stroll." )
 
-Hike.create!(name: 'BullHead Lake', national_park_id: national_parks[0].id, difficulty: "Easy", length: 6.9, route_type: "Out & Back", elevation_gain: 442, coordinates: [{lat: 48.799922, lon: -113.678465}, 
+grinnell_lake_photo = [
+    Photo.create!(hike_id: grinnell_lake.id, user_id: users[3].id),
+    Photo.create!(hike_id: grinnell_lake.id, user_id: users[4].id),
+    Photo.create!(hike_id: grinnell_lake.id, user_id: users[5].id),
+    Photo.create!(hike_id: grinnell_lake.id, user_id: users[1].id)
+]
+gl1 = open('https://alltreks-seeds.s3.amazonaws.com/grinnell_lake1.jpg')
+gl2 = open('https://alltreks-seeds.s3.amazonaws.com/grinnell_lake2.jpg')
+gl3 = open('https://alltreks-seeds.s3.amazonaws.com/grinnell_lake3.jpg')
+gl4 = open('https://alltreks-seeds.s3.amazonaws.com/grinnell_lake4.jpg')
+grinnell_lake_photo[0].picture.attach(io: gl1, filename:'grinnell_lake1.jpg')
+grinnell_lake_photo[1].picture.attach(io: gl2, filename: 'grinnell_lake2.jpg')
+grinnell_lake_photo[2].picture.attach(io: gl3, filename:'grinnell_lake3.jpg')
+grinnell_lake_photo[3].picture.attach(io: gl4, filename:'grinnell_lake4.jpg')
+
+bullhead_lake = Hike.create!(name: 'BullHead Lake', national_park_id: national_parks[0].id, difficulty: "Easy", length: 6.9, route_type: "Out & Back", elevation_gain: 442, coordinates: [{lat: 48.799922, lon: -113.678465}, 
 {lat: 48.796606, lon: -113.711376}, 
 {lat: 48.788139, lon: -113.735086}], 
 summary:"Head out on this beautiful route that, compared to others of the same distance, maintains a fairly level grade. This hike has many opportunities to see wildlife, especially moose, along a chain of lakes connected by creeks that sit below towering peaks." , 
@@ -193,12 +339,27 @@ About a quarter of a mile in, the trail passes by Fishercap Lake. A poorly signe
 Continue on to Redrock Lake with great vistas and a brief glimpse of Redrock Falls. The trail wraps around the lake to the cascading falls, and then heads on to Bullhead Lake, where the trail trades trees for open meadows and views at the head of the drainage.
 
 At around the 3.5-mile marker, you'll come to a lovely viewpoint that overlooks the largest body of Bullhead Lake up toward Mt Grinnell. This is a great spot to have a snack or lunch break before heading back on the same route to your vehicle..")
+
+bullhead_lake_photo = [
+    Photo.create!(hike_id: bullhead_lake.id, user_id: users[3].id),
+    Photo.create!(hike_id: bullhead_lake.id, user_id: users[4].id),
+    Photo.create!(hike_id: bullhead_lake.id, user_id: users[5].id),
+    Photo.create!(hike_id: bullhead_lake.id, user_id: users[2].id)
 ]
+bl1 = open('https://alltreks-seeds.s3.amazonaws.com/bullhead_lake1.jpg')
+bl2 = open('https://alltreks-seeds.s3.amazonaws.com/bullhead_lake2.jpg')
+bl3 = open('https://alltreks-seeds.s3.amazonaws.com/bullhead_lake3.jpg')
+bl4 = open('https://alltreks-seeds.s3.amazonaws.com/bullhead_lake4.png')
+bullhead_lake_photo[0].picture.attach(io: bl1, filename:'bullhead_lake1.jpg')
+bullhead_lake_photo[1].picture.attach(io: bl2, filename: 'bullhead_lake2.jpg')
+bullhead_lake_photo[2].picture.attach(io: bl3, filename:'bullhead_lake3.jpg')
+bullhead_lake_photo[3].picture.attach(io: bl4, filename:'bullhead_lake4.jpg')
+
 
 
 grinnell_glacier = [ 
-    Review.create!(description:'Fun overall but pretty tough hike if you ask me. Bring plenty of water', rating:4, hikes_id:glacier_hikes[0].id, user_id:users[0].id),
-    Review.create!(description:'My friend said that this was gonna be an easy hike. Come to find out that ', rating:4, hikes_id:glacier_hikes[0].id, user_id:users[0].id),
-    Review.create!(description:'I dont hike very often because I live in the big city but when I do I love to come out to Montana and hike these beautiful trails. As for the comment above the hike wasnt that hard.', rating:4, hikes_id:glacier_hikes[0].id, user_id:users[0].id),
+    Review.create!(description:'Fun overall but pretty tough hike if you ask me. Bring plenty of water', rating:4, hikes_id:grinnelle_Glacier.id, user_id:users[0].id),
+    Review.create!(description:'My friend said that this was gonna be an easy hike. Come to find out that ', rating:4, hikes_id:grinnelle_Glacier.id, user_id:users[0].id),
+    Review.create!(description:'I dont hike very often because I live in the big city but when I do I love to come out to Montana and hike these beautiful trails. As for the comment above the hike wasnt that hard.', rating:4, hikes_id:grinnelle_Glacier.id, user_id:users[0].id),
 
 ]

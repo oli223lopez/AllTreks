@@ -174,6 +174,56 @@ var fetchAllNP = function fetchAllNP() {
 
 /***/ }),
 
+/***/ "./frontend/actions/photo_actions.js":
+/*!*******************************************!*
+  !*** ./frontend/actions/photo_actions.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CREATE_PHOTO": () => /* binding */ CREATE_PHOTO,
+/* harmony export */   "DELETE_PHOTO": () => /* binding */ DELETE_PHOTO,
+/* harmony export */   "postPhoto": () => /* binding */ postPhoto,
+/* harmony export */   "destoryPhoto": () => /* binding */ destoryPhoto,
+/* harmony export */   "createPhoto": () => /* binding */ createPhoto,
+/* harmony export */   "deletePhoto": () => /* binding */ deletePhoto
+/* harmony export */ });
+/* harmony import */ var _util_photo_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/photo_api_util */ "./frontend/util/photo_api_util.js");
+
+var CREATE_PHOTO = 'CREATE_PHOTO';
+var DELETE_PHOTO = 'DELETE_PHOTO';
+var postPhoto = function postPhoto() {
+  return {
+    type: CREATE_PHOTO
+  };
+};
+var destoryPhoto = function destoryPhoto() {
+  return {
+    type: DELETE_PHOTO
+  };
+};
+var createPhoto = function createPhoto(photo) {
+  return function (dispatch) {
+    // console.log(photo)
+    return _util_photo_api_util__WEBPACK_IMPORTED_MODULE_0__.createPhoto(photo).then(function (res) {
+      return dispatch(postPhoto());
+    }, function (err) {
+      return console.log("not working");
+    });
+  };
+};
+var deletePhoto = function deletePhoto(photoID) {
+  return function (dispatch) {
+    return _util_photo_api_util__WEBPACK_IMPORTED_MODULE_0__.deletePhoto(photoID).then(function (res) {
+      return dispatch(destoryPhoto());
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*
   !*** ./frontend/actions/session_actions.js ***!
@@ -341,12 +391,88 @@ var HikeShow = function HikeShow(props) {
       hike = _useState2[0],
       setHike = _useState2[1];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+      _useState4 = _slicedToArray(_useState3, 2),
+      photo = _useState4[0],
+      setPhoto = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+      _useState6 = _slicedToArray(_useState5, 2),
+      photoFile = _useState6[0],
+      setPhotoFile = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
+      _useState8 = _slicedToArray(_useState7, 2),
+      photoUrl = _useState8[0],
+      setPhotoUrl = _useState8[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     props.fetchHike(props.hikeID).then(function (res) {
       return setHike(res.hike);
     });
+    console.log(props.userID);
   }, []);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, Object.values(hike).length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, hike.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Length: ", hike.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Route Type: ", hike.route_type), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Elevation Gain: ", hike.elevation_gain), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Summary: ", hike.summary), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Description: ", hike.description)) : null);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (Object.values(photo).length) {
+      // console.log(photo['picture'])
+      var formData = new FormData();
+      formData.append('photo[hike_id]', parseInt(props.hikeID, 10));
+      formData.append('photo[user_id]', props.userID);
+      formData.append('photo[picture]', photo['picture']);
+      props.createPhoto(formData).then(function (res) {
+        return console.log(res);
+      });
+    }
+  }, [photo]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    // console.log(photoFile)
+    if (photoFile) {
+      if (photoFile.name) {
+        var fileReader = new FileReader();
+
+        fileReader.onloadend = function () {
+          setPhotoUrl(fileReader.result);
+        };
+
+        if (photoFile) {
+          fileReader.readAsDataURL(photoFile);
+        }
+      }
+    }
+  }, [photoFile]); // function handlePhoto(e) {
+  //     const file = e.currentTarget.files[0];
+  //     const fileReader = new FileReader();
+  //     fileReader.onloadend = () => {
+  //         this.setState({ photo: file, photoUrl: fileReader.result });
+  //     };
+  //     if (file) {
+  //         fileReader.readAsDataURL(file);
+  //     }
+  // }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, Object.values(hike).length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, hike.photos.map(function (photo, i) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+      key: i,
+      src: photo.photoUrl,
+      width: "500px",
+      height: "500px"
+    });
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, hike.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Length: ", hike.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Route Type: ", hike.route_type), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Elevation Gain: ", hike.elevation_gain), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Summary: ", hike.summary), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Description: ", hike.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+    onSubmit: function onSubmit() {
+      return setPhoto({
+        picture: photoFile
+      });
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    type: "file",
+    onChange: function onChange(e) {
+      return setPhotoFile(e.currentTarget.files[0]);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    type: "submit"
+  }, "Submit")), photoUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+    src: photoUrl
+  })) : null) : null);
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HikeShow);
@@ -368,6 +494,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _hike_show__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./hike_show */ "./frontend/components/Hike/hike_show.js");
 /* harmony import */ var _actions_hike_action__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/hike_action */ "./frontend/actions/hike_action.js");
+/* harmony import */ var _actions_photo_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/photo_actions */ "./frontend/actions/photo_actions.js");
+
 
 
 
@@ -377,7 +505,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   // console.log(state.entities.hike)  
   return {
     hike: state.entities.hike,
-    hikeID: ownProps.match.params.id
+    hikeID: ownProps.match.params.id,
+    userID: state.entities.users.id
   };
 };
 
@@ -388,6 +517,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     removeHike: function removeHike() {
       return dispatch((0,_actions_hike_action__WEBPACK_IMPORTED_MODULE_3__.removeHike)());
+    },
+    createPhoto: function createPhoto(photo) {
+      return dispatch((0,_actions_photo_actions__WEBPACK_IMPORTED_MODULE_4__.createPhoto)(photo));
+    },
+    deletePhoto: function deletePhoto(photoID) {
+      return dispatch((0,_actions_photo_actions__WEBPACK_IMPORTED_MODULE_4__.deletePhoto)(photoID));
     }
   };
 };
@@ -400,55 +535,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 /*!***********************************************************!*
   !*** ./frontend/components/NationalPark/national_park.js ***!
   \***********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-var NationalPark = function NationalPark(props) {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
-      _useState2 = _slicedToArray(_useState, 2),
-      nationalPark = _useState2[0],
-      setNationalPark = _useState2[1];
-
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (Object.values(nationalPark).length === 0) {
-      props.fetchNP(props.nationalParkID);
-
-      if (props.nationalPark.hikes) {
-        setNationalPark(props.nationalPark);
-      }
-    }
-  });
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, console.log(nationalPark), Object.values(nationalPark).length ? nationalPark.hikes.map(function (hike, i) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-      key: i
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-      to: "/hike/".concat(hike.id)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, hike.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, hike.difficulty), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, hike.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, hike.elevation_gain), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, hike.summary)));
-  }) : null);
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NationalPark);
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /home/oliver/AllTreks2/AllTreks/frontend/components/NationalPark/national_park.js: Const declarations require an initialization value (9:13)\n\n\u001b[0m \u001b[90m  7 | \u001b[39m    \u001b[36mconst\u001b[39m \u001b[0m\n\u001b[0m \u001b[90m  8 | \u001b[39m \u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  9 | \u001b[39m    useEffect(() \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 10 | \u001b[39m        \u001b[36mif\u001b[39m(\u001b[33mObject\u001b[39m\u001b[33m.\u001b[39mvalues(nationalPark)\u001b[33m.\u001b[39mlength \u001b[33m===\u001b[39m \u001b[35m0\u001b[39m) {\u001b[0m\n\u001b[0m \u001b[90m 11 | \u001b[39m            props\u001b[33m.\u001b[39mfetchNP(props\u001b[33m.\u001b[39mnationalParkID)\u001b[0m\n\u001b[0m \u001b[90m 12 | \u001b[39m            \u001b[36mif\u001b[39m(props\u001b[33m.\u001b[39mnationalPark\u001b[33m.\u001b[39mhikes){\u001b[0m\n    at Object._raise (/home/oliver/AllTreks2/AllTreks/node_modules/@babel/parser/lib/index.js:748:17)\n    at Object.raiseWithData (/home/oliver/AllTreks2/AllTreks/node_modules/@babel/parser/lib/index.js:741:17)\n    at Object.raise (/home/oliver/AllTreks2/AllTreks/node_modules/@babel/parser/lib/index.js:735:17)\n    at Object.parseVar (/home/oliver/AllTreks2/AllTreks/node_modules/@babel/parser/lib/index.js:12320:18)\n    at Object.parseVarStatement (/home/oliver/AllTreks2/AllTreks/node_modules/@babel/parser/lib/index.js:12125:10)\n    at Object.parseStatementContent (/home/oliver/AllTreks2/AllTreks/node_modules/@babel/parser/lib/index.js:11717:21)\n    at Object.parseStatement (/home/oliver/AllTreks2/AllTreks/node_modules/@babel/parser/lib/index.js:11650:17)\n    at Object.parseBlockOrModuleBlockBody (/home/oliver/AllTreks2/AllTreks/node_modules/@babel/parser/lib/index.js:12232:25)\n    at Object.parseBlockBody (/home/oliver/AllTreks2/AllTreks/node_modules/@babel/parser/lib/index.js:12218:10)\n    at Object.parseBlock (/home/oliver/AllTreks2/AllTreks/node_modules/@babel/parser/lib/index.js:12202:10)");
 
 /***/ }),
 
@@ -676,6 +765,7 @@ var SearchBar = function SearchBar(props) {
 
 
   var results = function results() {
+    console.log(matches());
     return matches().map(function (result, i) {
       if (result.name) {
         if (result.name.includes('National')) {
@@ -1246,18 +1336,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _user_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user_reducer */ "./frontend/reducers/user_reducer.js");
 /* harmony import */ var _hike_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./hike_reducer */ "./frontend/reducers/hike_reducer.js");
 /* harmony import */ var _national_park_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./national_park_reducer */ "./frontend/reducers/national_park_reducer.js");
+/* harmony import */ var _photo_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./photo_reducer */ "./frontend/reducers/photo_reducer.js");
 
 
 
 
-var EntitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
+
+var EntitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
   users: _user_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
   hike: _hike_reducer__WEBPACK_IMPORTED_MODULE_1__.default,
-  nationalPark: _national_park_reducer__WEBPACK_IMPORTED_MODULE_2__.default
+  nationalPark: _national_park_reducer__WEBPACK_IMPORTED_MODULE_2__.default,
+  photo: _photo_reducer__WEBPACK_IMPORTED_MODULE_3__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EntitiesReducer);
 
@@ -1350,6 +1443,40 @@ var NationalParkReducer = function NationalParkReducer() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NationalParkReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/photo_reducer.js":
+/*!********************************************!*
+  !*** ./frontend/reducers/photo_reducer.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _actions_photo_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/photo_actions */ "./frontend/actions/photo_actions.js");
+
+
+var PhotoReducer = function PhotoReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_photo_actions__WEBPACK_IMPORTED_MODULE_0__.CREATE_PHOTO:
+      return {};
+
+    case _actions_photo_actions__WEBPACK_IMPORTED_MODULE_0__.DELETE_PHOTO:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PhotoReducer);
 
 /***/ }),
 
@@ -1555,6 +1682,36 @@ var allNP = function allNP() {
   return $.ajax({
     url: "/api/national_parks/",
     method: 'GET'
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/photo_api_util.js":
+/*!*****************************************!*
+  !*** ./frontend/util/photo_api_util.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createPhoto": () => /* binding */ createPhoto,
+/* harmony export */   "deletePhoto": () => /* binding */ deletePhoto
+/* harmony export */ });
+var createPhoto = function createPhoto(formData) {
+  return $.ajax({
+    url: 'api/photos',
+    method: "POST",
+    data: formData,
+    contentType: false,
+    processData: false
+  });
+};
+var deletePhoto = function deletePhoto(photoID) {
+  return $.ajax({
+    url: "api/photo/".concat(photoID),
+    method: "DELETE"
   });
 };
 

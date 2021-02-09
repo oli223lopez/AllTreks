@@ -1,8 +1,16 @@
+json.extract! @national_park, :id, :name, :lat, :lon, :hikes, :photos
 
-
-json.extract! @national_park, :id, :name, :lat, :lon, :hikes do |hike|
-    json.extract! hike, :id, :name, :summary, :difficulty, :length, :route_type, :elevation_gain
+json.photos @national_park.photos do |photo|
+    
+    json.photoUrl url_for(photo.picture) if photo.picture.attached?
 end
+    
+    
+    
+    
+
+
+
 
 
 

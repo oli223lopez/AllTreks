@@ -41,6 +41,7 @@ const SearchBar = (props) => {
     
     const results = () => {
         
+        console.log(matches())
        return matches().map((result, i) => {
            if(result.name){
             if (result.name.includes('National')) {
@@ -77,8 +78,6 @@ const SearchBar = (props) => {
             <form>
                 <input type='text' onChange={(e) => update(e)} value={searchInput} placeholder='Search'/>
                 <button type='submit'>Search</button>
-                
-
             </form>
             {results()}
         </div>

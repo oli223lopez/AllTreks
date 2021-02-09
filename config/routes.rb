@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :hikes, only: [:show, :index]
     resources :national_parks, only: [:show, :index]
     resources :reviews, only: [:show, :create, :update, :destroy]
+    resources :photos, only: [:create, :destroy]
   end
   
   root 'static_pages#root'
