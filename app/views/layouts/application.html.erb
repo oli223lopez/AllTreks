@@ -13,14 +13,18 @@
 
     <script type="text/javascript"> 
 
-    ; window.treksLogoURL = "<%= image_url('IMG_2945-png.png')%>";
-    window.treksLogoURL = "<%= image_url('IMG_2945-png2.png')%>";
+      ; window.treksLogoURL = "<%= image_url('IMG_2945-png.png')%>";
+      window.treksLogoURL = "<%= image_url('IMG_2945-png2.png')%>";
+      window.alltreks_logo = "<%= image_url('alltreks_icon.png')%>";
 
-    window.authBackGroundURL = "<%= image_url('plex_zion.jpg')%>";
+      window.authBackGroundURL = "<%= image_url('plex_zion.jpg')%>";
 
 
-  </script> 
+    </script> 
 
+    <%= favicon_link_tag asset_path('alltreks_icon.png'), :rel => 'icon', :type =>  'image/png' %>
+
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
 
   
   </head>

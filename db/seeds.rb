@@ -23,9 +23,9 @@ users =[
 national_parks = [ NationalPark.create(name: 'Glacier National Park', lat: 48.7596, lon: 113.7870)]
 
 
-grinnelle_Glacier = Hike.create!(name: 'Grinnell Glacier', national_park_id: national_parks[0].id, difficulty: 'Hard' , length: 11.2 , route_type: 'Out & Back', elevation_gain: 2181, coordinates: [{lat: 48.79279, lon: -113.66872}, 
-{lat: 48.77297558262199, lon: -113.70672747696791 }, 
-{lat: 48.7600035, lon: -113.7300751}], summary:'Grinnell Glacier Trail [CLOSED] is a 11.2 mile heavily trafficked out and back trail located near Babb, Montana that features a lake and is rated as difficult. The trail is primarily used for hiking and is best used from June until October.',
+grinnelle_Glacier = Hike.create!(name: 'Grinnell Glacier', national_park_id: national_parks[0].id, difficulty: 'Hard' , length: 11.2 , route_type: 'Out & Back', elevation_gain: 2181, coordinates: [-113.66872, 48.79279,  
+-113.70672747696791, 48.77297558262199, 
+-113.7300751, 48.7600035], summary:'Grinnell Glacier Trail [CLOSED] is a 11.2 mile heavily trafficked out and back trail located near Babb, Montana that features a lake and is rated as difficult. The trail is primarily used for hiking and is best used from June until October.',
  description: "Access the start of this route from the Grinnell Glacier Trailhead parking area, west of Swiftcurrent Lake.
 
 Start out on the first two level miles along Swiftcurrent Lake and Lake Josephine's eastern and northern shores on the appropriately named North Shore Lake Josephine Trail. Towards the end of Lake Josephine, look for the right-hand turn onto the Grinnell Glacier Trail. This is where the elevation begins to increase for the next two or so miles.
@@ -58,9 +58,9 @@ grinnelle_Glacier_Photos[3].picture.attach(io: gg4, filename:'grinnelle_glacier4
 
 
 
-highline_trail = Hike.create!(name: 'Highline Trail: Logan Pass to Granite Park Chalet', national_park_id: national_parks[0].id, difficulty: 'Hard', length: 14.9, route_type: "Out & Back", elevation_gain: 2578, coordinates: [{lat: 48.696920, lon: -113.718249}, 
-{lat: 48.745497, lon: -113.742094}, 
-{lat: 48.770844, lon: -113.772113 }], summary:'Highline Trail: Logan Pass to Granite Park Chalet is a 14.9 mile heavily trafficked out and back trail located near Siyeh Bend, Montana that features a river and is rated as difficult. 
+highline_trail = Hike.create!(name: 'Highline Trail: Logan Pass to Granite Park Chalet', national_park_id: national_parks[0].id, difficulty: 'Hard', length: 14.9, route_type: "Out & Back", elevation_gain: 2578, coordinates: [-113.718249, 48.696920,  
+  -113.742094, 48.745497, 
+ -113.772113, 48.770844], summary:'Highline Trail: Logan Pass to Granite Park Chalet is a 14.9 mile heavily trafficked out and back trail located near Siyeh Bend, Montana that features a river and is rated as difficult. 
 The trail is primarily used for hiking, camping, and backpacking and is best used from June until October.' , 
 description: "The High-Line trail runs from the Logan Pass Visitors Center to The Loop Trail Head along the Garden Wall. 
 The first 7.6 miles of the trail in easy with gradual elevation climb. After Granite Park Chalet the trail drops 2,200 feet in 4 miles to the Loop Trail Head. 
@@ -84,9 +84,9 @@ highline_trail_photos[1].picture.attach(io: ht2, filename: 'highline_trail2.jpg'
 highline_trail_photos[2].picture.attach(io: ht3, filename:'highline_trail3.jpg')
 highline_trail_photos[3].picture.attach(io: ht4, filename:'highline_trail4.jpg')
 
-avalanche_lake = Hike.create!(name: 'Avalanche Lake via Trail of the Cedars', national_park_id: national_parks[0].id, difficulty: "Moderate", length: 6.7, route_type: "Out & Back", elevation_gain: 757, coordinates: [{lat: 48.68008, lon: -113.81914}, 
-{lat: 48.668690, lon: -113.800368}, 
-{lat: 48.651190, lon: -113.784558}], summary:"Avalanche Lake is the perfect blend of accessibility, enjoyable hiking and scenic payoff. You know from the start that you're in for an experience that's worth the sweat. 
+avalanche_lake = Hike.create!(name: 'Avalanche Lake via Trail of the Cedars', national_park_id: national_parks[0].id, difficulty: "Moderate", length: 6.7, route_type: "Out & Back", elevation_gain: 757, coordinates: [-113.81914, 48.68008, 
+-113.800368, 48.668690,  
+-113.784558, 48.651190], summary:"Avalanche Lake is the perfect blend of accessibility, enjoyable hiking and scenic payoff. You know from the start that you're in for an experience that's worth the sweat. 
 It's a great one for families with smooth trail, steady inclines and lots of fun stops along the way from hollowed out trees struck by lightning to avalanche clearings blasted through the forest.
 
 Most of the trail is shaded and cool, growing warmer and more open as you reach the lake, where rock beaches and stunning views of distant waterfalls await. This is a snapshot destined for the mantel.", 
@@ -116,9 +116,9 @@ avalanche_lake_photos[1].picture.attach(io: al2, filename: 'avalanche_lake2.jpg'
 avalanche_lake_photos[2].picture.attach(io: al3, filename:'avalanche_lake3.jpg')
 avalanche_lake_photos[3].picture.attach(io: al4, filename:'avalanche_lake4.jpg')
 
-hidden_lake = Hike.create!(name: 'Hidden Lake Overlook', national_park_id: national_parks[0].id, difficulty: "Easy", length: 2.9, route_type: "Out & Back", elevation_gain: 567, coordinates: [{lat: 48.695481, lon: -113.717767}, 
-{lat: 48.692990, lon: -113.728133 }, 
-{lat: 48.687311, lon: -113.741492 }], summary:"This hike starts from the apex of the Going-to-the-Sun Road at Logan Pass. The entire hike features beautiful panoramic views out over alpine meadows and rugged peaks to a fantastic overlook of Hidden Lake tucked beneath towering peaks. 
+hidden_lake = Hike.create!(name: 'Hidden Lake Overlook', national_park_id: national_parks[0].id, difficulty: "Easy", length: 2.9, route_type: "Out & Back", elevation_gain: 567, coordinates: [-113.717767, 48.695481, 
+ -113.728133, 48.692990, 
+-113.741492, 48.687311], summary:"This hike starts from the apex of the Going-to-the-Sun Road at Logan Pass. The entire hike features beautiful panoramic views out over alpine meadows and rugged peaks to a fantastic overlook of Hidden Lake tucked beneath towering peaks. 
 The snow can stick around well into July, but the wildflowers are around through September with the best blooms in August." , 
 description: "To start this hike, head out on the Hidden Lake Trail past the visitor center that starts as asphalt and quickly turns into a raised boardwalk. The boardwalk heads up turning into stairs that lead toward the glacial moraine that was formed by the glacier that used to sit at the bottom of Clements Mountain. Note that the boardwalk is a series of many steps. They aren't difficult in and of themselves, but were not built at a height to be a simple step for someone shorter than 64 inches. It helps to have a hiking pole or walking stick to be able to navigate the step height.
 
@@ -141,9 +141,9 @@ hidden_lake_photos[1].picture.attach(io: hl2, filename: 'hidden_lake2.jpg')
 hidden_lake_photos[2].picture.attach(io: hl3, filename:'hidden_lake3.jpg')
 hidden_lake_photos[3].picture.attach(io: hl4, filename:'hidden_lake4.jpg')
 
-iceberg_lake = Hike.create!(name: 'Iceberg Lake', national_park_id: national_parks[0].id, difficulty: "Moderate", length: 9.3, route_type: "Out & Back", elevation_gain: 1450, coordinates: [{lat: 48.799922, lon: -113.678465}, 
-{lat: 48.827520, lon: -113.721428}, 
-{lat: 48.815588, lon: -113.742178}], 
+iceberg_lake = Hike.create!(name: 'Iceberg Lake', national_park_id: national_parks[0].id, difficulty: "Moderate", length: 9.3, route_type: "Out & Back", elevation_gain: 1450, coordinates: [-113.678465, 48.799922, 
+-113.721428, 48.827520, 
+-113.742178, 48.815588], 
 summary: "With icebergs drifting on an emerald lake surrounded by cliffs rising more than 2,000 feet above the water, this hike is a visitor favorite for a very good reason.", 
 description: "To access this route, take the Many Glacier Road to the Swiftcurrent Motor Inn parking area. Turn right just after the inn and follow the road to the Iceberg Lake/Ptarmigan Tunnel trailhead. 
 (Parking at the trailhead is limited, so you may have to park at the Swiftcurrent Motor Inn parking lot and follow the road to the trailhead on foot).
@@ -175,9 +175,9 @@ iceberg_lake_photos[1].picture.attach(io: il2, filename: 'iceberg_lake2.jpg')
 iceberg_lake_photos[2].picture.attach(io: il3, filename:'iceberg_lake3.jpg')
 iceberg_lake_photos[3].picture.attach(io: il4, filename:'iceberg_lake4.jpg')
 
-gunsight_pass = Hike.create!(name: 'Gunsight Pass Trail', national_park_id: national_parks[0].id, difficulty: "Hard", length: 18.8, route_type: "Out & Back", elevation_gain: 3727, coordinates: [{lat: 48.6775, lon: -113.6521}, 
-{lat: 48.611126, lon: -113.736578}, 
-{lat: 48.617756, lon: -113.878574}], 
+gunsight_pass = Hike.create!(name: 'Gunsight Pass Trail', national_park_id: national_parks[0].id, difficulty: "Hard", length: 18.8, route_type: "Out & Back", elevation_gain: 3727, coordinates: [-113.6521, 48.6775, 
+-113.736578, 48.611126, 
+-113.878574, 48.617756], 
 summary: "Gunsight Pass Trail is a 18.8 mile moderately trafficked point-to-point trail located near East Glacier Park Village, Montana that features a lake and is only recommended for very experienced adventurers. 
 The trail offers a number of activity options and is best used from March until October.", 
 description:"
@@ -220,9 +220,9 @@ gunsight_pass_photos[1].picture.attach(io: gp2, filename: 'gunsight_pass2.jpg')
 gunsight_pass_photos[2].picture.attach(io: gp3, filename:'gunsight_pass3.jpg')
 gunsight_pass_photos[3].picture.attach(io: gp4, filename:'gunsight_pass4.jpg')
 
-ptarmigan_tunnel = Hike.create!(name: 'Ptarmigan Tunnel Route', national_park_id: national_parks[0].id, difficulty: "Hard", length: 10.9, route_type: "Out & Back", elevation_gain: 2283, coordinates: [{lat: 48.799922, lon: -113.678465}, 
-{lat: 48.822113, lon: -113.712883}, 
-{lat: 48.849661, lon: -113.707675}], 
+ptarmigan_tunnel = Hike.create!(name: 'Ptarmigan Tunnel Route', national_park_id: national_parks[0].id, difficulty: "Hard", length: 10.9, route_type: "Out & Back", elevation_gain: 2283, coordinates: [-113.678465, 48.799922, 
+-113.712883, 48.822113, 
+-113.707675, 48.849661,], 
 summary: "The 250-foot, constructed tunnel, known as Ptarmigan Tunnel, goes from one stunning view, through the sheer ridge of Ptarmigan Wall, to another stunning view on the other side.", 
 description: "The Ptarmigan Trail shares a trailhead as well as its first 2.7 miles with the Iceberg Lake Trail (both can be paired for a longer day). 
 Although the first two-tenths of a mile climb at a fairly steep grade, the trail quickly flattens out, becoming a nice, gradual incline taking you to broad meadows. 
@@ -252,12 +252,12 @@ ptarmigan_tunnel_photo[1].picture.attach(io: pt2, filename: 'ptarmigan_tunnel2.j
 ptarmigan_tunnel_photo[2].picture.attach(io: pt3, filename:'ptarmigan_tunnel3.jpg')
 ptarmigan_tunnel_photo[3].picture.attach(io: pt4, filename:'ptarmigan_tunnel4.jpg')
 
-many_glacier = Hike.create!(name: 'Many Glacier Loop', national_park_id: national_parks[0].id, difficulty: "Hard", length: 61.9, route_type: "Loop", elevation_gain: 11232, coordinates: [{lat: 48.799922, lon: -113.678465}, 
-{lat: 48.819354, lon: -113.773815},
-{lat: 48.898031, lon: -113.904909}, 
-{lat: 48.911527, lon: -113.723326},
-{lat: 48.851713, lon: -113.605119},
-{lat: 48.821359, lon: -113.609962}], 
+many_glacier = Hike.create!(name: 'Many Glacier Loop', national_park_id: national_parks[0].id, difficulty: "Hard", length: 61.9, route_type: "Loop", elevation_gain: 11232, coordinates: [-113.678465, 48.799922,  
+-113.773815, 48.819354,
+-113.904909, 48.898031, 
+-113.723326, 48.911527,
+-113.605119, 48.851713, 
+-113.609962, 48.821359], 
 summary:"A strenuous multi-day loop that utilizes the CDT and other notable trails in Glacier National Park. Includes difficult sections in several passes, but crosses lake-side campsites to permit for adequate rest.", 
 description: "This is a multi-day loop (or a long run). The trails can be considerably difficult to navigate outside of July-September, so crampons/microspikes and an ice ax are recommended.
 
@@ -292,9 +292,9 @@ many_glacier_photo[1].picture.attach(io: mg2, filename: 'many_glacier2.jpg')
 many_glacier_photo[2].picture.attach(io: mg3, filename:'many_glacier3.jpg')
 many_glacier_photo[3].picture.attach(io: mg4, filename:'many_glacier4.jpg')
 
-grinnell_lake = Hike.create!(name: 'Grinnell Lake', national_park_id: national_parks[0].id, difficulty: "Easy", length: 7.1, route_type: "Out & Back", elevation_gain: 351, coordinates: [{lat: 48.795971, lon: -113.657241}, 
-{lat: 48.778570, lon: -113.672284}, 
-{lat: 48.764979, lon: -113.700516}], 
+grinnell_lake = Hike.create!(name: 'Grinnell Lake', national_park_id: national_parks[0].id, difficulty: "Easy", length: 7.1, route_type: "Out & Back", elevation_gain: 351, coordinates: [-113.657241, 48.795971,
+-113.672284, 48.778570,
+-113.700516, 48.764979], 
 summary:" Grinnell Lake Trail starts at the Many Glacier Hotel and follows the south shorelines of Swiftcurrent Lake and Lake Josephine. 
 Both of those lakes offer fantastic views of Grinnell Point and various other summits in the Many Glacier area as you dip in and out of lush forests to Grinnell Lake which is tucked beneath red cliffs and fed by a waterfall from the glacier above.", 
 description: "To access this hike, head into the Many Glacier area and take a left over the Swiftcurrent Creek bridge. Continue toward the historic Many Glacier Hotel and park in the lot. Head down to the shores of Swiftcurrent Lake by the hotel. 
@@ -327,9 +327,9 @@ grinnell_lake_photo[1].picture.attach(io: gl2, filename: 'grinnell_lake2.jpg')
 grinnell_lake_photo[2].picture.attach(io: gl3, filename:'grinnell_lake3.jpg')
 grinnell_lake_photo[3].picture.attach(io: gl4, filename:'grinnell_lake4.jpg')
 
-bullhead_lake = Hike.create!(name: 'BullHead Lake', national_park_id: national_parks[0].id, difficulty: "Easy", length: 6.9, route_type: "Out & Back", elevation_gain: 442, coordinates: [{lat: 48.799922, lon: -113.678465}, 
-{lat: 48.796606, lon: -113.711376}, 
-{lat: 48.788139, lon: -113.735086}], 
+bullhead_lake = Hike.create!(name: 'BullHead Lake', national_park_id: national_parks[0].id, difficulty: "Easy", length: 6.9, route_type: "Out & Back", elevation_gain: 442, coordinates: [-113.678465, 48.799922, 
+-113.711376, 48.796606, 
+-113.735086, 48.788139], 
 summary:"Head out on this beautiful route that, compared to others of the same distance, maintains a fairly level grade. This hike has many opportunities to see wildlife, especially moose, along a chain of lakes connected by creeks that sit below towering peaks." , 
 description: "To access this hike, head west on Many Glacier Road to the Swiftcurrent Motor Inn. Park in the main parking lot for the Inn and head to the west end of the parking lot and look for the Swiftcurrent Pass trailhead.
 

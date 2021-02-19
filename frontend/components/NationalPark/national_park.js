@@ -22,42 +22,51 @@ const NationalPark = (props) => {
     
 
     return(
-        <div>
-            {console.log(nationalPark)}
-            {Object.values(nationalPark).length ? 
-            nationalPark.hikes.map((hike, i) => {
-                return(
-                    <div key={i}> 
+        <div className='nationalPark'>
 
-                    <Link to={`/hike/${hike.id}`}>
-                        <div> 
-                            <h3>
-                                {hike.name}
-                            </h3>
-                        </div>
-                        <div>
-                            {hike.difficulty}
-                        </div>
-                        <div> 
-                            {hike.length}
-                        </div>
-                        <div> 
-                            {hike.elevation_gain}
-                        </div>
-                        <div> 
-                            {hike.summary}
-                        </div>
+            <div className='nationalParkName'>Best Trails in {nationalPark.name}</div>
 
-                    </Link>
-                    </div>
-                )
-            })
+            <div className='nationalParkHikeList'>
+                {console.log(nationalPark)}
+                {Object.values(nationalPark).length ? 
 
-            :
-            null
-            
-            
-            }
+                nationalPark.hikes.map((hike, i) => {
+                    return(
+                        <div key={i} className='nationalParkHike'> 
+
+                            <Link to={`/hike/${hike.id}`} className='nationalParkHikeLink'>
+                                <div >
+                                    <img className='nationalParkHikeImg' src={hike.photos[0].photoUrl} heigth='200px' width='250px'/> 
+                                </div>
+                                <div className='nationalParkHikeAttributes'>
+                                    <div className='nationalParkHikeName'>
+                                            {`#${i + 1} - ` + hike.name}
+                                    </div>
+                                    <div className={`nationalParkHikeDifficulty${hike.difficulty}`}>
+                                        {hike.difficulty}
+                                    </div>
+                                    <div className='nationalParkHikeLength'> 
+                                        Length: {hike.length}
+                                    </div>
+                                    <div className='nationalParkHikeElevationGain'> 
+                                        Elevation Gain: {hike.elevation_gain}
+                                    </div>
+                                    <div className='nationalParkHikeSummary'> 
+                                        Summary: {hike.summary}
+                                    </div>
+                                </div>
+
+                            </Link>
+                        </div>
+                    )
+                })
+
+                :
+                null
+                
+                
+                }
+            </div> 
         </div>
     )
 }

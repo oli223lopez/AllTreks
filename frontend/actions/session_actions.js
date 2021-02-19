@@ -54,6 +54,10 @@ export const signup = user => dispatch => {
     err => dispatch(receiveErrors(err)))
 }
 
+export const getUser = username => dispatch => {
+    return SessionApiUtil.getUser(username)
+    .then(user => dispatch(receiveCurrentUser(user)), err => dispatch(receiveErrors(err)))
+}
 
 
 

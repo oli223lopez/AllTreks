@@ -4,6 +4,9 @@ import {Link} from 'react-router-dom'
 
 
 
+
+
+
 const NavBar = (props) => {
     const [user, setUser] = useState(props.currentUser)
 
@@ -14,7 +17,16 @@ const NavBar = (props) => {
 
     const isLoggedIn = () => (
         <div>
-            <p className="welcomeMsg"> Welcome back {props.currentUser.username} </p>
+
+            <div>
+
+            <p className="welcomeMsg"> Welcome back  
+            </p>
+                <Link to={`profile/${props.currentUser.username}`} className="welcomeMsg"> 
+                {props.currentUser.username} 
+            </Link>
+                
+            </div>
 
             <div className="navBar">
                 <br />
@@ -40,7 +52,11 @@ const NavBar = (props) => {
             {/* {console.log(props.currentUser)} */}
 
             <h1 className="splashHeader">
-                <Link to="/" className="AllTreks">AllTreks</Link>
+                <Link to="/" className="AllTreks">
+                    <img src={window.alltreks_logo} width='40px' height='40px' />
+                </Link>
+                <Link to="/" className="AllTreks">
+                    AllTreks</Link>
             </h1>
 
 

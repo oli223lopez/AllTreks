@@ -9,6 +9,7 @@ import SignupFormContainer from './SessionForm/signup_form_container'
 import NavBarContainer from './NavBar/navbar_container'
 import NationalParkContainer from './NationalPark/national_park_container'
 import HikeShowContainer from './Hike/hike_show_container'
+import ProfileContainer from './Profile/profile_container'
 
 
 const App = () => (
@@ -21,7 +22,8 @@ const App = () => (
                 <AuthRoute exact path="/login" component={LoginFormContainer} />
                 <AuthRoute exact path="/signup" component={SignupFormContainer} />
                 <ProtectedRoute exact path='/national_park/:id' component={NationalParkContainer} />
-                <ProtectedRoute exact path={`/hike/:id`} component={HikeShowContainer} />
+                <ProtectedRoute exact path='/hike/:id' component={HikeShowContainer} />
+                <ProtectedRoute exact path='/profile/:username' component={ProfileContainer}/>
             </Switch>
 
 

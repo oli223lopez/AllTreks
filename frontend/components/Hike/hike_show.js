@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react'
+import Map from '../Map/map'
+import ReviewFormContainer from '../Review/review_form_container'
 
 const HikeShow = (props) => {
     const [hike, setHike] = useState({})
@@ -8,7 +10,7 @@ const HikeShow = (props) => {
 
     useEffect(() => {
         props.fetchHike(props.hikeID).then(res => setHike(res.hike))
-        console.log(props.userID)
+        // console.log(props.userID)
     }, [])
 
     
@@ -39,17 +41,10 @@ const HikeShow = (props) => {
 
         }
     }, [photoFile])
-    
-    // function handlePhoto(e) {
-    //     const file = e.currentTarget.files[0];
-    //     const fileReader = new FileReader();
-    //     fileReader.onloadend = () => {
-    //         this.setState({ photo: file, photoUrl: fileReader.result });
-    //     };
-    //     if (file) {
-    //         fileReader.readAsDataURL(file);
-    //     }
-    // }
+
+    useEffect(() => {
+        setHike(props.hike)
+    }, [props.hike])
 
     return(
         <div>
@@ -90,6 +85,28 @@ const HikeShow = (props) => {
                                 <img src={photoUrl}/>
                             </div> 
                             : null}
+                <div id='app'> 
+                </div>
+                <ReviewFormContainer hikeID={props.hikeID} userID={props.userID}/>
+
+                {hike.reviews.map((review, idx) => {
+                    return(
+                        <div key={idx}>
+                            {console.log(review)}
+                            <div> 
+                                {review.user.username}
+                            </div>
+                            <div>
+                                {review.rating}
+                            </div>
+                            <div> 
+                                {review.description}
+                            </div>
+                        </div>
+                    )
+                })}
+
+                <Map hike={hike}/>
             </div>
             
             : null}

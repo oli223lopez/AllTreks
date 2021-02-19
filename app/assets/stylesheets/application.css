@@ -30,7 +30,10 @@ body{
     position: relative;
 }
 .splashHeader{
-    text-align: center;
+    display: flex;
+    /* justify-content: center; */
+    justify-content: space-evenly;
+    margin: 17px 642px;
 }
 
 .splashMessage{
@@ -309,20 +312,7 @@ body{
 
 }
 
-.nationalDiv{
-    position: relative;
-    top: 20px;
-}
 
-
-
-.nationalParkName{
-    position: absolute;
-    left: 430px;
-    bottom: 132px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
-}
 .hikes{
     display: flex;
     height: 224px;
@@ -445,3 +435,147 @@ body{
       font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 16px;
 }
+
+#trailhead{
+    /* background-image: image-url("trailhead.png"); */
+     background-size: cover;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,.1), 0 0 8px 0 rgba(0,0,0,.08);
+}
+
+#combo-trailhead{
+    /* background-image: image-url("combo-trailhead.png"); */
+     background-size: cover;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,.1), 0 0 8px 0 rgba(0,0,0,.08);
+}
+
+#trail-end{
+    /* background-image: image-url("end-point.png"); */
+     background-size: cover;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,.1), 0 0 8px 0 rgba(0,0,0,.08);
+}
+
+.marker {
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,.1), 0 0 8px 0 rgba(0,0,0,.08);
+}
+
+
+
+/*National Park */
+
+.nationalParkName{
+    display: flex;
+    justify-content: center;
+        font-size: 32px;
+    font-weight: 700;
+    line-height: 1.13;
+    letter-spacing: -.3px;
+    color: #414141;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.nationalParkHikeList{
+    margin: 10vh 0vh;
+}
+
+.nationalParkHike{
+    display: flex;
+    height: 224px;
+    width: 85%;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px 0 rgb(0 0 0 / 8%), 0 0 4px 0 rgb(0 0 0 / 8%);
+    background-color: #fff;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    padding: 16px;
+    margin: 4vh 15vh
+}
+
+.nationalParkHikeLink{
+    display: flex;
+    text-decoration: none;
+    color: #414141;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+
+.nationalParkHikeImg{
+    border-radius: 8px;
+}
+
+.nationalParkHikeAttributes{
+    margin: 2vh 4vh;
+    /* display: flex;
+    align-content: column; */
+}
+
+.nationalParkHikeName{
+    /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #414141;
+    font-size: 18px;
+    font-weight: 700;
+    height: 24px;
+    line-height: 24px;
+    width: 100%;
+    margin: 0vh 0vh;
+}
+
+.nationalParkHikeDifficultyEasy{
+    background-color: #69a041;
+    color: #fff;
+    width: 5vh;
+    padding: 0px 6px;
+    border-radius: 8px;
+}
+
+.nationalParkHikeDifficultyModerate{
+    background-color: #4bafe1;
+    color: #fff;
+    width: 11vh;
+    padding: 0px 6px;
+    border-radius: 8px;
+}
+
+.nationalParkHikeDifficultyHard{
+    background-color: #676767;
+    color: #fff;
+    width: 6vh;
+    padding: 0px 6px;
+    border-radius: 8px;
+}
+
+.nationalParkHikeLength{
+    
+}
+
+.nationalParkHikeElevationGain{
+    
+}
+
+.nationalParkHikeSummary{
+    
+}
+
