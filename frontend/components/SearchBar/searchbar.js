@@ -1,5 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMapSigns, faTree } from "@fortawesome/free-solid-svg-icons";
 
 
 
@@ -48,14 +50,18 @@ const SearchBar = (props) => {
                 return (
                     <li key={i}  className="searchItem">
                         <Link to={`/national_park/${result.id}`}
-                            className="searchItemLink" >{result.name}</Link>
+                            className="searchItemLink" >
+                            <FontAwesomeIcon icon={faTree} className="result-park fa-fw" />
+                                {result.name}</Link>
                     </li>
                 )
             } else {
                 return (
                     <li key={i} className="searchItem">
                         <Link to={`/hike/${result.id}`}
-                            className="searchItemLink" >{result.name}</Link>
+                            className="searchItemLink" >
+                            <FontAwesomeIcon icon={faMapSigns} className="result-hike fa-fw" />
+                                {result.name}</Link>
                     </li>
                 )
             }
@@ -74,12 +80,16 @@ const SearchBar = (props) => {
     
     
     return(
-        <div>
-            <form>
-                <input type='text' onChange={(e) => update(e)} value={searchInput} placeholder='Search'/>
-                <button type='submit'>Search</button>
+        <div className='searchBarComponent'>
+            <form className='searchBarForm'>
+                <input type='text' onChange={(e) => update(e)} value={searchInput} placeholder='Enter a park or trail name'
+                className='searchBarInput'
+                />
             </form>
+            <div className='searchResults'> 
+
             {results()}
+            </div>
         </div>
     )
 

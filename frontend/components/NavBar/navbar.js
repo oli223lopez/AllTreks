@@ -24,7 +24,7 @@ const NavBar = (props) => {
             </p>
                 <Link to={`profile/${props.currentUser.username}`} className="welcomeMsg"> 
                 {props.currentUser.username} 
-            </Link>
+                </Link>
                 
             </div>
 
@@ -52,11 +52,13 @@ const NavBar = (props) => {
             {/* {console.log(props.currentUser)} */}
 
             <h1 className="splashHeader">
-                <Link to="/" className="AllTreks">
-                    <img src={window.alltreks_logo} width='40px' height='40px' />
-                </Link>
-                <Link to="/" className="AllTreks">
-                    AllTreks</Link>
+                <div className=''>
+                    <Link to="/">
+                        <img src={window.alltreks_logo} width='40px' height='40px' />
+                    </Link>
+                    <Link to="/" className="AllTreks">
+                        AllTreks</Link>
+                </div>
             </h1>
 
 

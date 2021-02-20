@@ -9,7 +9,17 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
 
-
+     <meta property="og:title" content="AllTreks" />
+     <meta property='og:image' content="<%= image_url('AllTreks.jpg') %>"/>
+     <meta property="og:description"
+       content="
+       AllTreks is a clone of AllTrails.com, where users can find detailed information about hikes they are interested in, as well as add reviews and photos of hikes they have completed. 
+       A hike page can give information such as difficulty, length, route types, and even a map of the hike.
+       "
+     />
+     <meta property="og:url"
+       content="https://alltreks.herokuapp.com/#/"
+     />
 
     <script type="text/javascript"> 
 

@@ -22,9 +22,14 @@ class Splash extends React.Component{
 
 
                 <img src={window.treksLogoURL} className="image" width='650' height='650' />
-
-                <h3 className="splashMessage">Find your next favorite trek</h3>
-                <SearchBar searchData = {this.props.allNationalParks}/>
+                <div className="splashMessage">
+                    <h1 >Find your next favorite trek
+                    </h1>
+                     <div>
+                        <SearchBar searchData={this.props.allNationalParks} />
+                    </div>   
+                </div> 
+               
 
                 <h3 className="splashH3">
                     100,000+ trails. 20 million explorers. Endless memories.

@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 
 
+
+
 const NationalPark = (props) => {
     const [nationalPark, setNationalPark] = useState({})
     const [photos, setPhotos] = useState([])
@@ -24,12 +26,26 @@ const NationalPark = (props) => {
     return(
         <div className='nationalPark'>
 
+            <div className='nationalParkPhotos'>
+                {Object.values(nationalPark).length ? 
+                nationalPark.photos.map((photo, idx) => {
+                    return(
+                        <div key={idx} className='nationalParkPhoto'> 
+                            <img src={photo.photoUrl} width='331px' height='220px'/>
+                        </div>
+                    )
+                })
+                : null}
+            </div>
+            {Object.values(nationalPark).length ? 
             <div className='nationalParkName'>Best Trails in {nationalPark.name}</div>
+
+            : null}
 
             <div className='nationalParkHikeList'>
                 {console.log(nationalPark)}
                 {Object.values(nationalPark).length ? 
-
+                
                 nationalPark.hikes.map((hike, i) => {
                     return(
                         <div key={i} className='nationalParkHike'> 
@@ -46,10 +62,10 @@ const NationalPark = (props) => {
                                         {hike.difficulty}
                                     </div>
                                     <div className='nationalParkHikeLength'> 
-                                        Length: {hike.length}
+                                        Length: {hike.length}m
                                     </div>
                                     <div className='nationalParkHikeElevationGain'> 
-                                        Elevation Gain: {hike.elevation_gain}
+                                        Elevation Gain: {hike.elevation_gain}ft
                                     </div>
                                     <div className='nationalParkHikeSummary'> 
                                         Summary: {hike.summary}
