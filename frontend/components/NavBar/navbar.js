@@ -16,19 +16,18 @@ const NavBar = (props) => {
     }, [props.currentUser])
 
     const isLoggedIn = () => (
-        <div>
+        <div className='isLoggedIn'>
 
-            <div>
+            <div className='welcomeMsgContainer'>
 
-            <p className="welcomeMsg"> Welcome back  
-            </p>
-                <Link to={`profile/${props.currentUser.username}`} className="welcomeMsg"> 
-                {props.currentUser.username} 
+                <p className="welcomeMsg">{props.currentUser.username}</p>
+                <Link to={`/profile/${props.currentUser.username}`} className='profileNavBar'> 
+                    Profile
                 </Link>
-                
+            
             </div>
 
-            <div className="navBar">
+            <div className="">
                 <br />
                 <Link to='/' className="login" onClick={props.logout}> Log Out</Link>
 
@@ -48,7 +47,7 @@ const NavBar = (props) => {
 
     
     return(
-        <div> 
+        <div className='navBarContainer'> 
             {/* {console.log(props.currentUser)} */}
 
             <h1 className="splashHeader">
@@ -61,13 +60,15 @@ const NavBar = (props) => {
                 </div>
             </h1>
 
+            <div className='isLoggedIn-notLoggedIn'>
 
-            {Object.values(props.currentUser).length ? 
-                isLoggedIn() 
-            
-            : 
-                notLoggedIn()
-            }
+                {Object.values(props.currentUser).length ? 
+                    isLoggedIn() 
+                
+                : 
+                    notLoggedIn()
+                }
+            </div>
         </div>
 
     )

@@ -10372,6 +10372,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _Map_map__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Map/map */ "./frontend/components/Map/map.js");
 /* harmony import */ var _Review_review_form_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Review/review_form_container */ "./frontend/components/Review/review_form_container.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -10385,6 +10386,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -10411,11 +10413,29 @@ var HikeShow = function HikeShow(props) {
       photoUrl = _useState8[0],
       setPhotoUrl = _useState8[1];
 
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState10 = _slicedToArray(_useState9, 2),
+      reviewOrPhoto = _useState10[0],
+      setReviewOrPhoto = _useState10[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     props.fetchHike(props.hikeID).then(function (res) {
       return setHike(res.hike);
     }); // console.log(props.userID)
+
+    return function () {
+      props.removeHike();
+    };
   }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    console.log('dog shit');
+    props.fetchHike(props.hikeID).then(function (res) {
+      return setHike(res.hike);
+    });
+    return function () {
+      props.removeHike();
+    };
+  }, [props.hikeID]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (Object.values(photo).length) {
       // console.log(photo['picture'])
@@ -10447,40 +10467,139 @@ var HikeShow = function HikeShow(props) {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setHike(props.hike);
   }, [props.hike]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, Object.values(hike).length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, hike.photos.map(function (photo, i) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-      key: i,
-      src: photo.photoUrl,
-      width: "500px",
-      height: "500px"
-    });
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, hike.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Length: ", hike.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Route Type: ", hike.route_type), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Elevation Gain: ", hike.elevation_gain), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Summary: ", hike.summary), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Description: ", hike.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-    onSubmit: function onSubmit() {
-      return setPhoto({
-        picture: photoFile
-      });
+
+  var ReviewOrPhoto = function ReviewOrPhoto() {
+    if (reviewOrPhoto === 0) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "hikeShowReviews"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "reviewFormContainer"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Review_review_form_container__WEBPACK_IMPORTED_MODULE_2__.default, {
+        hikeID: props.hikeID,
+        userID: props.userID
+      })), hike.reviews.map(function (review, idx) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          key: idx,
+          className: "hikeShowReview"
+        }, console.log(review), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, review.user.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, review.rating), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, review.description));
+      }));
+    } else {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "hikeShowPhotos"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "hikeShowPhotoForm"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Add a photo of this trail"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Photos help others preview the trail. Upload photos about this trail to inspire others.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        onSubmit: function onSubmit() {
+          return setPhoto({
+            picture: photoFile
+          });
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "file",
+        onChange: function onChange(e) {
+          return setPhotoFile(e.currentTarget.files[0]);
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "submit"
+      }, "Submit"))), photoUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "photoPreview"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        src: photoUrl
+      })) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "app"
+      }), hike.photos.map(function (photo, idx) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          key: idx
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          src: photo.photoUrl,
+          width: "100px",
+          height: "100px"
+        }));
+      }));
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-    type: "file",
-    onChange: function onChange(e) {
-      return setPhotoFile(e.currentTarget.files[0]);
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-    type: "submit"
-  }, "Submit")), photoUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-    src: photoUrl
-  })) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    id: "app"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Review_review_form_container__WEBPACK_IMPORTED_MODULE_2__.default, {
-    hikeID: props.hikeID,
-    userID: props.userID
-  }), hike.reviews.map(function (review, idx) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-      key: idx
-    }, console.log(review), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, review.user.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, review.rating), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, review.description));
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Map_map__WEBPACK_IMPORTED_MODULE_1__.default, {
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, Object.values(hike).length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShow"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShowPhotoContainer"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+    src: hike.photos[0].photoUrl,
+    className: "hikeShowPhoto"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShowName-Difficulty"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShowName"
+  }, hike.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "nationalParkHikeDifficulty".concat(hike.difficulty)
+  }, hike.difficulty)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShowSummary-Map"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShowSummary-Attributes"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShowSummary"
+  }, "Summary: ", hike.summary), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShowAttributeTitles"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShowLengthTitle"
+  }, "Length:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShowRoutetypeTitle"
+  }, "Route Type:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShowElevationGainTitle"
+  }, "Elevation Gain:")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShowAttributes"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShowLength"
+  }, hike.length, "m"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShowRoutetype"
+  }, hike.route_type), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShowElevationGain"
+  }, hike.elevation_gain, "ft"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShowMap"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Map_map__WEBPACK_IMPORTED_MODULE_1__.default, {
     hike: hike
-  })) : null);
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "description-relevantHikes-reviews-photos"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "description-photo-reviews"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShowDescription"
+  }, "Description: ", hike.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShowReviewOrPhoto"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    onClick: function onClick() {
+      return setReviewOrPhoto(0);
+    },
+    className: "reviewSelector",
+    style: reviewOrPhoto === 0 ? {
+      color: '#428a13',
+      borderBottom: '3px solid #428a13'
+    } : null
+  }, "Reviews"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    onClick: function onClick() {
+      return setReviewOrPhoto(1);
+    },
+    className: "photoSelector",
+    style: reviewOrPhoto === 1 ? {
+      color: '#428a13',
+      borderBottom: '3px solid #428a13'
+    } : null
+  }, "Photos")), ReviewOrPhoto()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShowRelevantHikes"
+  }, "Nearby Hikes:", hike.national_park.map(function (nearHike, idx) {
+    if (nearHike.id != hike.id) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "relevantHike",
+        key: idx
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+        to: "/hike/".concat(nearHike.id)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        src: nearHike.photos[0].photoUrl,
+        width: "250px",
+        height: "200px"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, nearHike.name, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, nearHike.difficulty), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, nearHike.length)));
+    }
+  })))) : null);
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HikeShow);
@@ -10901,13 +11020,17 @@ var NavBar = function NavBar(props) {
   }, [props.currentUser]);
 
   var isLoggedIn = function isLoggedIn() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "isLoggedIn"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "welcomeMsgContainer"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
       className: "welcomeMsg"
-    }, " Welcome back"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-      to: "profile/".concat(props.currentUser.username),
-      className: "welcomeMsg"
-    }, props.currentUser.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-      className: "navBar"
+    }, props.currentUser.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+      to: "/profile/".concat(props.currentUser.username),
+      className: "profileNavBar"
+    }, "Profile")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: ""
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
       to: "/",
       className: "login",
@@ -10927,7 +11050,9 @@ var NavBar = function NavBar(props) {
     }, " Log In "));
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "navBarContainer"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
     className: "splashHeader"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: ""
@@ -10940,7 +11065,9 @@ var NavBar = function NavBar(props) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
     to: "/",
     className: "AllTreks"
-  }, "AllTreks"))), Object.values(props.currentUser).length ? isLoggedIn() : notLoggedIn());
+  }, "AllTreks"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "isLoggedIn-notLoggedIn"
+  }, Object.values(props.currentUser).length ? isLoggedIn() : notLoggedIn()));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NavBar);
@@ -11078,6 +11205,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -11098,6 +11227,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 var ReviewForm = function ReviewForm(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
@@ -11115,6 +11246,11 @@ var ReviewForm = function ReviewForm(props) {
       review = _useState6[0],
       setReview = _useState6[1];
 
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(5),
+      _useState8 = _slicedToArray(_useState7, 2),
+      star = _useState8[0],
+      setStar = _useState8[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (Object.values(review).length) {
       var completeReview = _objectSpread(_objectSpread({}, review), {}, {
@@ -11127,36 +11263,77 @@ var ReviewForm = function ReviewForm(props) {
       }, function (err) {
         return console.log(err);
       }).then(function (res) {
-        setRating(0);
+        setRating(5);
         setDescription('');
       }).then();
     }
-  }, [review]);
+  }, [review]); // useEffect(() => {
+  // }, [star])
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
     onSubmit: function onSubmit() {
       return setReview({
-        rating: rating,
+        rating: star,
         description: description
       });
     }
-  }, "Rating: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
-    onChange: function onChange(e) {
-      return setRating(e.currentTarget.value);
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Rating:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "reviewStars"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "reviewStar1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
+    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__.faStar,
+    onClick: function onClick() {
+      return setStar(1);
     },
-    value: rating
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-    value: "0"
-  }, "0"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-    value: "1"
-  }, "1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-    value: "2"
-  }, "2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-    value: "3"
-  }, "3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-    value: "4"
-  }, "4"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-    value: "5"
-  }, "5")), "Description: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    value: "1",
+    style: star >= 1 ? {
+      color: 'gold'
+    } : null
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "reviewStar2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
+    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__.faStar,
+    onClick: function onClick() {
+      return setStar(2);
+    },
+    value: "2",
+    style: star >= 2 ? {
+      color: 'gold'
+    } : null
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "reviewStar3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
+    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__.faStar,
+    onClick: function onClick() {
+      return setStar(3);
+    },
+    value: "3",
+    style: star >= 3 ? {
+      color: 'gold'
+    } : null
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "reviewStar4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
+    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__.faStar,
+    onClick: function onClick() {
+      return setStar(4);
+    },
+    value: "4",
+    style: star >= 4 ? {
+      color: 'gold'
+    } : null
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
+    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__.faStar,
+    onClick: function onClick() {
+      return setStar(5);
+    },
+    value: "5",
+    className: "reviewStar5",
+    style: star >= 5 ? {
+      color: 'gold'
+    } : null
+  })))), "Description: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     type: "textarea",
     onChange: function onChange(e) {
       return setDescription(e.currentTarget.value);
@@ -11253,6 +11430,8 @@ var SearchBar = function SearchBar(props) {
   };
 
   var matches = function matches() {
+    console.log(searchInput);
+    console.log(props.searchData);
     var matches = [];
 
     if (searchInput === "") {
@@ -11276,49 +11455,57 @@ var SearchBar = function SearchBar(props) {
     }
 
     return matches;
-  }; // const selectName = (event) => {
-  //     const name = event.currentTarget.innerText
-  //     setSearchInput(name)
-  // }
-
+  };
 
   var results = function results() {
-    console.log(matches());
+    // console.log(matches())
     return matches().map(function (result, i) {
       if (result.name) {
         if (result.name.includes('National')) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
             key: i,
             className: "searchItem"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+            to: "/national_park/".concat(result.id),
+            className: "searchResultNaitonalParkIcon"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
+            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__.faTree
+          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
             to: "/national_park/".concat(result.id),
             className: "searchItemLink"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
-            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__.faTree,
-            className: "result-park fa-fw"
-          }), result.name));
+          }, result.name)));
         } else {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
             key: i,
             className: "searchItem"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+            to: "/hike/".concat(result.id),
+            className: "searchResultHikeIcon"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
+            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__.faMapSigns
+          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
             to: "/hike/".concat(result.id),
             className: "searchItemLink"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
-            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__.faMapSigns,
-            className: "result-hike fa-fw"
-          }), result.name));
+          }, result.name)));
         }
       } else {
         return matches().map(function (noResult, i) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
             key: i,
-            className: "searchItem"
+            className: "noResults"
           }, noResult);
         });
       }
     });
-  };
+  }; // const handleClickOutside = (e) => {
+  //     let input = document.getElementById('input');
+  //     if (e.target && !e.target.matches("li.searchItem") && e.target !== input) {
+  //         this.setState({
+  //             searchVal: ''
+  //         })
+  //     }
+  // }
+
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "searchBarComponent"
@@ -11330,6 +11517,7 @@ var SearchBar = function SearchBar(props) {
       return update(e);
     },
     value: searchInput,
+    id: "input",
     placeholder: "Enter a park or trail name",
     className: "searchBarInput"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -11714,7 +11902,27 @@ var Splash = /*#__PURE__*/function (_React$Component) {
         className: "splashPtag"
       }, "The beauty of nature doesn\u2019t need to be hard to find. Our goal is simple - build the largest collection of hand-curated trail guides, so you can explore the outdoors with confidence. Anytime. Anywhere."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "splashBottom"
-      }));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("footer", {
+        className: "links"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+        href: "https://www.linkedin.com/in/oliverlopez23/"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        src: window.linkedin_logo,
+        width: "40px",
+        height: "40px"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+        href: "https://github.com/oli223lopez"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        src: window.github_logo,
+        width: "60px",
+        height: "40px"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+        href: "https://angel.co/u/oliver-lopez-1"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        src: window.anglelist_logo,
+        width: "40px",
+        height: "40px"
+      }))));
     }
   }]);
 
@@ -11775,7 +11983,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.jsx");
 /* harmony import */ var _Splash_splash_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Splash/splash_container */ "./frontend/components/Splash/splash_container.js");
 /* harmony import */ var _SessionForm_login_form_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SessionForm/login_form_container */ "./frontend/components/SessionForm/login_form_container.jsx");
@@ -11784,6 +11992,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _NationalPark_national_park_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./NationalPark/national_park_container */ "./frontend/components/NationalPark/national_park_container.js");
 /* harmony import */ var _Hike_hike_show_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Hike/hike_show_container */ "./frontend/components/Hike/hike_show_container.js");
 /* harmony import */ var _Profile_profile_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Profile/profile_container */ "./frontend/components/Profile/profile_container.js");
+/* harmony import */ var _scrollToTop__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./scrollToTop */ "./frontend/components/scrollToTop.js");
 
 
 
@@ -11797,8 +12006,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var App = function App() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NavBar_navbar_container__WEBPACK_IMPORTED_MODULE_5__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NavBar_navbar_container__WEBPACK_IMPORTED_MODULE_5__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
     exact: true,
     path: "/",
     component: _Splash_splash_container__WEBPACK_IMPORTED_MODULE_2__.default
@@ -11822,7 +12032,7 @@ var App = function App() {
     exact: true,
     path: "/profile/:username",
     component: _Profile_profile_container__WEBPACK_IMPORTED_MODULE_8__.default
-  })));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_scrollToTop__WEBPACK_IMPORTED_MODULE_9__.default, null));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
@@ -11857,6 +12067,33 @@ var Root = function Root(_ref) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Root);
+
+/***/ }),
+
+/***/ "./frontend/components/scrollToTop.js":
+/*!********************************************!*\
+  !*** ./frontend/components/scrollToTop.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ScrollToTop)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+
+
+function ScrollToTop() {
+  var _useLocation = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.useLocation)(),
+      pathname = _useLocation.pathname;
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 /***/ }),
 

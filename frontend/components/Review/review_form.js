@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react'
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 
@@ -10,6 +12,7 @@ const ReviewForm = (props) => {
     const [description, setDescription] = useState('')
     // const [reviewForm, setReviewFrom]  = useState({})
     const [review, setReview] = useState({})
+    const [star, setStar] = useState(5)
    
     
     useEffect(() => {
@@ -18,7 +21,7 @@ const ReviewForm = (props) => {
             props.createReview(completeReview)
             .then(res => props.fetchHike(props.hikeID), err => console.log(err))
             .then(res => {
-                setRating(0)
+                setRating(5)
                 setDescription('')
             })
             .then()
@@ -27,19 +30,38 @@ const ReviewForm = (props) => {
     }, [review])
 
 
+    // useEffect(() => {
+
+    // }, [star])
+
+
 
     return(
         <div>
-            <form onSubmit = {() => setReview({rating: rating, description: description})}>
-                Rating: <select onChange={(e) => setRating(e.currentTarget.value)} value={rating}> 
-                    <option value='0' >0</option>
-                    <option value='1' >1</option>
-                    <option value='2' >2</option>
-                    <option value='3' >3</option>
-                    <option value='4' >4</option>
-                    <option value='5' >5</option>
-                </select>
-                Description: <input type='textarea' onChange={(e) => setDescription(e.currentTarget.value)} value={description}/>
+            <form onSubmit = {() => setReview({rating: star, description: description})}>
+                <label>
+                    Rating: 
+                    <div className='reviewStars'>
+                        <div className='reviewStar1' >
+                        <FontAwesomeIcon icon={faStar} onClick={() => setStar(1)} value='1' style={star >= 1 ? {color: 'gold'} : null}/>
+                        </div>
+                        <div className='reviewStar2'>
+                        <FontAwesomeIcon icon={faStar} onClick={() => setStar(2)} value='2'  style={star >= 2 ? { color: 'gold' } : null}/>
+                        </div>
+                        <div className='reviewStar3'>
+                        <FontAwesomeIcon icon={faStar} onClick={() => setStar(3)} value='3'  style={star >= 3 ? { color: 'gold' } : null}/>
+                        </div>
+                        <div className='reviewStar4' >
+                        <FontAwesomeIcon icon={faStar} onClick={() => setStar(4)} value='4' style={star >= 4 ? { color: 'gold' } : null}/>
+                        </div>
+                        <div>
+
+                        <FontAwesomeIcon icon={faStar} onClick={() => setStar(5)} value='5' className='reviewStar5' style={star >= 5 ? { color: 'gold' } : null}/>
+                        </div>
+
+                    </div>
+                </label>
+                Description: <input type='textarea' onChange={(e) => setDescription(e.currentTarget.value)} value={description} />
                 <button type='submit'>Post Review</button>
             </form>
         </div>

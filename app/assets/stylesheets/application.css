@@ -29,16 +29,6 @@ body{
     color: #808080;
     position: relative;
 }
-.splashHeader{
-    display: flex;
-    /* justify-content: center; */
-    justify-content: space-evenly;
-    margin: 17px 642px;
-}
-
-.splashHeader > div {
-    display: flex;
-}
 
 .splashMessage{
     position: absolute;
@@ -86,10 +76,13 @@ body{
     width: 100%
 }
 
-
-.searchBar{
-   
+.links{
+    display: flex;
+    justify-content: center;
 }
+
+
+
 
 
 
@@ -130,24 +123,7 @@ body{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.welcomeMsg{
-    text-emphasis: none;
-    font-family:  'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    display: flex;
-    position: absolute;
-    top: 9px;
-    display: flex;
-    right: 106px;
-    font-size: 19px;
 
-    
-}
-.navBar{
-    position: absolute;
-    top: 18px;
-    right: 1%;
-    display: flex;
-}
 
 .authForm {
     flex-direction: column;
@@ -215,6 +191,72 @@ body{
     font-size: 16px;
 }
 
+/* NavBar */
+
+.isLoggedIn{
+    display: flex;
+}
+
+.isLoggedIn-notLoggedIn {
+    display: flex;
+    /* flex-direction: row-reverse; */
+    align-items: column;
+    position: absolute;
+    right: 1%;
+    top: 3%;
+}
+
+
+.navBar{
+    /* position: absolute;
+    top: 18px;
+    right: 1%; */
+    display: flex;
+}
+
+.splashHeader{
+    display: flex;
+    justify-content: center;
+  
+}
+
+.splashHeader > div {
+    display: flex;
+}
+
+.welcomeMsg{
+    /* position: relative;
+    display: inline-block; */
+    font-size: 17px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-right: 1vh;
+}
+
+.welcomeMsgContainer:hover .profileNavBar{
+    display: block;
+}
+
+.profileNavBar{
+    display: none;
+    text-decoration: none;
+    color: black;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+    font-size: 17px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.profileNavBar:hover{
+    background-color: green;
+    color: white;
+}
+
+
+
 
 /* Search Bar */
 
@@ -243,21 +285,265 @@ body{
 
 }
 
+/* .searchBarForm:active:focus .searchResults{
+    display: block;
+} */
+
+.noResults{
+     list-style: none;
+     text-decoration: none;
+    color: black;
+    font-size: 20px;
+    margin: 2vh 2vh;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
+}
+
 .searchItem{
     list-style: none;
+    margin: 2vh 0vh;
+    padding: 4px 0px;
+}
+
+.searchItem:hover{
+    background-color: green;
+    color: white
+}
+
+.searchItem:hover .searchItemLink{
+    color: white;
+}
+
+.searchItem:hover .searchResultNaitonalParkIcon{
+    color: orange;
+    background-color: white;
+}
+
+.searchItem:hover .searchResultHikeIcon{
+    color: green;
+    background-color: white;
 }
 
 .searchItemLink{
     text-decoration: none;
     color: black;
+    font-size: 20px;
+    margin: 0vh 2vh;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .searchResults{
+    /* display: none; */
     background: white;
+}
+
+.searchResultNaitonalParkIcon{
+    text-decoration: none;
+    color: white;
+    background-color: orange;
+    font-size: 20px;
+    padding: 6px 7px;
+    border-radius: 6px;
+
+}
+
+.searchResultHikeIcon{
+    text-decoration: none;
+    background-color: green;
+    color: white;
+    font-size: 20px;
+    padding: 5px 5px;
+    border-radius: 6px;
 }
 
 
 /* Hike Show */
+
+
+.hikeShowPhotoContainer{
+        display: flex;
+        justify-content: center;
+}
+
+.hikeShowPhoto{
+    width: 1000px;
+    height: 500px;
+}
+
+.hikeShowName-Difficulty{
+   display: flex;
+    flex-direction: column;
+    z-index: 1;
+    position: absolute;
+    top: 480px;
+    left: 305px;
+}
+
+.hikeShowName{
+
+    font-size: 30px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 800;
+    text-shadow: 2px 2px black;
+    color: white;
+    position: relative;
+}
+
+
+.hikeShowSummary-Map{
+    display: flex;
+    /* flex-direction: column; */
+}
+
+.hikeShowSummary{
+       font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border-bottom: 1px solid #E6E6E6;
+    margin: 0% 0%;
+    padding: 3% 0%;
+    padding-bottom: 3%;
+    font-size: 20px;
+    width: 60%;
+   
+    margin-left: 242px;
+
+}
+.hikeShowMap{
+    display: flex;
+    /* margin: -21vh 161vh; */
+}
+.hikeShowSummary-Attributes{
+    width: 822px;
+}
+
+.hikeShowAttributeTitles{
+    display: flex;
+    /* justify-content: space-around; */
+       margin-left: 242px;
+
+   /* padding: 5vh 0vh; */
+   padding-top: 2%;
+}
+.hikeShowAttributes{
+    display: flex;
+    /* justify-content: space-around; */
+       margin-left: 242px;
+
+   /* padding: 5vh 0vh; */
+   padding-bottom: 2%;
+    width: 60%;
+    border-bottom: 1px solid #E6E6E6;
+}
+.hikeShowLength{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 18px;
+}
+
+.hikeShowRoutetype{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 0vh 26%;
+    font-size: 18px;
+
+}
+
+.hikeShowElevationGain{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 18px;
+
+}
+
+.hikeShowLengthTitle{
+    font-size: 14px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.hikeShowRoutetypeTitle{
+    font-size: 14px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 0vh 24%
+}
+
+.hikeShowElevationGainTitle{
+    font-size: 14px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.description-photo-reviews{
+    margin-left: 242px;
+}
+.description-relevantHikes-reviews-photos{
+    width: 73%;
+    display: flex;
+}
+.hikeShowDescription{
+       font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    width: 66%;
+    font-size: 20px;
+    padding-top: 2%;
+    border-bottom: 1px solid #E6E6E6;
+    margin-bottom: 3vh;
+}
+
+.hikeShowReviewOrPhoto{
+    display : flex;
+    flex-direction: row;
+    padding-top: 2%;
+
+    /* border-bottom: 1px solid #E6E6E6; */
+    margin-bottom: 3%;
+    justify-self: space-around;
+    width: 30%;
+    background: #80808054;
+}
+
+.photoSelector{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    margin: 0% 26%;
+}
+
+.photoSelector:hover {
+    cursor: pointer;
+    color: #428a13!important;
+}
+
+.reviewSelector{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    
+}
+.reviewSelector:hover{
+    cursor: pointer;
+    color: #428a13!important;
+}
+
+
+.hikeShowPhotos{
+    padding-top: 2%;
+
+
+    border-bottom: 1px solid #E6E6E6;
+    margin-bottom: 3%;
+}
+
+.hikeShowReviews{
+    padding-top: 2%;
+    border-bottom: 1px solid #E6E6E6;
+    margin-bottom: 3%;
+}
+
+.reviewStars{
+    display: flex;
+}
+
+.hikeShowRelevantHikes{
+    padding-top: 219px;
+    margin-left: -170px;
+}
+
+.relevantHike{
+    display: flex;
+}
+
 
 #trailhead{
     /* background-image: image-url("trailhead.png"); */
@@ -381,7 +667,7 @@ body{
 .nationalParkHikeDifficultyEasy{
     background-color: #69a041;
     color: #fff;
-    width: 5    vh;
+    width: 5vh;
     padding: 0px 6px;
     border-radius: 8px;
 }
@@ -389,7 +675,7 @@ body{
 .nationalParkHikeDifficultyModerate{
     background-color: #4bafe1;
     color: #fff;
-    width: 11vh;
+    width: 10vh;
     padding: 0px 6px;
     border-radius: 8px;
 }
@@ -397,7 +683,7 @@ body{
 .nationalParkHikeDifficultyHard{
     background-color: #676767;
     color: #fff;
-    width: 6vh;
+    width: 5vh;
     padding: 0px 6px;
     border-radius: 8px;
 }

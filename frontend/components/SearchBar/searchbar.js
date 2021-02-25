@@ -8,11 +8,15 @@ import { faMapSigns, faTree } from "@fortawesome/free-solid-svg-icons";
 const SearchBar = (props) => {
     const [searchInput, setSearchInput] = useState('')
 
+    
+
     const update = (e) => {
         setSearchInput(e.currentTarget.value)
     }
 
     const matches=  ()  =>{
+        console.log(searchInput)
+        console.log(props.searchData)
         const matches = []
         if (searchInput === "") {
             return []
@@ -36,45 +40,60 @@ const SearchBar = (props) => {
         return matches
     }
 
-    // const selectName = (event) => {
-    //     const name = event.currentTarget.innerText
-    //     setSearchInput(name)
-    // }
-    
     const results = () => {
         
-        console.log(matches())
+        // console.log(matches())
        return matches().map((result, i) => {
            if(result.name){
             if (result.name.includes('National')) {
                 return (
                     <li key={i}  className="searchItem">
-                        <Link to={`/national_park/${result.id}`}
-                            className="searchItemLink" >
-                            <FontAwesomeIcon icon={faTree} className="result-park fa-fw" />
-                                {result.name}</Link>
+                        <div>
+                            <Link to={`/national_park/${result.id}`} className="searchResultNaitonalParkIcon">
+                                <FontAwesomeIcon icon={faTree}  />
+                            </Link>
+                            <Link to={`/national_park/${result.id}`} className="searchItemLink" >
+                                    {result.name}
+                            </Link>
+                        </div>
                     </li>
                 )
             } else {
                 return (
                     <li key={i} className="searchItem">
-                        <Link to={`/hike/${result.id}`}
-                            className="searchItemLink" >
-                            <FontAwesomeIcon icon={faMapSigns} className="result-hike fa-fw" />
-                                {result.name}</Link>
+                        <div>
+                            <Link to={`/hike/${result.id}`} className="searchResultHikeIcon" >
+                                <FontAwesomeIcon icon={faMapSigns} />
+                            </Link>
+                            <Link to={`/hike/${result.id}`}className="searchItemLink" >
+                                    {result.name}
+                            </Link>
+                        </div>
                     </li>
                 )
             }
         }else{
            return matches().map((noResult, i) => {
                 return(
-                    <li key={i} className="searchItem">{noResult}</li>
+                    <li key={i} className="noResults">{noResult}</li>
                 )
             })
         }
         })
         
     }
+
+
+    // const handleClickOutside = (e) => {
+    //     let input = document.getElementById('input');
+    //     if (e.target && !e.target.matches("li.searchItem") && e.target !== input) {
+    //         this.setState({
+    //             searchVal: ''
+    //         })
+    //     }
+
+    // }
+
     
     
     
@@ -82,7 +101,7 @@ const SearchBar = (props) => {
     return(
         <div className='searchBarComponent'>
             <form className='searchBarForm'>
-                <input type='text' onChange={(e) => update(e)} value={searchInput} placeholder='Enter a park or trail name'
+                <input type='text' onChange={(e) => update(e)} value={searchInput} id='input' placeholder='Enter a park or trail name'
                 className='searchBarInput'
                 />
             </form>

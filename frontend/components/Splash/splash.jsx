@@ -40,6 +40,18 @@ class Splash extends React.Component{
                     outdoors with confidence. Anytime. Anywhere.
                 </p>
                 <div className="splashBottom"></div>
+
+                <footer className='links'>
+                    <a href='https://www.linkedin.com/in/oliverlopez23/'>
+                        <img src={window.linkedin_logo} width='40px' height='40px'/>
+                    </a>
+                    <a href='https://github.com/oli223lopez'>
+                        <img src={window.github_logo} width='60px' height='40px'/>
+                    </a>
+                    <a href='https://angel.co/u/oliver-lopez-1' >
+                        <img src={window.anglelist_logo} width='40px' height='40px'/>
+                    </a>
+                </footer>
             </div>
         )
     }

@@ -10,6 +10,7 @@ import NavBarContainer from './NavBar/navbar_container'
 import NationalParkContainer from './NationalPark/national_park_container'
 import HikeShowContainer from './Hike/hike_show_container'
 import ProfileContainer from './Profile/profile_container'
+import ScrollToTop from './scrollToTop'
 
 
 const App = () => (
@@ -25,6 +26,8 @@ const App = () => (
                 <ProtectedRoute exact path='/hike/:id' component={HikeShowContainer} />
                 <ProtectedRoute exact path='/profile/:username' component={ProfileContainer}/>
             </Switch>
+            <ScrollToTop />
+
 
 
     </div>
