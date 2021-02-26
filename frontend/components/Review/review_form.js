@@ -40,7 +40,9 @@ const ReviewForm = (props) => {
         <div>
             <form onSubmit = {() => setReview({rating: star, description: description})}>
                 <label>
-                    Rating: 
+                    <div className='reviewFormRating'>
+                        Rating: 
+                    </div>
                     <div className='reviewStars'>
                         <div className='reviewStar1' >
                         <FontAwesomeIcon icon={faStar} onClick={() => setStar(1)} value='1' style={star >= 1 ? {color: 'gold'} : null}/>
@@ -61,8 +63,15 @@ const ReviewForm = (props) => {
 
                     </div>
                 </label>
-                Description: <input type='textarea' onChange={(e) => setDescription(e.currentTarget.value)} value={description} />
-                <button type='submit'>Post Review</button>
+                <div className='reviewFormDescription'>
+                    <div className='reviewFormDescriptionTitle'>
+                        Description:
+                    </div>
+                    <div >
+                        <textarea onChange={(e) => setDescription(e.currentTarget.value)} value={description} className='reviewFormDescriptionInput' placeholder='Give back to the community! Share your thoughts about the trail so others know what to expect!'/>
+                    </div>
+                    <button type='submit' className='reviewFormDescriptionButton'>Post Review</button>
+                </div>
             </form>
         </div>
     )

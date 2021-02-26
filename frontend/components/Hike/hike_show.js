@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import Map from '../Map/map'
 import ReviewFormContainer from '../Review/review_form_container'
-
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const HikeShow = (props) => {
     const [hike, setHike] = useState({})
@@ -10,6 +11,9 @@ const HikeShow = (props) => {
     const [photoFile, setPhotoFile] = useState({})
     const [photoUrl, setPhotoUrl] = useState()
     const [reviewOrPhoto, setReviewOrPhoto] = useState(0)
+
+    
+    const [photoPreview, setPhotoPreview] = useState()
 
     useEffect(() => {
         props.fetchHike(props.hikeID).then(res => setHike(res.hike))
@@ -21,7 +25,6 @@ const HikeShow = (props) => {
     }, [])
 
     useEffect(() => {
-        console.log('dog shit')
         props.fetchHike(props.hikeID).then(res => setHike(res.hike))
         return () => {
             props.removeHike()
@@ -61,10 +64,31 @@ const HikeShow = (props) => {
         setHike(props.hike)
     }, [props.hike])
 
+
+    useEffect(() => {
+        if(photoPreview){
+            if (Object.values(photoPreview).length) {
+                const pictureModal = document.getElementById('pictureModal')
+                pictureModal.style.display = 'block'
+            } else {
+                const pictureModal = document.getElementById('pictureModal')
+                pictureModal.style.display = 'none'
+            }
+        }
+    }, [photoPreview])
+
+    
+
+
+
+
     const ReviewOrPhoto = () => {
         if (reviewOrPhoto === 0) {
             return (
                 <div className='hikeShowReviews'>
+                    <div className='hikeShowReviewHeader'>
+                        Write a review for {hike.name}!
+                    </div>
                     <div className='reviewFormContainer'>
                         <ReviewFormContainer hikeID={props.hikeID} userID={props.userID} />
                     </div>
@@ -75,14 +99,27 @@ const HikeShow = (props) => {
                         hike.reviews.map((review, idx) => {
                             return (
                                 <div key={idx} className='hikeShowReview'>
-                                    {console.log(review)}
-                                    <div>
+                                    <div className='reviewUsername'>
                                         {review.user.username}
                                     </div>
-                                    <div>
-                                        {review.rating}
+                                    <div className='reviewStars'>
+                                        <div className='reviewStar1' >
+                                            <FontAwesomeIcon icon={faStar}  style={review.rating >= 1 ? { color: 'gold' } : null} />
+                                        </div>
+                                        <div className='reviewStar2'>
+                                            <FontAwesomeIcon icon={faStar}  style={review.rating >= 2 ? { color: 'gold' } : null} />
+                                        </div>
+                                        <div className='reviewStar3'>
+                                            <FontAwesomeIcon icon={faStar}  style={review.rating >= 3 ? { color: 'gold' } : null} />
+                                        </div>
+                                        <div className='reviewStar4' >
+                                            <FontAwesomeIcon icon={faStar}  style={review.rating >= 4 ? { color: 'gold' } : null} />
+                                        </div>
+                                        <div  className='reviewStar5'>
+                                            <FontAwesomeIcon icon={faStar} style={review.rating >= 5 ? { color: 'gold' } : null} />
+                                        </div>
                                     </div>
-                                    <div>
+                                    <div className='reviewDescription'>
                                         {review.description}
                                     </div>
                                 </div>
@@ -94,34 +131,39 @@ const HikeShow = (props) => {
             )
         } else {
             return (
-                <div className='hikeShowPhotos'>
+                <div className='hikeShowPhotoSection'>
                     <div className='hikeShowPhotoForm'>
                         <div> 
-                            <h3>Add a photo of this trail</h3>
-                            <div>Photos help others preview the trail. Upload photos about this trail to inspire others.</div>
+                            <div className='hikeShowPhotoHeader'>Add a photo of this trail</div>
+                            <div className='hikeShowPhotoSentence'>Photos help others preview the trail. Upload photos about this trail to inspire others.</div>
                         </div>
                         
                         <form onSubmit={() => setPhoto({ picture: photoFile })}>
-                            <input type='file' onChange={((e) => setPhotoFile(e.currentTarget.files[0]))} />
-                            <button type='submit'>Submit</button>
+                            <input type='file' onChange={((e) => setPhotoFile(e.currentTarget.files[0]))}  className='hikeShowPhotoInput' />
+                            <button type='submit' className='hikeShowPhotoSubmit'>Post Photo</button>
                         </form>
                     </div>
 
                     {photoUrl ? <div className='photoPreview'>
-                        <img src={photoUrl} />
+                        <img src={photoUrl} height='200px' width='200px' onClick={() =>
+                           setPhotoPreview(photoUrl)}/>
                     </div>
                         : null}
                     <div id='app'>
                     </div>
 
 
-                    {hike.photos.map((photo, idx) => {
-                        return(
-                            <div key={idx}> 
-                                <img src={photo.photoUrl} width='100px' height='100px'/>
-                            </div>
-                        )
-                    })}
+                    
+
+                    <div className='hikeShowPhotos'>
+                        {hike.photos.map((photo, idx) => {
+                            return(
+                                <div key={idx}> 
+                                    <img src={photo.photoUrl} width='100px' height='100px' className='hikePhoto' onClick={() => setPhotoPreview(photo.photoUrl)}/>
+                                </div>
+                            )
+                        })}
+                    </div>
 
                 </div>
 
@@ -207,6 +249,7 @@ const HikeShow = (props) => {
                                 </div>
 
                                 {ReviewOrPhoto()}
+                                
 
                             </div>
                             <div className='hikeShowRelevantHikes'> 
@@ -216,29 +259,33 @@ const HikeShow = (props) => {
                                     if(nearHike.id != hike.id){
                                     return(
                                         <div className='relevantHike' key={idx}> 
-                                            <Link to={`/hike/${nearHike.id}`}>
-                                                <img src={nearHike.photos[0].photoUrl} width='250px' height='200px'/>
-                                                <div>{nearHike.name} </div>
-                                                <div>{nearHike.difficulty}</div>
-                                                <div>{nearHike.length}</div>
+                                            <Link to={`/hike/${nearHike.id}`} className='relevantHikeLink'>
+                                                <img src={nearHike.photos[0].photoUrl} width='250px' height='200px' className='relevantHikePhoto'/>
+                                                <div className='relevantHikeName'>{nearHike.name} </div>
+                                                <div className={`relevantHikeDifficulty${nearHike.difficulty}`}>{nearHike.difficulty}</div>
+                                                <div className='relevantHikeLength'>{nearHike.length}</div>
                                             </Link>
                                         </div>
                                         )
                                     }
                                 })}
                         </div>
-                   
-
-                   
                 </div>
 
                
-                 
+                    <div  id='pictureModal'>
+                        <div className='pictureModalContents'>
+                            <button onClick={() => setPhotoPreview({})} className='closeModalButton'>Close Preview</button>
+                            <div></div>
+
+                            <img src={photoPreview} className='pictureInModal' />
+                        </div>
+                    </div> 
             </div>
             
             : null}
         </div>
-    )
+    ) 
 }
 
 export default HikeShow
