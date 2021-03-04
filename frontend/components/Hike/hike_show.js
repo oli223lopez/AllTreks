@@ -183,20 +183,21 @@ const HikeShow = (props) => {
             <div className='hikeShow'>
                 <div className='hikeShowPhotoContainer'>
                     <img src={hike.photos[0].photoUrl} className='hikeShowPhoto' />
-                </div>
-
-                <div className='hikeShowName-Difficulty'> 
-                    <div className='hikeShowName'> 
-                        {hike.name}
+                    <div className='hikeShowName-Difficulty'>
+                        <div className='hikeShowName'>
+                            {hike.name}
+                        </div>
+                        <div className={`nationalParkHikeDifficulty${hike.difficulty}`}>
+                            {hike.difficulty}
+                        </div>
                     </div>
-                    <div className={`nationalParkHikeDifficulty${hike.difficulty}`}> 
-                        {hike.difficulty}
-                    </div>
                 </div>
-
+    
+              
                 <div className='hikeShowSummary-Map'>
-                    
                     <div className='hikeShowSummary-Attributes'> 
+                            
+                       
                         <div className='hikeShowSummary'>
                             Summary: {hike.summary}
                         </div>
