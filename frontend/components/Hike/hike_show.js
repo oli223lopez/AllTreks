@@ -178,7 +178,7 @@ const HikeShow = (props) => {
 
 
     return(
-        <div>
+        <div className='hikeShowContainer'>
             {Object.values(hike).length ? 
             <div className='hikeShow'>
                 <div className='hikeShowPhotoContainer'>
@@ -237,39 +237,44 @@ const HikeShow = (props) => {
 
 
                 <div className='description-relevantHikes-reviews-photos'>
-                            <div className ='description-photo-reviews'> 
-                                <div className='hikeShowDescription'> 
-                                    Description: {hike.description}
-                                </div>
-                                <div className='hikeShowReviewOrPhoto'>
-                                    <div onClick={() => setReviewOrPhoto(0)} className='reviewSelector'
-                                        style={reviewOrPhoto === 0 ? { color: '#428a13', borderBottom: '3px solid #428a13' } : null}>Reviews</div>
-                                    <div onClick={() => setReviewOrPhoto(1)} className='photoSelector'
-                                        style={reviewOrPhoto === 1 ? { color: '#428a13', borderBottom: '3px solid #428a13' } : null}>Photos</div>
-                                </div>
+                           <div className='description-wrapper'> 
+                                <div className='description-photo-reviews'>
+                                    <div className='hikeShowDescription'>
+                                        Description: {hike.description}
+                                    </div>
+                                    <div className='hikeShowReviewOrPhoto'>
+                                        <div onClick={() => setReviewOrPhoto(0)} className='reviewSelector'
+                                            style={reviewOrPhoto === 0 ? { color: '#428a13', borderBottom: '3px solid #428a13' } : null}>Reviews</div>
+                                        <div onClick={() => setReviewOrPhoto(1)} className='photoSelector'
+                                            style={reviewOrPhoto === 1 ? { color: '#428a13', borderBottom: '3px solid #428a13' } : null}>Photos</div>
+                                    </div>
+                                    <div className='reviewOrPhotoDiv'> 
+                                        {ReviewOrPhoto()}
+                                    </div>
 
-                                {ReviewOrPhoto()}
-                                
 
-                            </div>
-                            <div className='hikeShowRelevantHikes'> 
-                                Nearby Hikes:
-                                {/* {console.log(hike.national_park)} */}
-                                {hike.national_park.map((nearHike, idx) => {
-                                    if(nearHike.id != hike.id){
-                                    return(
-                                        <div className='relevantHike' key={idx}> 
-                                            <Link to={`/hike/${nearHike.id}`} className='relevantHikeLink'>
-                                                <img src={nearHike.photos[0].photoUrl} width='250px' height='200px' className='relevantHikePhoto'/>
-                                                <div className='relevantHikeName'>{nearHike.name} </div>
-                                                <div className={`relevantHikeDifficulty${nearHike.difficulty}`}>{nearHike.difficulty}</div>
-                                                <div className='relevantHikeLength'>{nearHike.length}</div>
-                                            </Link>
-                                        </div>
-                                        )
-                                    }
-                                })}
-                        </div>
+                                </div>
+                                <div className='hikeShowRelevantHikes'>
+                                    <div className='nearbyHike'>
+                                        Nearby Hikes:
+                                    </div>
+                                    {/* {console.log(hike.national_park)} */}
+                                    {hike.national_park.map((nearHike, idx) => {
+                                        if (nearHike.id != hike.id) {
+                                            return (
+                                                <div className='relevantHike' key={idx}>
+                                                    <Link to={`/hike/${nearHike.id}`} className='relevantHikeLink'>
+                                                        <img src={nearHike.photos[0].photoUrl} width='250px' height='200px' className='relevantHikePhoto' />
+                                                        <div className='relevantHikeName'>{nearHike.name} </div>
+                                                        <div className={`relevantHikeDifficulty${nearHike.difficulty}`}>{nearHike.difficulty}</div>
+                                                        <div className='relevantHikeLength'>{nearHike.length}</div>
+                                                    </Link>
+                                                </div>
+                                            )
+                                        }
+                                    })}
+                                </div>
+                           </div>
                 </div>
 
                

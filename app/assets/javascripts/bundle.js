@@ -10599,7 +10599,9 @@ var HikeShow = function HikeShow(props) {
     }
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, Object.values(hike).length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "hikeShowContainer"
+  }, Object.values(hike).length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "hikeShow"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "hikeShowPhotoContainer"
@@ -10641,6 +10643,8 @@ var HikeShow = function HikeShow(props) {
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "description-relevantHikes-reviews-photos"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "description-wrapper"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "description-photo-reviews"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "hikeShowDescription"
@@ -10664,9 +10668,13 @@ var HikeShow = function HikeShow(props) {
       color: '#428a13',
       borderBottom: '3px solid #428a13'
     } : null
-  }, "Photos")), ReviewOrPhoto()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, "Photos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "reviewOrPhotoDiv"
+  }, ReviewOrPhoto())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "hikeShowRelevantHikes"
-  }, "Nearby Hikes:", hike.national_park.map(function (nearHike, idx) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "nearbyHike"
+  }, "Nearby Hikes:"), hike.national_park.map(function (nearHike, idx) {
     if (nearHike.id != hike.id) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "relevantHike",
@@ -10687,7 +10695,7 @@ var HikeShow = function HikeShow(props) {
         className: "relevantHikeLength"
       }, nearHike.length)));
     }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     id: "pictureModal"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "pictureModalContents"
@@ -10981,6 +10989,11 @@ var NationalPark = function NationalPark(props) {
       photos = _useState4[0],
       setPhotos = _useState4[1];
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
+      _useState6 = _slicedToArray(_useState5, 2),
+      photoPreview = _useState6[0],
+      setPhotoPreview = _useState6[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (Object.values(nationalPark).length === 0) {
       props.fetchNP(props.nationalParkID);
@@ -10990,6 +11003,18 @@ var NationalPark = function NationalPark(props) {
       }
     }
   });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (photoPreview) {
+      if (Object.values(photoPreview).length) {
+        var pictureModal = document.getElementById('pictureModal');
+        pictureModal.style.display = 'block';
+      } else {
+        var _pictureModal = document.getElementById('pictureModal');
+
+        _pictureModal.style.display = 'none';
+      }
+    }
+  }, [photoPreview]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "nationalPark"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -11001,7 +11026,10 @@ var NationalPark = function NationalPark(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
       src: photo.photoUrl,
       width: "331px",
-      height: "220px"
+      height: "220px",
+      onClick: function onClick() {
+        return setPhotoPreview(photo.photoUrl);
+      }
     }));
   }) : null), Object.values(nationalPark).length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "nationalParkName"
@@ -11032,7 +11060,19 @@ var NationalPark = function NationalPark(props) {
     }, "Elevation Gain: ", hike.elevation_gain, "ft"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: "nationalParkHikeSummary"
     }, "Summary: ", hike.summary))));
-  }) : null));
+  }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    id: "pictureModal"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "pictureModalContents"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    onClick: function onClick() {
+      return setPhotoPreview({});
+    },
+    className: "closeModalButton"
+  }, "Close Preview"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+    src: photoPreview,
+    className: "pictureInModal"
+  })))));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NationalPark);

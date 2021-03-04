@@ -359,6 +359,26 @@ body{
 
 /* Hike Show */
 
+@media (min-width: 1200px){
+    .hikeShow{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        width: 1024px;
+        margin:auto;
+        background: white;
+        border: 1px solid #c1bfbf;
+    } 
+}
+
+.hikeShowContainer{
+    background-color: #F2F2F2;
+}
+
+
+
 
 .hikeShowPhotoContainer{
         display: flex;
@@ -366,8 +386,19 @@ body{
 }
 
 .hikeShowPhoto{
-    width: 1000px;
+    width: 1024px;
     height: 500px;
+}
+
+.hikeShowSummary-Map{
+    display: flex;
+}
+
+.hikeShowSummary-Attributes{
+        display: flex;
+    flex-direction: column;
+    width: 56%;
+    margin-left: 20px;
 }
 
 .hikeShowName-Difficulty{
@@ -390,48 +421,35 @@ body{
 }
 
 
-.hikeShowSummary-Map{
-    display: flex;
-    /* flex-direction: column; */
-}
 
 .hikeShowSummary{
-       font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    border-bottom: 1px solid #E6E6E6;
+     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border: 1px solid #E6E6E6;
     margin: 0% 0%;
-    padding: 3% 0%;
+    padding: 3% 2%;
     padding-bottom: 3%;
-    font-size: 20px;
-    width: 60%;
+    font-size: 18px;
+    width: 95%;
    
-    margin-left: 242px;
+    /* margin-left: 242px; */
 
 }
 .hikeShowMap{
     display: flex;
     /* margin: -21vh 161vh; */
 }
-.hikeShowSummary-Attributes{
-    width: 822px;
-}
+
 
 .hikeShowAttributeTitles{
     display: flex;
-    /* justify-content: space-around; */
-       margin-left: 242px;
-
-   /* padding: 5vh 0vh; */
+   
    padding-top: 2%;
 }
 .hikeShowAttributes{
     display: flex;
-    /* justify-content: space-around; */
-       margin-left: 242px;
-
-   /* padding: 5vh 0vh; */
+    
    padding-bottom: 2%;
-    width: 60%;
-    border-bottom: 1px solid #E6E6E6;
+    width: 95%;
 }
 .hikeShowLength{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -467,31 +485,50 @@ body{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.description-photo-reviews{
-    margin-left: 242px;
-}
+
 .description-relevantHikes-reviews-photos{
-    width: 73%;
     display: flex;
 }
+
+.description-photo-reviews{
+     
+}
+
+.description-wrapper{
+    display: flex;
+    /* flex-direction: column; */
+    /* width: 45%; */
+}
+
+.description-photo-reviews{
+    /* margin-left: 242px; */
+    /* width: 90%; */
+
+}
+
+
 .hikeShowDescription{
-       font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    width: 66%;
-    font-size: 20px;
+   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    width: 65%;
+    font-size: 18px;
     padding-top: 2%;
-    border-bottom: 1px solid #E6E6E6;
+    /* border-bottom: 1px solid #E6E6E6; */
     margin-bottom: 3vh;
+    border: 1px solid #E6E6E6;
+    padding: 2% 10px;
+    margin-left: 20px;
 }
 
 .hikeShowReviewOrPhoto{
-    display : flex;
+        display: flex;
     flex-direction: row;
     padding-top: 2%;
-
     margin-bottom: 3%;
     justify-self: space-around;
-    width: 66%;
+    width: 67%;
+    margin-left: 20px;
     background: #80808054;
+    padding-right: 4px;
 }
 
 .photoSelector{
@@ -529,6 +566,10 @@ body{
 
 }
 
+.hikeShowPhotoSection{
+    margin-left: 20px;
+}
+
 
 .hikeShowPhotoHeader{
     font-size: 18px;
@@ -540,7 +581,7 @@ body{
 .hikeShowPhotoSentence{
     font-size: 18px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    width: 50%;
+    width: 65%;
     padding-bottom: 10px;
 }
 
@@ -549,7 +590,7 @@ body{
    flex-direction: row; 
     border-top: 1px solid #E6E6E6;
     padding-top: 50px;
-    width: 500px;
+    width: 70%;
 }
 
 .hikePhoto{
@@ -562,6 +603,7 @@ body{
     padding-top: 2%;
     border-bottom: 1px solid #E6E6E6;
     margin-bottom: 3%;
+    margin-left: 20px;
 }
 
 .reviewStars{
@@ -569,14 +611,19 @@ body{
 }
 
 .hikeShowRelevantHikes{
-    padding-top: 219px;
+    padding-top: 250px;
     margin-left: -170px;
+}
+.nearbyHike{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 18px;
 }
 
 .relevantHike{
     display: flex;
     margin-bottom: 10px;
     box-shadow: 0px 1px 5px 0px;
+        margin-right: 100px;
 }
 
 .relevantHikeLink{
@@ -673,7 +720,6 @@ body{
 
 .reviewFormDescription{
     padding-bottom: 20px;
-    border-bottom: 1px solid #E6E6E6;
 }
 
 .reviewFormDescriptionTitle{
@@ -739,7 +785,6 @@ body{
   color: white;
 }
 
-
 #pictureModal{
     width: 100%;
     height: 100%;
@@ -780,45 +825,6 @@ body{
 
 
 
-
-#trailhead{
-    /* background-image: image-url("trailhead.png"); */
-     background-size: cover;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,.1), 0 0 8px 0 rgba(0,0,0,.08);
-}
-
-#combo-trailhead{
-    /* background-image: image-url("combo-trailhead.png"); */
-     background-size: cover;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,.1), 0 0 8px 0 rgba(0,0,0,.08);
-}
-
-#trail-end{
-    /* background-image: image-url("end-point.png"); */
-     background-size: cover;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,.1), 0 0 8px 0 rgba(0,0,0,.08);
-}
-
-.marker {
-    background-size: cover;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,.1), 0 0 8px 0 rgba(0,0,0,.08);
-}
 
 
 
