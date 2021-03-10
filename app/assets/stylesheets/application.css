@@ -592,6 +592,7 @@ body{
     border-top: 1px solid #E6E6E6;
     padding-top: 50px;
     width: 70%;
+    flex-flow: wrap;
 }
 
 .hikePhoto{

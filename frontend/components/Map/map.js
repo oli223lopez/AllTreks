@@ -57,7 +57,7 @@ const Map = (props) => {
                     waypoints += coordinate + ','
                 }
             })
-            console.log(waypoints)
+            // console.log(waypoints)
 
             const getRoute = () => {
                 const api = `https://api.mapbox.com/directions/v5/mapbox/walking/${waypoints}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`;

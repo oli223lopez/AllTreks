@@ -6,7 +6,6 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const HikeShow = (props) => {
-    const [hike, setHike] = useState({})
     const [photo, setPhoto] = useState({})
     const [photoFile, setPhotoFile] = useState({})
     const [photoUrl, setPhotoUrl] = useState()
@@ -16,16 +15,8 @@ const HikeShow = (props) => {
     const [photoPreview, setPhotoPreview] = useState()
 
     useEffect(() => {
-        props.fetchHike(props.hikeID).then(res => setHike(res.hike))
-        // console.log(props.userID)
-
-        return () => {
-            props.removeHike()
-        }
-    }, [])
-
-    useEffect(() => {
-        props.fetchHike(props.hikeID).then(res => setHike(res.hike))
+        props.fetchHike(props.hikeID)
+        // console.log('is working')
         return () => {
             props.removeHike()
         }
@@ -40,7 +31,11 @@ const HikeShow = (props) => {
             formData.append('photo[user_id]', props.userID)
             formData.append('photo[picture]', photo['picture'])
             props.createPhoto(formData)
-            .then(res => console.log(res))
+            .then(res => {
+                props.fetchHike(props.hikeID)
+                setPhotoUrl(null)
+            })
+            
         }
     }, [photo])
 
@@ -59,10 +54,6 @@ const HikeShow = (props) => {
 
         }
     }, [photoFile])
-
-    useEffect(() => {
-        setHike(props.hike)
-    }, [props.hike])
 
 
     useEffect(() => {
@@ -87,7 +78,7 @@ const HikeShow = (props) => {
             return (
                 <div className='hikeShowReviews'>
                     <div className='hikeShowReviewHeader'>
-                        Write a review for {hike.name}!
+                        Write a review for {props.hike.name}!
                     </div>
                     <div className='reviewFormContainer'>
                         <ReviewFormContainer hikeID={props.hikeID} userID={props.userID} />
@@ -96,7 +87,7 @@ const HikeShow = (props) => {
 
 
                     {
-                        hike.reviews.map((review, idx) => {
+                        props.hike.reviews.map((review, idx) => {
                             return (
                                 <div key={idx} className='hikeShowReview'>
                                     <div className='reviewUsername'>
@@ -156,7 +147,7 @@ const HikeShow = (props) => {
                     
 
                     <div className='hikeShowPhotos'>
-                        {hike.photos.map((photo, idx) => {
+                        {props.hike.photos.map((photo, idx) => {
                             return(
                                 <div key={idx}> 
                                     <img src={photo.photoUrl} width='100px' height='100px' className='hikePhoto' onClick={() => setPhotoPreview(photo.photoUrl)}/>
@@ -179,16 +170,16 @@ const HikeShow = (props) => {
 
     return(
         <div className='hikeShowContainer'>
-            {Object.values(hike).length ? 
+            {Object.values(props.hike).length ? 
             <div className='hikeShow'>
                 <div className='hikeShowPhotoContainer'>
-                    <img src={hike.photos[0].photoUrl} className='hikeShowPhoto' />
+                    <img src={props.hike.photos[0].photoUrl} className='hikeShowPhoto' />
                     <div className='hikeShowName-Difficulty'>
                         <div className='hikeShowName'>
-                            {hike.name}
+                            {props.hike.name}
                         </div>
-                        <div className={`nationalParkHikeDifficulty${hike.difficulty}`}>
-                            {hike.difficulty}
+                        <div className={`nationalParkHikeDifficulty${props.hike.difficulty}`}>
+                            {props.hike.difficulty}
                         </div>
                     </div>
                 </div>
@@ -199,7 +190,7 @@ const HikeShow = (props) => {
                             
                        
                         <div className='hikeShowSummary'>
-                            Summary: {hike.summary}
+                            Summary: {props.hike.summary}
                         </div>
                         
                         <div className='hikeShowAttributeTitles'> 
@@ -219,19 +210,19 @@ const HikeShow = (props) => {
                         <div className='hikeShowAttributes'>
 
                                 <div className='hikeShowLength'>
-                                    {hike.length}m
+                                    {props.hike.length}m
                                 </div>
                                 <div className='hikeShowRoutetype'>
-                                    {hike.route_type}
+                                    {props.hike.route_type}
                                 </div>
                                 <div className='hikeShowElevationGain'>
-                                    {hike.elevation_gain}ft
+                                    {props.hike.elevation_gain}ft
                                 </div>
                         </div>
                     </div>
 
                     <div className='hikeShowMap'>
-                        <Map hike={hike} />
+                        <Map hike={props.hike} />
                     </div>
 
                 </div>
@@ -241,7 +232,7 @@ const HikeShow = (props) => {
                            <div className='description-wrapper'> 
                                 <div className='description-photo-reviews'>
                                     <div className='hikeShowDescription'>
-                                        Description: {hike.description}
+                                        Description: {props.hike.description}
                                     </div>
                                     <div className='hikeShowReviewOrPhoto'>
                                         <div onClick={() => setReviewOrPhoto(0)} className='reviewSelector'
@@ -259,9 +250,8 @@ const HikeShow = (props) => {
                                     <div className='nearbyHike'>
                                         Nearby Hikes:
                                     </div>
-                                    {/* {console.log(hike.national_park)} */}
-                                    {hike.national_park.map((nearHike, idx) => {
-                                        if (nearHike.id != hike.id) {
+                                    {props.hike.national_park.map((nearHike, idx) => {
+                                        if (nearHike.id != props.hike.id) {
                                             return (
                                                 <div className='relevantHike' key={idx}>
                                                     <Link to={`/hike/${nearHike.id}`} className='relevantHikeLink'>

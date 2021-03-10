@@ -16,29 +16,28 @@ const ReviewForm = (props) => {
    
     
     useEffect(() => {
-        if(Object.values(review).length){
+
+        if(Object.values(review).length && review.description){
             let completeReview = {...review, hikes_id: props.hikeID, user_id: props.userID}
             props.createReview(completeReview)
-            .then(res => props.fetchHike(props.hikeID), err => console.log(err))
             .then(res => {
-                setRating(5)
+                props.fetchHike(props.hikeID)
+                setStar(5)
                 setDescription('')
             })
-            .then()
+           
         }
 
     }, [review])
 
 
-    // useEffect(() => {
-
-    // }, [star])
+   
 
 
 
     return(
         <div>
-            <form onSubmit = {() => setReview({rating: star, description: description})}>
+            <form >
                 <label>
                     <div className='reviewFormRating'>
                         Rating: 
@@ -70,7 +69,9 @@ const ReviewForm = (props) => {
                     <div >
                         <textarea onChange={(e) => setDescription(e.currentTarget.value)} value={description} className='reviewFormDescriptionInput' placeholder='Give back to the community! Share your thoughts about the trail so others know what to expect!'/>
                     </div>
-                    <button type='submit' className='reviewFormDescriptionButton'>Post Review</button>
+                    <button  className='reviewFormDescriptionButton'
+                        onClick={() =>  setReview({ rating: star, description: description })}
+                    >Post Review</button>
                 </div>
             </form>
         </div>

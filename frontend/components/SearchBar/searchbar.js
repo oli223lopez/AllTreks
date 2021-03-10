@@ -15,8 +15,8 @@ const SearchBar = (props) => {
     }
 
     const matches=  ()  =>{
-        console.log(searchInput)
-        console.log(props.searchData)
+        // console.log(searchInput)
+        // console.log(props.searchData)
         const matches = []
         if (searchInput === "") {
             return []

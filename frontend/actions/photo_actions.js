@@ -21,7 +21,7 @@ export const destoryPhoto = () => ({
 export const createPhoto = (photo) => dispatch => {
     // console.log(photo)
     return PhotoAPI.createPhoto(photo)
-    .then(res => dispatch(postPhoto()), err => console.log("not working"))
+    .then(res => dispatch(postPhoto()))
 }
 
 
