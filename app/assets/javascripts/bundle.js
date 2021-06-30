@@ -10322,6 +10322,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_hike_api_util__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./util/hike_api_util */ "./frontend/util/hike_api_util.js");
 /* harmony import */ var _util_national_park_api_util__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./util/national_park_api_util */ "./frontend/util/national_park_api_util.js");
 /* harmony import */ var _util_review_api_util__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./util/review_api_util */ "./frontend/util/review_api_util.js");
+/* harmony import */ var ga_4_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ga-4-react */ "./node_modules/ga-4-react/dist/ga-4-react.esm.js");
 
 
 
@@ -10331,6 +10332,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+var ga4react = new ga_4_react__WEBPACK_IMPORTED_MODULE_9__.default("G-FJVWRKRXPD");
 document.addEventListener("DOMContentLoaded", function () {
   var root = document.getElementById('root');
   var store;
@@ -10351,10 +10354,15 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   window.store = store;
+  test(store);
+});
+
+function test(store) {
+  ga4react.initialize();
   react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_root__WEBPACK_IMPORTED_MODULE_5__.default, {
     store: store
   }), root);
-});
+}
 
 /***/ }),
 
@@ -12934,6 +12942,360 @@ var getUser = function getUser(username) {
     url: "api/users/".concat(username)
   });
 };
+
+/***/ }),
+
+/***/ "./node_modules/ga-4-react/dist/ga-4-react.esm.js":
+/*!********************************************************!*\
+  !*** ./node_modules/ga-4-react/dist/ga-4-react.esm.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "GA4R": () => (/* binding */ GA4R),
+/* harmony export */   "GA4React": () => (/* binding */ GA4React),
+/* harmony export */   "useGA4React": () => (/* binding */ useGA4React),
+/* harmony export */   "withTracker": () => (/* binding */ withTracker)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+var GA4ReactGlobalIndex = '__ga4React__';
+/**
+ * @desc class required to manage google analitycs 4
+ * @class GA4React
+ *  */
+
+class GA4React {
+  constructor(gaCode, gaConfig, additionalGaCode, timeout, options) {
+    this.gaCode = gaCode;
+    this.gaConfig = gaConfig;
+    this.additionalGaCode = additionalGaCode;
+    this.timeout = timeout;
+    this.options = options;
+    this.scriptSyncId = 'ga4ReactScriptSync';
+    this.scriptAsyncId = 'ga4ReactScriptAsync';
+    this.nonceAsync = '';
+    this.nonceSync = '';
+    this.gaConfig = gaConfig ? gaConfig : {};
+    this.gaCode = gaCode;
+    this.timeout = timeout || 5000;
+    this.additionalGaCode = additionalGaCode;
+    this.options = options;
+
+    if (this.options) {
+      var {
+        nonce
+      } = this.options;
+      this.nonceAsync = nonce && nonce[0] ? nonce[0] : '';
+      this.nonceSync = nonce && nonce[1] ? nonce[1] : '';
+    }
+  }
+  /**
+   * @desc output on resolve initialization
+   */
+
+
+  outputOnResolve() {
+    return {
+      pageview: this.pageview,
+      event: this.event,
+      gtag: this.gtag
+    };
+  }
+  /**
+   * @desc Return main function for send ga4 events, pageview etc
+   * @returns {Promise<GA4ReactResolveInterface>}
+   */
+
+
+  initialize() {
+    return new Promise((resolve, reject) => {
+      if (GA4React.isInitialized()) {
+        reject(new Error('GA4React is being initialized'));
+      } // in case of retry logics, remove previous scripts
+
+
+      var previousScriptAsync = document.getElementById(this.scriptAsyncId);
+
+      if (previousScriptAsync) {
+        previousScriptAsync.remove();
+      }
+
+      var head = document.getElementsByTagName('head')[0];
+      var scriptAsync = document.createElement('script');
+      scriptAsync.setAttribute('id', this.scriptAsyncId);
+      scriptAsync.setAttribute('async', '');
+
+      if (this.nonceAsync && typeof this.nonceAsync === 'string' && this.nonceAsync.length > 0) {
+        scriptAsync.setAttribute('nonce', this.nonceAsync);
+      }
+
+      scriptAsync.setAttribute('src', "https://www.googletagmanager.com/gtag/js?id=" + this.gaCode);
+
+      scriptAsync.onload = () => {
+        var target = document.getElementById(this.scriptSyncId);
+
+        if (target) {
+          target.remove();
+        } // in case of retry logics, remove previous script sync
+
+
+        var previousScriptSync = document.getElementById(this.scriptSyncId);
+
+        if (previousScriptSync) {
+          previousScriptSync.remove();
+        }
+
+        var scriptSync = document.createElement('script');
+        scriptSync.setAttribute('id', this.scriptSyncId);
+
+        if (this.nonceSync && typeof this.nonceSync === 'string' && this.nonceSync.length > 0) {
+          scriptSync.setAttribute('nonce', this.nonceSync);
+        }
+
+        var scriptHTML = "window.dataLayer = window.dataLayer || [];\n        function gtag(){dataLayer.push(arguments);};\n        gtag('js', new Date());\n        gtag('config', '" + this.gaCode + "', " + JSON.stringify(this.gaConfig) + ");";
+
+        if (this.additionalGaCode) {
+          this.additionalGaCode.forEach(code => {
+            scriptHTML += "\ngtag('config', '" + code + "', " + JSON.stringify(this.gaConfig) + ");";
+          });
+        }
+
+        scriptSync.innerHTML = scriptHTML;
+        head.appendChild(scriptSync);
+        var resolved = this.outputOnResolve();
+        Object.assign(window, {
+          [GA4ReactGlobalIndex]: resolved
+        });
+        resolve(resolved);
+      };
+
+      scriptAsync.onerror = event => {
+        if (typeof event === 'string') {
+          reject("GA4React intialization failed " + event);
+        } else {
+          var error = new Error();
+          error.name = 'GA4React intialization failed';
+          error.message = JSON.stringify(event, ['message', 'arguments', 'type', 'name']);
+          reject(error);
+        }
+      };
+
+      var onChangeReadyState = () => {
+        switch (document.readyState) {
+          case 'interactive':
+          case 'complete':
+            if (!GA4React.isInitialized()) {
+              head.appendChild(scriptAsync);
+              document.removeEventListener('readystatechange', onChangeReadyState);
+            }
+
+            break;
+        }
+      };
+
+      if (document.readyState !== 'complete') {
+        document.addEventListener('readystatechange', onChangeReadyState);
+      } else {
+        onChangeReadyState();
+      }
+
+      setTimeout(() => {
+        reject(new Error('GA4React Timeout'));
+      }, this.timeout);
+    });
+  }
+  /**
+   * @desc send pageview event to gtag
+   * @param path
+   */
+
+
+  pageview(path, location, title) {
+    return this.gtag('event', 'page_view', {
+      page_path: path,
+      page_location: location || window.location,
+      page_title: title || document.title
+    });
+  }
+  /**
+   * @desc set event and send to gtag
+   * @param action
+   * @param label
+   * @param category
+   * @param nonInteraction
+   */
+
+
+  event(action, label, category, nonInteraction) {
+    if (nonInteraction === void 0) {
+      nonInteraction = false;
+    }
+
+    return this.gtag('event', action, {
+      event_label: label,
+      event_category: category,
+      non_interaction: nonInteraction
+    });
+  }
+  /**
+   * @desc direct access to gtag
+   * @param args
+   */
+
+
+  gtag() {
+    //@ts-ignore
+    return window.gtag(...arguments);
+  }
+  /**
+   * @desc ga is initialized?
+   */
+
+
+  static isInitialized() {
+    switch (typeof window[GA4ReactGlobalIndex] !== 'undefined') {
+      case true:
+        return true;
+
+      default:
+        return false;
+    }
+  }
+  /**
+   * @desc get ga4react from global
+   */
+
+
+  static getGA4React() {
+    if (GA4React.isInitialized()) {
+      return window[GA4ReactGlobalIndex];
+    } else {
+      console.error(new Error('GA4React is not initialized'));
+    }
+  }
+
+}
+
+var outputGA4 = (children, setComponents, ga4) => {
+  setComponents(react__WEBPACK_IMPORTED_MODULE_0__.Children.map(children, (child, index) => {
+    if (!react__WEBPACK_IMPORTED_MODULE_0__.isValidElement(child)) {
+      return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, child);
+    } //@ts-ignore
+
+
+    if (child.type && typeof child.type.name !== 'undefined') {
+      return react__WEBPACK_IMPORTED_MODULE_0__.cloneElement(child, {
+        //@ts-ignore
+        ga4: ga4,
+        index
+      });
+    } else {
+      return child;
+    }
+  }));
+};
+
+var GA4R = (_ref) => {
+  var {
+    code,
+    timeout,
+    config,
+    additionalCode,
+    children,
+    options
+  } = _ref;
+  var [components, setComponents] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!GA4React.isInitialized()) {
+      var ga4manager = new GA4React("" + code, config, additionalCode, timeout, options);
+      ga4manager.initialize().then(ga4 => {
+        outputGA4(children, setComponents, ga4);
+      }, err => {
+        console.error(err);
+      });
+    } else {
+      var ga4 = GA4React.getGA4React();
+
+      if (ga4) {
+        outputGA4(children, setComponents, ga4);
+      }
+    }
+  }, []);
+  return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, components);
+};
+
+var useGA4React = (gaCode, gaConfig, gaAdditionalCode, gaTimeout, options) => {
+  var [ga4, setGA4] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(undefined);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (gaCode) {
+      switch (GA4React.isInitialized()) {
+        case false:
+          var ga4react = new GA4React("" + gaCode, gaConfig, gaAdditionalCode, gaTimeout, options);
+          ga4react.initialize().then(ga4 => {
+            setGA4(ga4);
+          }, err => {
+            console.error(err);
+          });
+          break;
+
+        case true:
+          setGA4(GA4React.getGA4React());
+          break;
+      }
+    } else {
+      setGA4(GA4React.getGA4React());
+    }
+  }, [gaCode]);
+  return ga4;
+};
+
+function withTracker(MyComponent) {
+  return props => {
+    var {
+      path,
+      location,
+      title,
+      gaCode,
+      gaTimeout,
+      gaConfig,
+      gaAdditionalCode,
+      options
+    } = props;
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+      switch (GA4React.isInitialized()) {
+        case true:
+          var ga4 = GA4React.getGA4React();
+
+          if (ga4) {
+            ga4.pageview(path, location, title);
+          }
+
+          break;
+
+        default:
+        case false:
+          var ga4react = new GA4React("" + gaCode, gaConfig, gaAdditionalCode, gaTimeout, options);
+          ga4react.initialize().then(ga4 => {
+            ga4.pageview(path, location, title);
+          }, err => {
+            console.error(err);
+          });
+          break;
+      }
+    });
+    return react__WEBPACK_IMPORTED_MODULE_0__.createElement(MyComponent, Object.assign({}, props));
+  };
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GA4React);
+
+//# sourceMappingURL=ga-4-react.esm.js.map
+
 
 /***/ }),
 

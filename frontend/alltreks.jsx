@@ -7,6 +7,8 @@ import Root from './components/root'
 import * as HikeAPI from './util/hike_api_util'
 import * as NationalParkAPI from './util/national_park_api_util'
 import * as ReviewAPI from './util/review_api_util'
+import GA4React from 'ga-4-react'
+const ga4react = new GA4React("G-FJVWRKRXPD")
 
 document.addEventListener("DOMContentLoaded", () => {
     const root = document.getElementById('root');
@@ -29,7 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   
   window.store = store
-
-  ReactDOM.render( <Root store = {store}/>, root)
+  
+    test(store)
 })
 
+
+function test(store){
+  ga4react.initialize()
+  ReactDOM.render( <Root store = {store}/>, root)
+}
